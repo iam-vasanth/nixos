@@ -15,7 +15,6 @@
     pkgs.nautilus
     pkgs.wev
     pkgs.bibata-cursors
-    # pkgs.xwayland-satellite
   ];
 
   fonts.packages = with pkgs; [
@@ -26,10 +25,6 @@
     nerd-fonts.hack
     inter-nerdfont
   ];
-
-  # Power profile
-  services.power-profiles-daemon.enable = true;
-  services.upower.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -45,6 +40,12 @@
 
   # ADB support for android USB debugging
   programs.adb.enable = true;
+
+  # Enables CUPS to print documents
+  services.printing.enable = true;
+
+  # Enable touchpad support
+  services.libinput.enable = true;
 
   # Enables virt-manager for managing virtual machines
   programs.virt-manager.enable = true;
@@ -73,5 +74,14 @@
     openDefaultPorts = true; # Open ports in the firewall for Syncthing. (NOTE: this will not open syncthing gui port)
     dataDir = "/home/zoro/.syncthing";
     configDir = "/home/zoro/.config/syncthing";
+  };
+
+  # Enable the OpenSSH daemon
+  services.openssh = {
+    enable = true;
+    settings = {
+      PasswordAuthentication = false;
+      PermitRootLogin = "no";
+    };
   };
 }

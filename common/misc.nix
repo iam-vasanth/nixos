@@ -2,7 +2,7 @@
 
 {
 
-  # Sets your time zone.
+  # Sets your time zone
   time.timeZone = "Asia/Kolkata";
 
   # Select internationalisation properties
@@ -19,6 +19,8 @@
     LC_TIME = "en_IN";
   };
 
+
+  # Nix cleanup
   nix = {
     gc = {
       automatic = true;

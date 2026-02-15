@@ -1,0 +1,12 @@
+*.nix     text eol=lf
+*.plymouth text eol=lf
+*.script  text eol=lf
+
+# To all text files
+* text eol=lf
+
+# Leave images as it is
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
