@@ -1,0 +1,49 @@
+layout {
+    gaps 16
+    center-focused-column "never"
+    background-color "#000000"
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+    }
+    default-column-width { proportion 0.5; }
+}
+
+animations {
+    slowdown 0.6          // ← global speedup (try 0.5–0.8)
+
+    horizontal-view-movement {
+        spring damping-ratio=1.0 stiffness=1200 epsilon=0.0001  // was 800
+    }
+
+    window-movement {
+        spring damping-ratio=1.0 stiffness=1200 epsilon=0.0001
+    }
+
+    window-resize {
+        spring damping-ratio=1.0 stiffness=1200 epsilon=0.0001
+    }
+
+    // keep the 150 ms ease-out-cubic ones for open/close or reduce to 100–120 ms
+    window-open { duration-ms 120; curve "ease-out-cubic"; }
+    window-close { duration-ms 120; curve "ease-out-cubic"; }
+}
+
+// Cursor
+cursor {
+    xcursor-theme "Bibata-Modern-Classic"
+    xcursor-size 24
+    hide-after-inactive-ms 10000
+}
+
+
+// Miscs
+
+screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+
+hotkey-overlay {
+    skip-at-startup
+}
+
+prefer-no-csd
