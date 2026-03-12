@@ -15,7 +15,11 @@
   services.upower.enable = true;
 
   # ── Enables Niri and GDM with LUKS autoLogin ───────────────────────────────────────────────────────────
-  programs.niri.enable = true;
+  programs.niri = {
+    enable = true;
+    package = pkgs.niri-unstable;
+  };
+
   services.displayManager = {
     autoLogin = {
       enable = true;
@@ -27,6 +31,7 @@
       autoSuspend = false;
     };
   };
+
   # Keyring gets unlocked automatically with LUKS but this will render the noctalia fprintd un-usable
   services.gnome.gnome-keyring.enable = true;
 

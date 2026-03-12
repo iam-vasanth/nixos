@@ -10,7 +10,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    niri = {
+    niri-flake = {
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
@@ -36,7 +36,7 @@
     nixpkgs,
     nixpkgs-unstable,
     home-manager,
-    niri,
+    niri-flake,
     noctalia,
     dms,
     nixos-hardware,
@@ -143,6 +143,13 @@
             disko.nixosModules.disko
             sops-nix.nixosModules.sops
             home-manager.nixosModules.home-manager
+
+            # Sodiboo's niri cache
+            niri-flake.nixosModules.niri
+
+            # Can be disabled in host specific configurations with,
+            # niri-flake.nixosModules.niri.enable = false;
+
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
