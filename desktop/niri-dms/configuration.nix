@@ -7,7 +7,6 @@
   ...
 }: {
   imports = [
-    # ...
   ];
 
   # ── Power profile ───────────────────────────────────────────────────────────
@@ -31,6 +30,9 @@
       autoSuspend = false;
     };
   };
+
+  # Disabled default polkit to use DMS's built-in polkit
+  systemd.user.services.niri-flake-polkit.enable = false;
 
   # Keyring gets unlocked automatically with LUKS but this will render the noctalia fprintd un-usable
   services.gnome.gnome-keyring.enable = true;
@@ -93,5 +95,5 @@
   # };
 
   # ── Home Manager ───────────────────────────────────────────────────────
-  home-manager.users.${user} = import ./desktop/niri-noctalia/home.nix;
+  home-manager.users.${user} = import ./desktop/niri-dms/home.nix;
 }

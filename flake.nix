@@ -17,9 +17,14 @@
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.noctalia-qs.follows = "noctalia-qs";
+    };
+    noctalia-qs = {
+      url = "github:noctalia-dev/noctalia-qs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     dms = {
-      url = "github:AvengeMedia/DankMaterialShell";
+      url = "github:AvengeMedia/DankMaterialShell/stable";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
@@ -28,7 +33,7 @@
     disko.url = "github:nix-community/disko";
     sops-nix.url = "github:mic92/sops-nix";
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
-    inputs.nur.url = "github:nix-community/NUR";
+    nur.url = "github:nix-community/NUR";
   };
 
   outputs = {
@@ -181,6 +186,17 @@
         ];
       };
 
+      Ares = mkHost {
+        hardware = "Thinkpad x1";
+        hostname = "Ares";
+        profile = "desktop";
+        desktop = "niri-dms";
+        hardwareModules = [
+          nixos-hardware.nixosModules.lenovo-thinkpad-x1-10th-gen
+          nixos-hardware.nixosModules.common-cpu-intel
+        ];
+      };
+
       Hera = mkHost {
         hardware = "Thinkpad x1";
         hostname = "Hera";
@@ -203,7 +219,7 @@
         hardware = "Virtual machine";
         hostname = "Hestia";
         profile = "vm-desktop";
-        desktop = "cosmic";
+        desktop = "niri-dms";
       };
 
       # Example

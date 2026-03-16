@@ -9,7 +9,7 @@
   services.qemuGuest.enable = true;
   services.spice-vdagentd.enable = true;
 
-  fileSystems."/mnt/nixos" = {
+  fileSystems."/home/zoro/nixos" = {
     device = "nixos";
     fsType = "virtiofs";
     options = ["defaults" "nofail"];

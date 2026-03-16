@@ -1,4 +1,4 @@
-{ ... }:
+{ inputs, ... }:
 
 {
   imports = [
@@ -13,5 +13,12 @@
     ./modules/profiles/desktop/home/pkgs.nix
     ./modules/profiles/desktop/home/shell.nix
     ./modules/profiles/desktop/home/symlinks.nix
+
+    inputs.nix-flatpak.homeManagerModules.nix-flatpak
+    inputs.sops-nix.homeManagerModules.sops
   ];
+
+  # Enables bluetooth audio controls
+  services.mpris-proxy.enable = true;
+
 }
