@@ -190,7 +190,7 @@
   # boot.loader.efi.canTouchEfiVariables = true;
 
   # ── Home Manager ───────────────────────────────────────────────────────
-  home-manager.users.${user} = import ./modules/home/desktop.nix;
+  # home-manager.users.${user} = import ./modules/home/desktop.nix;
 
   system.stateVersion = "25.11"; # Do not touch this
 }

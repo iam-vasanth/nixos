@@ -69,7 +69,7 @@
         desktop = [
 
           # Default desktop configuration.nix
-          ./modules/profiles/desktop/desktop.nix
+          ./modules/profiles/desktop/default.nix
 
           # Default desktop home.nix
           ./modules/profiles/desktop/home.nix
@@ -93,7 +93,7 @@
           ./modules/profiles/vm.nix
 
           # Default desktop configuration.nix
-          ./modules/profiles/desktop.nix
+          ./modules/profiles/desktop/default.nix
 
           # Default desktop home.nix
           ./modules/profiles/desktop/home.nix
