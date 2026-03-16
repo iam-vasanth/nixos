@@ -97,7 +97,7 @@
           ./modules/profiles/desktop/default.nix
 
           # Default desktop home.nix
-          ./modules/profiles/desktop/home.nix
+          # ./modules/profiles/desktop/home.nix
 
           # DE specific configuration
           ./desktop/${desktop}/configuration.nix
