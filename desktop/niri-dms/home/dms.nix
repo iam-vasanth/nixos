@@ -8,10 +8,12 @@
 
   programs.dank-material-shell = {
     enable = true;
-    enableSpawn = true;
     enableSystemMonitoring = true;
     enableDynamicTheming = true;
     enableAudioWavelength = true;
     enableClipboardPaste = true;
+    niri = {
+      enableSpawn = true;
+    };
   };
 }

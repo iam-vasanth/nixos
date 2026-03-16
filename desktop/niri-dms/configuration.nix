@@ -3,7 +3,7 @@
   lib,
   inputs,
   user,
-  host1,
+  hostname,
   ...
 }: {
   imports = [
@@ -38,7 +38,7 @@
   services.gnome.gnome-keyring.enable = true;
 
   # ── Identity ───────────────────────────────────────────────────────────
-  networking.hostName = "${host1}";
+  networking.hostName = "${hostname}";
 
   # ── Host specific packages ─────────────────────────────────────────────────────────────
   environment.systemPackages = [
@@ -95,5 +95,5 @@
   # };
 
   # ── Home Manager ───────────────────────────────────────────────────────
-  home-manager.users.${user} = import ./desktop/niri-dms/home.nix;
+  home-manager.users.${user} = import ./home.nix;
 }

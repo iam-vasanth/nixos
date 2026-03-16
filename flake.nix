@@ -47,6 +47,7 @@
     nixos-hardware,
     disko,
     sops-nix,
+    nix-flatpak,
     ...
   } @ inputs: let
     inherit (nixpkgs) lib;
@@ -96,7 +97,7 @@
           ./modules/profiles/desktop/default.nix
 
           # Default desktop home.nix
-          # ./modules/profiles/desktop/home.nix
+          ./modules/profiles/desktop/home.nix
 
           # DE specific configuration
           ./desktop/${desktop}/configuration.nix
@@ -108,7 +109,7 @@
           ./modules/profiles/vm.nix
 
           # Default server home.nix
-          # ./modules/profiles/server/home.nix
+          ./modules/profiles/server/home.nix
 
           # Default server configuration.nix
           ./modules/profiles/server/server.nix
@@ -147,6 +148,7 @@
             # lanzaboote.nixosModules.lanzaboote
             disko.nixosModules.disko
             sops-nix.nixosModules.sops
+            nix-flatpak.homeManagerModules.nix-flatpak
             home-manager.nixosModules.home-manager
 
             # Sodiboo's niri cache

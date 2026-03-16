@@ -6,7 +6,7 @@
   # Environment Variables
   # ────────────────────────────────────────────────
 
-  home.sessionVariables = {
+  programs.niri.settings.environment = {
     GDK_SCALE = "2";
     GDK_BACKEND = "wayland";
     QT_AUTO_SCREEN_SCALE_FACTOR = "0";

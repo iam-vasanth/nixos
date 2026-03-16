@@ -3,9 +3,9 @@
 {
 
   imports = [
-    ./modules/profiles/desktop/home.nix
-    ./desktop/niri-dms/home/niri.nix
-    ./desktop/niri-dms/home/dms.nix
+    # ./modules/profiles/desktop/home.nix
+    ./home/niri.nix
+    ./home/dms.nix
   ];
 
 }

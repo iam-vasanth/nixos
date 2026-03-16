@@ -2,7 +2,7 @@
 
 {
 
-  program.niri = {
+  programs.niri = {
 
     settings ={
 
@@ -33,7 +33,7 @@
         "XF86MonBrightnessDown".action.spawn = [ "dms" "ipc" "call" "brightness" "decrement" "10" ];
 
         # Power profile
-        "XF86Favorites".action.spawn = [ "dms" "ipc" "call" "powerProfile" "cycle" ];
+        # "XF86Favorites".action.spawn = [ "dms" "ipc" "call" "powerProfile" "cycle" ];
       };
     };
   };
