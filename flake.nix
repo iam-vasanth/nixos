@@ -72,7 +72,7 @@
           ./modules/profiles/desktop/default.nix
 
           # Default desktop home.nix
-          ./modules/profiles/desktop/home.nix
+          # ./modules/profiles/desktop/home.nix
 
           # It has the DE specific configurations
           ./desktop/${desktop}/configuration.nix
@@ -84,7 +84,7 @@
           ./modules/profiles/server/server.nix
 
           # Default server home.nix
-          ./modules/profiles/server/home.nix
+          # ./modules/profiles/server/home.nix
 
         ];
         vm-desktop = [
@@ -96,7 +96,7 @@
           ./modules/profiles/desktop/default.nix
 
           # Default desktop home.nix
-          ./modules/profiles/desktop/home.nix
+          # ./modules/profiles/desktop/home.nix
 
           # DE specific configuration
           ./desktop/${desktop}/configuration.nix
@@ -108,7 +108,7 @@
           ./modules/profiles/vm.nix
 
           # Default server home.nix
-          ./modules/profiles/server/home.nix
+          # ./modules/profiles/server/home.nix
 
           # Default server configuration.nix
           ./modules/profiles/server/server.nix
