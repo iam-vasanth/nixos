@@ -1,7 +1,7 @@
 { ... }:
 
 {
-  program.niri = {
+  programs.niri = {
     # Niri keybinds
     # Launch apps
     "Mod+T".action.spawn = "kitty";

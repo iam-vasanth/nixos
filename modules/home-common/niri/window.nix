@@ -6,7 +6,7 @@
   # Window / layer rules (very close to your .kdl)
   # ────────────────────────────────────────────────
 
-  program.niri = {
+  programs.niri = {
     settings.window-rule = [
       {
         match.title = "Picture-in-Picture";

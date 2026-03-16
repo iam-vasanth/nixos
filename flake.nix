@@ -152,7 +152,7 @@
             home-manager.nixosModules.home-manager
 
             # Sodiboo's niri cache
-            niri-flake.nixosModules.niri
+            niri-flake.homeModules.niri
 
             # Can be disabled in host specific configurations with,
             # niri-flake.nixosModules.niri.enable = false;
