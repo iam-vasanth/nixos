@@ -7,20 +7,25 @@
   # ────────────────────────────────────────────────
 
   programs.niri = {
-    settings.window-rule = [
+    settings.window-rules = [
       {
-        match.title = "Picture-in-Picture";
+        matches = [{ title = "Picture-in-Picture"; }];
         open-floating = true;
       }
       {
-        geometry-corner-radius = 15;
+        geometry-corner-radius = {
+          top-left     = 15.0;
+          top-right    = 15.0;
+          bottom-left  = 15.0;
+          bottom-right = 15.0;
+        };
         clip-to-geometry = true;
       }
     ];
 
-    settings.layer-rule = [
+    settings.layer-rules = [
       {
-        match.namespace = "^noctalia-overview.*";
+        matches = [{ namespace = "^noctalia-overview.*"; }];
         place-within-backdrop = true;
       }
     ];

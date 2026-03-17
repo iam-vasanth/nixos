@@ -2,6 +2,8 @@
 
 {
   imports = [
+    inputs.nix-flatpak.homeManagerModules.nix-flatpak
+
     # ./modules/home-common/git.nix
     # ./modules/home-common/ssh.nix
     ../../home-common/fish.nix
@@ -18,5 +20,7 @@
 
   # Enables bluetooth audio controls
   services.mpris-proxy.enable = true;
+
+  home.stateVersion = "25.11";
 
 }

@@ -148,11 +148,7 @@
             # lanzaboote.nixosModules.lanzaboote
             disko.nixosModules.disko
             sops-nix.nixosModules.sops
-            nix-flatpak.homeManagerModules.nix-flatpak
             home-manager.nixosModules.home-manager
-
-            # Sodiboo's niri cache
-            niri-flake.homeModules.niri
 
             # Can be disabled in host specific configurations with,
             # niri-flake.nixosModules.niri.enable = false;

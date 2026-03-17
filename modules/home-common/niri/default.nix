@@ -2,7 +2,7 @@
 
 {
   imports = [
-    # inputs.niri-flake.homeModules.niri
+    inputs.niri-flake.homeModules.niri
 
     ./input.nix
     ./output.nix

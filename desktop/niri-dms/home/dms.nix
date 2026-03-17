@@ -12,8 +12,8 @@
     enableDynamicTheming = true;
     enableAudioWavelength = true;
     enableClipboardPaste = true;
-    niri = {
-      enableSpawn = true;
-    };
+    # niri = {
+    #   enableSpawn = true;
+    # };
   };
 }

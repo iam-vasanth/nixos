@@ -9,7 +9,7 @@
       binds = with inputs.niri.lib; let
       # you can also define Mod = "Mod4"; here
       in {
-        "Mod+O".action = "toggle-overview";
+        "Mod+O".action.toggle-overview = {};
 
         # Noctalia Specific
         # Check https://docs.noctalia.dev/getting-started/keybinds/ for more

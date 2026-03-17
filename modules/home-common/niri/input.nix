@@ -38,9 +38,11 @@
           map-to-output = "eDP-1";
         };
 
-        warp-mouse-to-focus = true;
-        focus-follows-mouse = "max-scroll-amount=\"0%\"";
-        disable-power-key-handling = true;
+        warp-mouse-to-focus.enable = true;
+        focus-follows-mouse = {
+          enable = true;
+          max-scroll-amount = "0";
+        };
       };
     };
   };
