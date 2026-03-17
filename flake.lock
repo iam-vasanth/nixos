@@ -310,7 +310,7 @@
     "noctalia-qs": {
       "inputs": {
         "nixpkgs": [
-          "nixpkgs"
+          "nixpkgs-unstable"
         ],
         "systems": "systems",
         "treefmt-nix": "treefmt-nix"
