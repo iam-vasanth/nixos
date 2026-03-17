@@ -89,6 +89,13 @@
   # ── Enables flatpak ─────────────────────────────────────────────────────────────
   services.flatpak.enable = true;
 
+  # ── XDG Portals ────────────────────────────────────
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    config.common.default = "*";
+  };
+
   # ── Enables ADB ─────────────────────────────────────────────────────────────
   programs.adb.enable = true;
 
