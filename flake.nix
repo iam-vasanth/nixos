@@ -150,8 +150,8 @@
             sops-nix.nixosModules.sops
             home-manager.nixosModules.home-manager
 
-            # Can be disabled in host specific configurations with,
-            # niri-flake.nixosModules.niri.enable = false;
+            { nixpkgs.overlays = [ niri-flake.overlays.niri ]; }
+
 
             {
               home-manager.useGlobalPkgs = true;
@@ -165,10 +165,7 @@
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
 
     # Overlays
-    overlays.default = import [
-      ./modules/overlays
-      niri-flake.overlays.niri
-    ];
+    overlays.default = import ./modules/overlays;
 
     # # Reusable modules
     # nixosModules = import ./modules/nixos;

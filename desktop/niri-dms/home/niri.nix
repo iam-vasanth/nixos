@@ -6,7 +6,7 @@
 
     settings ={
 
-      binds = with inputs.niri.lib; let
+      binds = with inputs.niri-flake.lib; let
       # you can also define Mod = "Mod4"; here
       in {
         "Mod+O".action.toggle-overview = {};

@@ -4,10 +4,6 @@
   programs.kitty = {
     enable = true;
 
-    settings = {
-      shell = "fish";
-    };
-
     shellIntegration = {
       enableFishIntegration = true;
     };
@@ -18,6 +14,7 @@
     };
 
     settings = {
+      shell = "fish";
       enable_audio_bell = false;
       cursor_shape = "block";
       cursor_blink_interval = 0;

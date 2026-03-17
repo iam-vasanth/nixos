@@ -41,7 +41,7 @@
         warp-mouse-to-focus.enable = true;
         focus-follows-mouse = {
           enable = true;
-          max-scroll-amount = "0";
+          max-scroll-amount = "0%";
         };
       };
     };
