@@ -14,10 +14,10 @@
   services.upower.enable = true;
 
   # ── Enables Niri and GDM with LUKS autoLogin ───────────────────────────────────────────────────────────
-  # programs.niri = {
-  #   enable = true;
-  #   package = pkgs.niri-unstable;
-  # };
+  programs.niri = {
+    enable = true;
+    package = pkgs.niri-unstable;
+  };
 
   services.displayManager = {
     autoLogin = {

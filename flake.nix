@@ -66,6 +66,10 @@
       extraModules ? [],
       hardwareModules ? [],
     } @ args: let
+      unstable = import nixpkgs-unstable {
+        inherit system;
+        config.allowUnfree = true;
+      };
       profileModules = {
         desktop = [
 
@@ -133,11 +137,7 @@
       nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = {
-          inherit inputs user hostname profile desktop;
-          unstable = import nixpkgs-unstable {
-            inherit system;
-            config.allowUnfree = true;
-          };
+          inherit inputs user hostname profile desktop unstable;
         };
 
         modules =
@@ -156,7 +156,7 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = {inherit inputs desktop;};
+              home-manager.extraSpecialArgs = {inherit inputs desktop unstable;};
             }
           ] ++ selectedProfileModules ++ extraModules ++ hardwareModules;
       };
@@ -165,7 +165,10 @@
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
 
     # Overlays
-    overlays.default = import ./modules/overlays;
+    overlays.default = import [
+      ./modules/overlays
+      niri-flake.overlays.niri
+    ];
 
     # # Reusable modules
     # nixosModules = import ./modules/nixos;
