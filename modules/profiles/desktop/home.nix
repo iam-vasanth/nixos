@@ -5,7 +5,7 @@
     inputs.nix-flatpak.homeManagerModules.nix-flatpak
 
     ../../home-common/git.nix
-    # ../../home-common/ssh.nix
+    ../../home-common/ssh.nix
     ../../home-common/fish.nix
     ../../home-common/kitty.nix
     ../../home-common/starship.nix
