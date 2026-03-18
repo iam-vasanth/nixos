@@ -46,6 +46,7 @@
     pkgs.nautilus
     pkgs.wev
     pkgs.xwayland-satellite
+    pkgs.firefox
   ];
 
   # # ── Disk layout (disko) ────────────────────────────────────────────────

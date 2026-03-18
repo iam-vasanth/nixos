@@ -19,8 +19,8 @@
       # Themes
       theme = {
         mode = "dark";
-        light = "Noctalia Light";
-        dark = "Noctalia Dark";
+        light = "DankShell Light Transparent";
+        dark = "DankShell Dark Transparent";
       };
 
       # Icon theme

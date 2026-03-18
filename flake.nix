@@ -24,7 +24,7 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     dms = {
-      url = "github:AvengeMedia/DankMaterialShell/stable";
+      url = "github:AvengeMedia/DankMaterialShell";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
@@ -152,6 +152,7 @@
               home-manager.useUserPackages = true;
               home-manager.backupFileExtension = "backup";
               home-manager.extraSpecialArgs = {inherit inputs desktop unstable;};
+              home-manager.sharedModules = [ sops-nix.homeManagerModules.sops ];
             }
           ] ++ selectedProfileModules ++ extraModules ++ hardwareModules;
       };

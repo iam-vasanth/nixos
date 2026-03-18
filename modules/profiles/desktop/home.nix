@@ -4,8 +4,8 @@
   imports = [
     inputs.nix-flatpak.homeManagerModules.nix-flatpak
 
-    # ./modules/home-common/git.nix
-    # ./modules/home-common/ssh.nix
+    ../../home-common/git.nix
+    # ../../home-common/ssh.nix
     ../../home-common/fish.nix
     ../../home-common/kitty.nix
     ../../home-common/starship.nix

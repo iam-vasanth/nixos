@@ -36,9 +36,9 @@
     };
   };
 
-  home.file.".config/git/allowed_signers".text = let
-    pubKey = builtins.readFile "${config.home.homeDirectory}/.ssh/github_ssh.pub";
-  in ''
-    vk.vasanth.r@gmail.com namespaces="git" ${pubKey}
-  '';
+  # home.file.".config/git/allowed_signers".text = let
+  #   pubKey = builtins.readFile "${config.home.homeDirectory}/.ssh/github_ssh.pub";
+  # in ''
+  #   vk.vasanth.r@gmail.com namespaces="git" ${pubKey}
+  # '';
 }

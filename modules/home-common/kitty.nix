@@ -41,6 +41,8 @@
     # Theme file
     extraConfig = ''
       include themes/noctalia.conf
+      include dank-theme.conf
+      include dank-tabs.conf
     '';
   };
 }
