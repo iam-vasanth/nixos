@@ -7,6 +7,7 @@
   ...
 }: {
   imports = [
+    inputs.dms.nixosModules.greeter
   ];
 
   # ── Power profile ───────────────────────────────────────────────────────────
@@ -19,23 +20,26 @@
     package = pkgs.niri-unstable;
   };
 
-  services.displayManager = {
-    autoLogin = {
-      enable = true;
-      user = "${user}";
-    };
-    gdm = {
-      enable = true;
-      wayland = true;
-      autoSuspend = false;
+  programs.dank-material-shell.greeter = {
+
+    enable = true;
+
+    compositor.name = "niri";
+
+    configHome = "/home/${user}";
+
+    configFiles = [
+      "/home/${user}/.config/DankMaterialShell/settings.json"
+    ];
+
+    logs = {
+      save = true;
+      path = "/tmp/dms-greeter.log";
     };
   };
 
   # Disabled default polkit to use DMS's built-in polkit
   systemd.user.services.niri-flake-polkit.enable = false;
-
-  # Keyring gets unlocked automatically with LUKS but this will render the noctalia fprintd un-usable
-  services.gnome.gnome-keyring.enable = true;
 
   # ── Hostname ───────────────────────────────────────────────────────────
   networking.hostName = "${hostname}";

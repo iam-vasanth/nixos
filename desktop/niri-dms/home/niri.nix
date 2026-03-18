@@ -5,6 +5,12 @@
   programs.niri = {
 
     settings ={
+      layer-rules = [
+        {
+          matches = [{ namespace = "^quickshell$"; }];
+          place-within-backdrop = true;
+        }
+      ];
 
       binds = with inputs.niri-flake.lib; let
       # you can also define Mod = "Mod4"; here

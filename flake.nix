@@ -152,7 +152,10 @@
               home-manager.useUserPackages = true;
               home-manager.backupFileExtension = "backup";
               home-manager.extraSpecialArgs = {inherit inputs desktop unstable;};
-              home-manager.sharedModules = [ sops-nix.homeManagerModules.sops ];
+              home-manager.sharedModules = [
+                sops-nix.homeManagerModules.sops
+                nix-flatpak.homeManagerModules.nix-flatpak
+              ];
             }
           ] ++ selectedProfileModules ++ extraModules ++ hardwareModules;
       };
@@ -212,8 +215,7 @@
       Hestia = mkHost {
         hardware = "Virtual machine";
         hostname = "Hestia";
-        profile = "vm-desktop";
-        desktop = "niri-dms";
+        profile = "vm-server";
       };
 
       # Example

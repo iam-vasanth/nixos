@@ -21,7 +21,6 @@
 
   # ── Kernal Parameters ───────────────────────────────────────────────────────────
   boot.consoleLogLevel = 0;
-  boot.initrd.systemd.enable = true;
   boot.initrd.verbose = false;
   boot.kernelParams = [
     "quiet"

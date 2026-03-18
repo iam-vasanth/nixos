@@ -2,8 +2,6 @@
 
 {
   imports = [
-    inputs.nix-flatpak.homeManagerModules.nix-flatpak
-
     ../../home-common/git.nix
     ../../home-common/ssh.nix
     ../../home-common/fish.nix

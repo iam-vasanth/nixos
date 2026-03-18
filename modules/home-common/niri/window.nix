@@ -3,7 +3,7 @@
 {
 
   # ────────────────────────────────────────────────
-  # Window / layer rules (very close to your .kdl)
+  # Window / layer rules
   # ────────────────────────────────────────────────
 
   programs.niri = {
@@ -20,13 +20,6 @@
           bottom-right = 15.0;
         };
         clip-to-geometry = true;
-      }
-    ];
-
-    settings.layer-rules = [
-      {
-        matches = [{ namespace = "^noctalia-overview.*"; }];
-        place-within-backdrop = true;
       }
     ];
   };
