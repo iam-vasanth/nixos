@@ -18,4 +18,6 @@
       enableSpawn = true;
     };
   };
+
+  services.udiskie.enable = true;
 }

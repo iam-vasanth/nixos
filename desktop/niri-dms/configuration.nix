@@ -37,8 +37,11 @@
   # Keyring gets unlocked automatically with LUKS but this will render the noctalia fprintd un-usable
   services.gnome.gnome-keyring.enable = true;
 
-  # ── Identity ───────────────────────────────────────────────────────────
+  # ── Hostname ───────────────────────────────────────────────────────────
   networking.hostName = "${hostname}";
+
+  # ── USB handling ───────────────────────────────────────────────────────────
+  services.udisks2.enable = true;
 
   # ── Host specific packages ─────────────────────────────────────────────────────────────
   environment.systemPackages = [

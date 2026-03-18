@@ -99,6 +99,13 @@
   # ── Enables ADB ─────────────────────────────────────────────────────────────
   programs.adb.enable = true;
 
+  # ── Android and Iphone mounting ───────────────────────────────────────────────────────────
+  # Android
+  services.gvfs.enable = true;
+
+  # Iphones
+  services.usbmuxd.enable = true;
+
   # ── Thermal management for intel processors ─────────────────────────────────────────────────────────────
   services.thermald.enable = true;
 
@@ -144,14 +151,14 @@
   };
 
   # ── Syncthing ─────────────────────────────────────────────────────────────
-  services.syncthing = {
-    enable = true;
-    user = "${user}";
-    group = "users";
-    openDefaultPorts = true; # Open ports in the firewall for Syncthing. (NOTE: this will not open syncthing gui port)
-    dataDir = "/home/zoro/.syncthing";
-    configDir = "/home/zoro/.config/syncthing";
-  };
+  # services.syncthing = {
+  #   enable = true;
+  #   user = "${user}";
+  #   group = "users";
+  #   openDefaultPorts = true; # Open ports in the firewall for Syncthing. (NOTE: this will not open syncthing gui port)
+  #   dataDir = "/home/zoro/.syncthing";
+  #   configDir = "/home/zoro/.config/syncthing";
+  # };
 
   # ── Common packages ─────────────────────────────────────────────────────────────
   environment.systemPackages = [
@@ -163,6 +170,13 @@
     pkgs.fuse
     pkgs.wev
     pkgs.bibata-cursors
+
+    ### Android and IOS mounting ###
+    pkgs.go-mtpfs
+    pkgs.jmtpfs
+    pkgs.libimobiledevice
+    pkgs.ifuse
+    ################################
   ];
 
   # ── Font packages ─────────────────────────────────────────────────────────────

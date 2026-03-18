@@ -1,4 +1,4 @@
-{ config, user, pkgs, ... }:
+{ config, lib, user, pkgs, ... }:
 
 {
   home.sessionVariables = {
@@ -34,4 +34,15 @@
       file://${config.home.homeDirectory}/Music
     '';
   };
+
+  home.activation.zenChrome = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    PROFILE_DIR=$(find "$HOME/.zen" -maxdepth 1 -type d -name "*.Default Profile" 2>/dev/null | head -n 1)
+
+    if [ -n "$PROFILE_DIR" ]; then
+      $DRY_RUN_CMD mkdir -p "$PROFILE_DIR/chrome"
+      $DRY_RUN_CMD ln -sf "$HOME/.config/DankMaterialShell/zen.css" "$PROFILE_DIR/chrome/userChrome.css"
+    elsefi
+      echo "Zen profile not found, skipping userChrome symlink"
+    fi
+  '';
 }
