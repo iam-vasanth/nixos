@@ -15,13 +15,11 @@
     pkgs.bitwarden-desktop
     pkgs.amberol
     pkgs.signal-desktop
-    pkgs.termusic
     pkgs.blanket
-    pkgs.winboat
     pkgs.obsidian
     pkgs._7zz-rar
-    pkgs.obsidian
     pkgs.btop
+    pkgs.mpv
     # Fish dependencies
     pkgs.fzf # fish : fzf-fish and forgit plugins
     pkgs.grc # fish : grc plugin

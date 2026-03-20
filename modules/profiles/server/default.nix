@@ -6,19 +6,26 @@
   hostname,
   ...
 }: {
-  # ── Boot (headless) ────────────────────────────────────────────────────
-  boot.loader.grub = {
-    enable = true;
-    device = "/dev/sda"; # adjust to your disk
-    efiSupport = false; # set true + add efiSysMountPoint if UEFI
-  };
+
+  # ── External imports ───────────────────────────────────────────────────────────
+  imports = [
+    /etc/nixos/hardware-configuration.nix
+  ];
+
+  # ── Bootloader ───────────────────────────────────────────────────────────
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.configurationLimit = 20;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  # ── Kernal ───────────────────────────────────────────────────────────
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # ── Networking ─────────────────────────────────────────────────────────
   networking = {
     useDHCP = false;
     interfaces.eth0.ipv4.addresses = [
       {
-        address = "192.168.1.10"; # ← set your static IP
+        address = "192.168.1.10";
         prefixLength = 24;
       }
     ];
@@ -37,7 +44,7 @@
       PasswordAuthentication = false;
       PermitRootLogin = "no";
       X11Forwarding = false;
-      AllowTcpForwarding = "yes";
+      AllowTcpForwarding = "no";
       ClientAliveInterval = 300;
       ClientAliveCountMax = 2;
     };
@@ -56,69 +63,72 @@
       enable = true;
       multipliers = "1 2 4 8 16 32 64";
     };
+    # For whitelisting trusted IP's
+    # ignoreip = "192.168.1.0/24 10.0.0.0/8";
   };
 
   # ── Nginx (reverse proxy) ──────────────────────────────────────────────
-  services.nginx = {
-    enable = true;
-    recommendedGzipSettings = true;
-    recommendedOptimisation = true;
-    recommendedProxySettings = true;
-    recommendedTlsSettings = true;
+  # Disabled because im usinf Nginx proxy manager (Docker Container)
+  # services.nginx = {
+  #   enable = true;
+  #   recommendedGzipSettings = true;
+  #   recommendedOptimisation = true;
+  #   recommendedProxySettings = true;
+  #   recommendedTlsSettings = true;
 
-    # Example vhost — add your own below
-    virtualHosts."example.com" = {
-      enableACME = true;
-      forceSSL = true;
-      locations."/" = {
-        proxyPass = "http://127.0.0.1:8080";
-        proxyWebsockets = true;
-      };
-    };
-  };
+  #   # Example vhost — add your own below
+  #   virtualHosts."example.com" = {
+  #     enableACME = true;
+  #     forceSSL = true;
+  #     locations."/" = {
+  #       proxyPass = "http://127.0.0.1:8080";
+  #       proxyWebsockets = true;
+  #     };
+  #   };
+  # };
 
   # ── ACME / Let's Encrypt ───────────────────────────────────────────────
-  security.acme = {
-    acceptTerms = true;
-    defaults.email = "admin@example.com"; # ← your email
-  };
+  # security.acme = {
+  #   acceptTerms = true;
+  #   defaults.email = "admin@example.com"; # ← your email
+  # };
 
   # ── Podman (rootless containers) ───────────────────────────────────────
   virtualisation.podman = {
     enable = true;
-    dockerCompat = true; # "docker" aliased to podman
+    dockerCompat = true;
     defaultNetwork.settings.dns_enabled = true;
   };
 
   # ── Monitoring ─────────────────────────────────────────────────────────
-  services.prometheus = {
-    enable = true;
-    port = 9090;
-    exporters = {
-      node = {
-        enable = true;
-        enabledCollectors = ["systemd" "processes" "diskstats"];
-        port = 9100;
-      };
-    };
-    scrapeConfigs = [
-      {
-        job_name = "node";
-        static_configs = [{targets = ["localhost:9100"];}];
-      }
-    ];
-  };
+  # services.prometheus = {
+  #   enable = true;
+  #   port = 9090;
+  #   exporters = {
+  #     node = {
+  #       enable = true;
+  #       enabledCollectors = ["systemd" "processes" "diskstats"];
+  #       port = 9100;
+  #     };
+  #   };
+  #   scrapeConfigs = [
+  #     {
+  #       job_name = "node";
+  #       static_configs = [{targets = ["localhost:9100"];}];
+  #     }
+  #   ];
+  # };
 
-  services.grafana = {
-    enable = true;
-    settings = {
-      server = {
-        http_addr = "127.0.0.1";
-        http_port = 3000;
-        domain = "grafana.example.com"; # ← adjust
-      };
-    };
-  };
+  # services.grafana = {
+  #   enable = true;
+  #   settings = {
+  #     server = {
+  #       http_addr = "127.0.0.1";
+  #       http_port = 3000;
+  #       domain = "grafana.example.com"; # ← adjust
+  #     };
+  #   };
+  # };
 
   # ── Logs ───────────────────────────────────────────────────────────────
   services.journald.extraConfig = ''
@@ -131,6 +141,7 @@
     podman-compose
     ncdu
     iotop
+    btop
     nethogs
     nmap
     tcpdump
@@ -141,11 +152,11 @@
   ];
 
   # ── Automatic updates ──────────────────────────────────────────────────
-  system.autoUpgrade = {
-    enable = true;
-    flake = "github:yourusername/nixos-config#server"; # ← adjust
-    flags = ["--update-input" "nixpkgs"];
-    dates = "04:00";
-    randomizedDelaySec = "45min";
-  };
+  # system.autoUpgrade = {
+  #   enable = true;
+  #   flake = "github:yourusername/nixos-config#server"; # ← adjust
+  #   flags = ["--update-input" "nixpkgs"];
+  #   dates = "04:00";
+  #   randomizedDelaySec = "45min";
+  # };
 }

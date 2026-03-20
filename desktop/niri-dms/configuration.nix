@@ -7,12 +7,10 @@
   ...
 }: {
   imports = [
-    inputs.dms.nixosModules.greeter
   ];
 
   # ── Power profile ───────────────────────────────────────────────────────────
   services.power-profiles-daemon.enable = true;
-  services.upower.enable = true;
 
   # ── Enables Niri and GDM with LUKS autoLogin ───────────────────────────────────────────────────────────
   programs.niri = {
@@ -20,23 +18,18 @@
     package = pkgs.niri-unstable;
   };
 
-  programs.dank-material-shell.greeter = {
-
-    enable = true;
-
-    compositor.name = "niri";
-
-    configHome = "/home/${user}";
-
-    configFiles = [
-      "/home/${user}/.config/DankMaterialShell/settings.json"
-    ];
-
-    logs = {
-      save = true;
-      path = "/tmp/dms-greeter.log";
+  services.displayManager = {
+    autoLogin = {
+      enable = true;
+      user = "${user}";
+    };
+    gdm = {
+      enable = true;
+      wayland = true;
+      autoSuspend = false;
     };
   };
+  services.gnome.gnome-keyring.enable = true;
 
   # Disabled default polkit to use DMS's built-in polkit
   systemd.user.services.niri-flake-polkit.enable = false;

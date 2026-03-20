@@ -13,7 +13,7 @@
 
   # ── Bootloader ───────────────────────────────────────────────────────────
   boot.loader.systemd-boot.enable = true;
-  boot.loader.systemd-boot.configurationLimit = 5;
+  boot.loader.systemd-boot.configurationLimit = 20;
   boot.loader.efi.canTouchEfiVariables = true;
 
   # ── Kernal ───────────────────────────────────────────────────────────
@@ -21,6 +21,7 @@
 
   # ── Kernal Parameters ───────────────────────────────────────────────────────────
   boot.consoleLogLevel = 0;
+  boot.initrd.systemd.enable = true;
   boot.initrd.verbose = false;
   boot.kernelParams = [
     "quiet"
@@ -91,8 +92,23 @@
   # ── XDG Portals ────────────────────────────────────
   xdg.portal = {
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-    config.common.default = "*";
+
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk      # fallback for file pickers, etc.
+      xdg-desktop-portal-gnome    # required for screencast on Niri
+    ];
+
+    config = {
+      common = {
+        default = [ "gtk" ];  # GTK as general fallback
+
+        # Force ScreenCast to use the GNOME backend (Niri provides the Mutter interface it needs)
+        "org.freedesktop.impl.portal.ScreenCast" = [ "gnome" ];
+
+        # Optional but helpful: force Screenshot too if you use portal-based screenshot tools
+        "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
+      };
+    };
   };
 
   # ── Enables ADB ─────────────────────────────────────────────────────────────
@@ -110,6 +126,10 @@
 
   # ── Firmware updates ─────────────────────────────────────────────────────────────
   services.fwupd.enable = true;
+
+  services.fprintd = {
+      enable = true;
+  };
 
   # ── Localsend ─────────────────────────────────────────────────────────────
   programs.localsend = {

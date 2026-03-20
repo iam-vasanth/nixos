@@ -58,7 +58,7 @@
       show_whitespaces = "selection";
       tab_size = 2;
       soft_wrap = "none";
-      format_on_save = "on";
+      format_on_save = "off";
       autosave = "on_focus_change";
       auto_update = false;
       base_keymap = "VSCode";

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, hostname, ... }:
 
 {
   programs.fish = {
@@ -30,8 +30,7 @@
       glog = "git log --oneline --graph --decorate";
 
       # Nix
-      rebuild = "sudo nixos-rebuild switch --impure --flake .";
-      hms = "home-manager switch --impure --flake .";
+      rebuild = "sudo nixos-rebuild switch --flake .${hostname} --impure";
       ngc = "nix-collect-garbage -d";
       nsearch = "nix search nixpkgs";
 
