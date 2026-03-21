@@ -43,6 +43,9 @@
     };
   };
 
+  # Timezone
+  time.timezone = "Asia/Kolkata";
+
   # ── Swap file ─────────────────────────────────────────────────────────
   # Waiting for nix Zswap implementation
   # https://github.com/NixOS/nixpkgs/pull/470366

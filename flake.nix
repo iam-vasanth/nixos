@@ -107,10 +107,10 @@
           ./modules/profiles/vm.nix
 
           # Default server configuration.nix
-          ./modules/profiles/server/server.nix
+          ./modules/profiles/server/default.nix
 
           # Default server home.nix
-          ./modules/profiles/server/home.nix
+          # ./modules/profiles/server/home.nix
 
         ];
 
@@ -208,7 +208,8 @@
       # Server
       Hades = mkHost {
         hostname = "Hades";
-        profile = "server";
+        profile = "server-vm";
+        hardwareModules = [ ];
       };
 
       # VM - Virt-manager

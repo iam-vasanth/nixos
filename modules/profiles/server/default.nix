@@ -18,10 +18,11 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # ── Kernal ───────────────────────────────────────────────────────────
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_lts;
 
   # ── Networking ─────────────────────────────────────────────────────────
   networking = {
+    hostName = "${hostname}";
     useDHCP = false;
     interfaces.eth0.ipv4.addresses = [
       {
@@ -35,6 +36,8 @@
       allowedTCPPorts = [22 80 443];
     };
   };
+
+  time.timezone = "Asia/Kolkata";
 
   # ── SSH hardening ──────────────────────────────────────────────────────
   services.openssh = {
@@ -66,6 +69,44 @@
     # For whitelisting trusted IP's
     # ignoreip = "192.168.1.0/24 10.0.0.0/8";
   };
+
+  # ───────────────────────────────────────────────────────────
+  services.xserver.enable = true;
+  services.desktopManager.gnome.enable = true;
+  services.displayManager = {
+    autoLogin = {
+      enable = true;
+      user = "${user}";
+    };
+    gdm = {
+      enable = true;
+      wayland = true;
+      autoSuspend = false;
+    };
+  };
+
+  environment.gnome.excludePackages = (with pkgs; [
+    gnome-photos
+    gnome-tour
+    cheese
+    gnome-music
+    epiphany
+    geary
+    gnome-characters
+    tali
+    iagno
+    hitori
+    atomix
+    yelp
+    gnome-contacts
+    gnome-initial-setup
+    baobab
+    gnome-text-editor
+    gnome-music
+    gnome-software
+  ]) ++ (with pkgs.gnome; [
+    simple-scan
+  ]);
 
   # ── Nginx (reverse proxy) ──────────────────────────────────────────────
   # Disabled because im usinf Nginx proxy manager (Docker Container)
@@ -149,6 +190,7 @@
     dnsutils
     openssl
     certbot
+    gnome.gnome-tweaks
   ];
 
   # ── Automatic updates ──────────────────────────────────────────────────
