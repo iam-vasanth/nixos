@@ -207,9 +207,9 @@
 
       # Server
       Hades = mkHost {
+        hardware = "Virtual machine";
         hostname = "Hades";
-        profile = "server-vm";
-        hardwareModules = [ ];
+        profile = "vm-server";
       };
 
       # VM - Virt-manager

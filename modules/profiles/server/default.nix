@@ -17,8 +17,32 @@
   boot.loader.systemd-boot.configurationLimit = 20;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # ── Kernal Parameters ───────────────────────────────────────────────────────────
+  boot.consoleLogLevel = 0;
+  boot.initrd.systemd.enable = true;
+  boot.initrd.verbose = false;
+  boot.kernelParams = [
+    "quiet"
+    "loglevel=3"
+    "rd.systemd.show_status=false"
+    "rd.udev.log_level=3"
+    "udev.log_priority=3"
+    "vt.global_cursor_default=0"
+  ];
+
+  # ── Silences systemd logs ───────────────────────────────────────────────────────────
+  systemd = {
+    services.NetworkManager-wait-online.enable = false;
+    settings = {
+      Manager = {
+        ShowStatus = "no";
+        DefaultStandardOutput = "null";
+      };
+    };
+  };
+
   # ── Kernal ───────────────────────────────────────────────────────────
-  boot.kernelPackages = pkgs.linuxPackages_lts;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # ── Networking ─────────────────────────────────────────────────────────
   networking = {
@@ -37,7 +61,7 @@
     };
   };
 
-  time.timezone = "Asia/Kolkata";
+  time.timeZone = "Asia/Kolkata";
 
   # ── SSH hardening ──────────────────────────────────────────────────────
   services.openssh = {
@@ -70,6 +94,16 @@
     # ignoreip = "192.168.1.0/24 10.0.0.0/8";
   };
 
+  # ── Enables flakes ───────────────────────────────────────────────────────────
+  nix.settings.experimental-features = ["nix-command" "flakes"];
+
+  # ── User ─────────────────────────────────────────────────────────────
+  users.users.${user} = {
+    isNormalUser = true;
+    description = "ZORO";
+    extraGroups = ["networkmanager" "wheel" "docker" "fuse" "video" "libvirtd"];
+  };
+
   # ───────────────────────────────────────────────────────────
   services.xserver.enable = true;
   services.desktopManager.gnome.enable = true;
@@ -86,6 +120,7 @@
   };
 
   environment.gnome.excludePackages = (with pkgs; [
+    simple-scan
     gnome-photos
     gnome-tour
     cheese
@@ -104,8 +139,6 @@
     gnome-text-editor
     gnome-music
     gnome-software
-  ]) ++ (with pkgs.gnome; [
-    simple-scan
   ]);
 
   # ── Nginx (reverse proxy) ──────────────────────────────────────────────
@@ -190,7 +223,7 @@
     dnsutils
     openssl
     certbot
-    gnome.gnome-tweaks
+    git
   ];
 
   # ── Automatic updates ──────────────────────────────────────────────────
@@ -201,4 +234,8 @@
   #   dates = "04:00";
   #   randomizedDelaySec = "45min";
   # };
+
+  home-manager.users.${user} = import ./home.nix;
+
+  system.stateVersion = "25.11"; # Do not touch this
 }

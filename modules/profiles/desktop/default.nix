@@ -44,7 +44,7 @@
   };
 
   # Timezone
-  time.timezone = "Asia/Kolkata";
+  time.timeZone = "Asia/Kolkata";
 
   # ── Swap file ─────────────────────────────────────────────────────────
   # Waiting for nix Zswap implementation
