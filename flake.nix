@@ -34,6 +34,11 @@
     sops-nix.url = "github:mic92/sops-nix";
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
     nur.url = "github:nix-community/NUR";
+
+    sops-secrets = {
+      url = "git+ssh://git@gitlab.com/iam-vasanth/sops-secrets.git?shallow=1";
+      flake = false;
+    };
   };
 
   outputs = {
@@ -48,6 +53,7 @@
     disko,
     sops-nix,
     nix-flatpak,
+    sops-secrets,
     ...
   } @ inputs: let
     inherit (nixpkgs) lib;
@@ -131,7 +137,7 @@
       nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = {
-          inherit inputs user hostname profile desktop unstable;
+          inherit inputs user hostname profile desktop unstable sops-secrets;
         };
 
         modules =
@@ -151,7 +157,7 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.backupFileExtension = "backup";
-              home-manager.extraSpecialArgs = {inherit inputs user hostname desktop unstable;};
+              home-manager.extraSpecialArgs = {inherit inputs user hostname desktop unstable sops-secrets;};
               home-manager.sharedModules = [
                 sops-nix.homeManagerModules.sops
                 nix-flatpak.homeManagerModules.nix-flatpak

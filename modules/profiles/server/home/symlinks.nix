@@ -1,5 +1,9 @@
-{ ... }:
+{ inputs, ... }:
+
+let
+  secretspath = builtins.toString inputs.sops-secrets;
+in
 
 {
-  home.file.".ssh/github_ssh.pub".source = ../../../../.secrets/public_keys/github_ssh.pub;
+  home.file.".ssh/zoro_key.pub".source = "${secretspath}/public_keys/zoro_key.pub";
 }

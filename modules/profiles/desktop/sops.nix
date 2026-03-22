@@ -1,9 +1,13 @@
-{ ... }:
+{ inputs, ... }:
+
+let
+  secretspath = builtins.toString inputs.sops-secrets;
+in
 
 {
 
   sops = {
-    defaultSopsFile = ../../../.secrets/secrets.yaml;
+    defaultSopsFile = "${secretspath}/secrets.yaml";
     validateSopsFiles = false;
 
     age = {
