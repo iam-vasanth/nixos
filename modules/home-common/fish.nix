@@ -31,7 +31,8 @@
 
       # Nix
       rebuild = "sudo nixos-rebuild switch --flake .${hostname} --impure";
-      ngc = "nix-collect-garbage -d";
+      nso = "sudo nix store optimise";
+      ngc = "sudo nix-collect-garbage -d";
       nsearch = "nix search nixpkgs";
 
       # Tools

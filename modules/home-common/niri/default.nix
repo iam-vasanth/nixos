@@ -1,9 +1,7 @@
-{ inputs, ... }:
+{ ... }:
 
 {
   imports = [
-    inputs.niri-flake.homeModules.niri
-
     ./input.nix
     ./output.nix
     ./window.nix

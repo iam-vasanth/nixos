@@ -13,6 +13,7 @@
   services.power-profiles-daemon.enable = true;
 
   # ── Enables Niri and GDM with LUKS autoLogin ───────────────────────────────────────────────────────────
+  nixpkgs.overlays = [ inputs.niri.overlays.niri ];
   programs.niri = {
     enable = true;
     package = pkgs.niri-unstable;

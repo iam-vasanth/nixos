@@ -10,10 +10,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    niri-flake = {
-      url = "github:sodiboo/niri-flake";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
+    niri.url = "github:sodiboo/niri-flake";
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -46,7 +43,7 @@
     nixpkgs,
     nixpkgs-unstable,
     home-manager,
-    niri-flake,
+    niri,
     noctalia,
     dms,
     nixos-hardware,
@@ -149,9 +146,7 @@
             disko.nixosModules.disko
             sops-nix.nixosModules.sops
             home-manager.nixosModules.home-manager
-
-            { nixpkgs.overlays = [ niri-flake.overlays.niri ]; }
-
+            niri.nixosModules.niri
 
             {
               home-manager.useGlobalPkgs = true;
