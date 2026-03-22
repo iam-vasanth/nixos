@@ -3,6 +3,9 @@ hardware-configuration.nix
 # Logs
 /logs
 
+# nix ignores
+/results
+
 # Personal
 /.misc
 /.ideas
