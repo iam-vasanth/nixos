@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   lib,
   inputs,
@@ -9,9 +10,8 @@
   # ── External imports ───────────────────────────────────────────────────────────
   imports = [
     /etc/nixos/hardware-configuration.nix
+    ./sops.nix
   ];
-
-  sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
 
   # ── Bootloader ───────────────────────────────────────────────────────────
   boot.loader.systemd-boot.enable = true;
@@ -79,8 +79,12 @@
   };
 
   # ── User ─────────────────────────────────────────────────────────────
+  sops.secrets.zoro-password.neededForUsers = true;
+  users.mutableUsers = false;
+
   users.users.${user} = {
     isNormalUser = true;
+    hashedPasswordFile = config.sops.secrets.zoro-password.path;
     description = "ZORO";
     extraGroups = ["networkmanager" "wheel" "docker" "adbusers" "fuse" "video" "libvirtd"];
   };
