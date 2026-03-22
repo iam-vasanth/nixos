@@ -1,7 +1,12 @@
 keys:
-  - &thinkpad_x1 age1qj307tu0ucdzk275xtkv0d3sumdstcwlr7a2lgvscxn3dd8tea5s026f9f
+  - &zoro age1dj45s3v8rmuecwx9f854pn8r5s5z8adgc6j3g4hzpr090p2rzensjc5puz
+  - &hosts :
+      - &ares age1fme2mg48948xa693rear04suvu8875eal76hg7swk569yzzx0prq8pn8em
+      - &hades age1dfktke8dkujws53hjq8u4uyfrwz3ch4hpq58ry2feur7a2n54exqgr8fz9
 creation_rules:
   - path_regex: '^\.secrets/.*\.(yaml|json|env|ini)$'
     key_groups:
       - age:
-          - *thinkpad_x1
+        - *zoro
+        - *ares
+        - *hades

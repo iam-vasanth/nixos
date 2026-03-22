@@ -4,7 +4,7 @@
   programs.git = {
     enable = true;
     signing = {
-      key = "${config.home.homeDirectory}/.ssh/github_ssh.pub";
+      key = "${config.home.homeDirectory}/.ssh/zoro_key.pub";
       signByDefault = true;
       format = "ssh";
     };
@@ -37,7 +37,7 @@
   };
 
   home.file.".config/git/allowed_signers".text = let
-    pubKey = builtins.readFile "${config.home.homeDirectory}/.ssh/github_ssh.pub";
+    pubKey = builtins.readFile "${config.home.homeDirectory}/.ssh/zoro_key.pub";
   in ''
     vk.vasanth.r@gmail.com namespaces="git" ${pubKey}
   '';

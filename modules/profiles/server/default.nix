@@ -12,6 +12,8 @@
     /etc/nixos/hardware-configuration.nix
   ];
 
+  sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+
   # ── Bootloader ───────────────────────────────────────────────────────────
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.configurationLimit = 20;
@@ -47,19 +49,27 @@
   # ── Networking ─────────────────────────────────────────────────────────
   networking = {
     hostName = "${hostname}";
+    networkmanager.enable = true;
     useDHCP = false;
-    interfaces.eth0.ipv4.addresses = [
-      {
-        address = "192.168.1.10";
-        prefixLength = 24;
-      }
-    ];
-    defaultGateway = "192.168.1.1";
+    # interfaces.eth0.ipv4.addresses = [
+    #   {
+    #     address = "192.168.1.10";
+    #     prefixLength = 24;
+    #   }
+    # ];
+    # defaultGateway = "192.168.1.1";
+    # nameservers = [
+    #     "8.8.8.8"
+    #     "1.1.1.1"
+    #     "9.9.9.9"
+    #   ];
     firewall = {
       enable = true;
       allowedTCPPorts = [22 80 443];
     };
   };
+
+  programs.firefox.enable = true;
 
   time.timeZone = "Asia/Kolkata";
 
@@ -104,20 +114,20 @@
     extraGroups = ["networkmanager" "wheel" "docker" "fuse" "video" "libvirtd"];
   };
 
-  # ───────────────────────────────────────────────────────────
-  services.xserver.enable = true;
-  services.desktopManager.gnome.enable = true;
-  services.displayManager = {
-    autoLogin = {
-      enable = true;
-      user = "${user}";
-    };
-    gdm = {
-      enable = true;
-      wayland = true;
-      autoSuspend = false;
-    };
-  };
+  # # ───────────────────────────────────────────────────────────
+  # services.xserver.enable = true;
+  # services.desktopManager.gnome.enable = true;
+  # services.displayManager = {
+  #   autoLogin = {
+  #     enable = true;
+  #     user = "${user}";
+  #   };
+  #   gdm = {
+  #     enable = true;
+  #     wayland = true;
+  #     autoSuspend = false;
+  #   };
+  # };
 
   environment.gnome.excludePackages = (with pkgs; [
     simple-scan
