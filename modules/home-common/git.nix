@@ -36,9 +36,11 @@
     };
   };
 
-  home.file.".config/git/allowed_signers".text = let
-    pubKey = builtins.readFile "${config.home.homeDirectory}/.ssh/zoro_key.pub";
-  in ''
-    vk.vasanth.r@gmail.com namespaces="git" ${pubKey}
-  '';
+  # modules/home-common/git.nix
+  home.file.".config/git/allowed_signers".text =
+    let
+      pubKey = builtins.readFile ../../.secrets/public_keys/zoro_key.pub;
+    in ''
+      @gmail.com namespaces="git" ${pubKey}
+    '';
 }

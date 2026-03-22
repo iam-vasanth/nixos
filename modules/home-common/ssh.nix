@@ -9,6 +9,10 @@
         identityFile = config.sops.secrets."private_keys/zoro_key".path;
         addKeysToAgent = "yes";
       };
+      "gitlab.com" = {
+        identityFile = config.sops.secrets."private_keys/zoro_key".path;
+        addKeysToAgent = "yes";
+      };
     };
   };
 
