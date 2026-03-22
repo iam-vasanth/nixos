@@ -1,16 +1,11 @@
 {
-  pkgs,
-  lib,
-  inputs,
-  user,
-  hostname,
   ...
 }: {
   services.qemuGuest.enable = true;
   services.spice-vdagentd.enable = true;
 
-  fileSystems."/home/zoro/nixos" = {
-    device = "nixos";
+  fileSystems."/home/zoro/nix" = {
+    device = "nix";
     fsType = "virtiofs";
     options = ["defaults" "nofail"];
   };
