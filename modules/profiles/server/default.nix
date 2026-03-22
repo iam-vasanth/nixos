@@ -10,9 +10,8 @@
   # ── External imports ───────────────────────────────────────────────────────────
   imports = [
     /etc/nixos/hardware-configuration.nix
+    ./sops.nix
   ];
-
-  sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
 
   # ── Bootloader ───────────────────────────────────────────────────────────
   boot.loader.systemd-boot.enable = true;
@@ -129,27 +128,27 @@
   #   };
   # };
 
-  environment.gnome.excludePackages = (with pkgs; [
-    simple-scan
-    gnome-photos
-    gnome-tour
-    cheese
-    gnome-music
-    epiphany
-    geary
-    gnome-characters
-    tali
-    iagno
-    hitori
-    atomix
-    yelp
-    gnome-contacts
-    gnome-initial-setup
-    baobab
-    gnome-text-editor
-    gnome-music
-    gnome-software
-  ]);
+  # environment.gnome.excludePackages = (with pkgs; [
+  #   simple-scan
+  #   gnome-photos
+  #   gnome-tour
+  #   cheese
+  #   gnome-music
+  #   epiphany
+  #   geary
+  #   gnome-characters
+  #   tali
+  #   iagno
+  #   hitori
+  #   atomix
+  #   yelp
+  #   gnome-contacts
+  #   gnome-initial-setup
+  #   baobab
+  #   gnome-text-editor
+  #   gnome-music
+  #   gnome-software
+  # ]);
 
   # ── Nginx (reverse proxy) ──────────────────────────────────────────────
   # Disabled because im usinf Nginx proxy manager (Docker Container)
