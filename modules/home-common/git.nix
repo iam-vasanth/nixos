@@ -1,8 +1,4 @@
-{ config, inputs, ... }:
-
-let
-  secretspath = builtins.toString inputs.sops-secrets;
-in
+{ config, ... }:
 
 {
   programs.git = {
@@ -43,7 +39,7 @@ in
   # modules/home-common/git.nix
   home.file.".config/git/allowed_signers".text =
     let
-      pubKey = builtins.readFile "${secretspath}/public_keys/zoro_key.pub";
+      pubKey = builtins.readFile "../../.secrets/public_keys/zoro_key.pub";
     in ''
       @gmail.com namespaces="git" ${pubKey}
     '';

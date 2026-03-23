@@ -1,8 +1,8 @@
-{ config, lib, user, pkgs, ... }:
+{ config, lib, ... }:
 
 {
   home.sessionVariables = {
-    EDITOR = "dev.zed.Zed.desktop";
+    EDITOR = "nvim";
   };
 
   # Sets up XDG folders

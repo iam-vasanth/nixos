@@ -1,4 +1,4 @@
-{ config, user, ... }:
+{ config, ... }:
 
 {
   programs.ssh = {

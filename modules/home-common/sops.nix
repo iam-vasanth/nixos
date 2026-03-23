@@ -1,13 +1,9 @@
-{ config, inputs, user, ... }:
-
-let
-  secretspath = builtins.toString inputs.sops-secrets;
-in
+{ config, ... }:
 
 {
   sops = {
     age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
-    defaultSopsFile = "${secretspath}/secrets.yaml";
+    defaultSopsFile = "../../.secrets/secrets.yaml";
     validateSopsFiles = false;
     secrets = {
       "private_keys/zoro_key" ={
