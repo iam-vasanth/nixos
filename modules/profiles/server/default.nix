@@ -91,17 +91,17 @@
   };
 
   # ── Fail2ban ───────────────────────────────────────────────────────────
-  services.fail2ban = {
-    enable = true;
-    maxretry = 5;
-    bantime = "1h";
-    bantime-increment = {
-      enable = true;
-      multipliers = "1 2 4 8 16 32 64";
-    };
-    # For whitelisting trusted IP's
-    # ignoreip = "192.168.1.0/24 10.0.0.0/8";
-  };
+  # services.fail2ban = {
+  #   enable = true;
+  #   maxretry = 5;
+  #   bantime = "1h";
+  #   bantime-increment = {
+  #     enable = true;
+  #     multipliers = "1 2 4 8 16 32 64";
+  #   };
+  #   # For whitelisting trusted IP's
+  #   # ignoreip = "192.168.1.0/24 10.0.0.0/8";
+  # };
 
   # ── Enables flakes ───────────────────────────────────────────────────────────
   nix.settings.experimental-features = ["nix-command" "flakes"];
@@ -110,8 +110,15 @@
   users.users.${user} = {
     isNormalUser = true;
     description = "ZORO";
-    extraGroups = ["networkmanager" "wheel" "docker" "fuse" "video" "libvirtd"];
+    extraGroups = ["networkmanager" "wheel" "docker" "podman" "fuse" "video" "libvirtd"];
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM8gMfrAx7QGMkIHLJhe5NI/PbGiTzomS4GgWoYpI/Ip vk.vasanth.r@gmail.com"
+    ];
+    # openssh.authorizedKeys.keys = [
+    #   (builtins.readFile ../../../.secrets/public_keys/zoro_key.pub)
+    # ];
   };
+
 
   # # ───────────────────────────────────────────────────────────
   # services.xserver.enable = true;

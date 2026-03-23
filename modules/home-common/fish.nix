@@ -48,6 +48,7 @@
 
       ports = "ss -tuln";
       myip = "curl ifconfig.me";
+      sshk="kitty +kitten ssh";
     };
 
     plugins = [

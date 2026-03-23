@@ -95,7 +95,7 @@
           ./modules/profiles/desktop/default.nix
 
           # DE specific configuration
-          ./desktop/${desktop}/configuration.nix
+          # ./desktop/${desktop}/configuration.nix
 
         ];
         vm-server = [
