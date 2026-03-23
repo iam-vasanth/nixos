@@ -10,7 +10,7 @@
   # ── External imports ───────────────────────────────────────────────────────────
   imports = [
     /etc/nixos/hardware-configuration.nix
-    ./sops.nix
+    ./nixos/include.nix
   ];
 
   # ── Bootloader ───────────────────────────────────────────────────────────
