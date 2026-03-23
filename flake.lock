@@ -396,8 +396,7 @@
         "noctalia": "noctalia",
         "noctalia-qs": "noctalia-qs",
         "nur": "nur",
-        "sops-nix": "sops-nix",
-        "sops-secrets": "sops-secrets"
+        "sops-nix": "sops-nix"
       }
     },
     "sops-nix": {
@@ -416,23 +415,6 @@
         "owner": "mic92",
         "repo": "sops-nix",
         "type": "github"
-      }
-    },
-    "sops-secrets": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1774155098,
-        "narHash": "sha256-m8J0atUGELRbljhu+nhA7wuJEMqPjR8FmDtjpiWDvLQ=",
-        "ref": "refs/heads/main",
-        "rev": "b069aafefc4369e69eb2f6935afa32a016db55a8",
-        "shallow": true,
-        "type": "git",
-        "url": "ssh://git@gitlab.com/iam-vasanth/sops-secrets.git"
-      },
-      "original": {
-        "shallow": true,
-        "type": "git",
-        "url": "ssh://git@gitlab.com/iam-vasanth/sops-secrets.git"
       }
     },
     "systems": {

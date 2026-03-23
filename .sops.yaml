@@ -4,7 +4,7 @@ keys:
       - &ares age1fme2mg48948xa693rear04suvu8875eal76hg7swk569yzzx0prq8pn8em
       - &hades age1dfktke8dkujws53hjq8u4uyfrwz3ch4hpq58ry2feur7a2n54exqgr8fz9
 creation_rules:
-  - path_regex: 'secrets\.yaml$'
+  - path_regex: '\.secrets/secrets\.yaml$'
     key_groups:
       - age:
         - *zoro
