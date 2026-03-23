@@ -20,6 +20,7 @@
     pkgs._7zz-rar
     pkgs.btop
     pkgs.mpv
+    pkgs.termius
     # Fish dependencies
     pkgs.fzf # fish : fzf-fish and forgit plugins
     pkgs.grc # fish : grc plugin

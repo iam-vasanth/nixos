@@ -7,8 +7,8 @@
   # ────────────────────────────────────────────────
 
   programs.niri.settings.environment = {
-    GDK_SCALE = "2";
-    # GDK_BACKEND = "wayland";
+    GDK_SCALE = "1";
+    GDK_BACKEND = "wayland";
     # QT_AUTO_SCREEN_SCALE_FACTOR = "0";
     # QT_QPA_PLATFORM = "wayland";
     # MOZ_ENABLE_WAYLAND = "1";
