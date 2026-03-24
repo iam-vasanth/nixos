@@ -1,0 +1,41 @@
+server:
+  port: 8080
+  proxied: true
+
+pages:
+  - name: Home
+    columns:
+      - size: small
+        widgets:
+          - type: clock
+            hour-format: 24h
+
+          - type: calendar
+
+      - size: full
+        widgets:
+          - type: bookmarks
+            groups:
+              - title: Services
+                links:
+                  - title: Immich
+                    url: http://192.168.122.130:2283
+                    icon: sh:immich
+                  - title: Nginx Proxy Manager
+                    url: http://192.168.122.130:81
+                    icon: sh:nginx-proxy-manager
+
+          - type: hacker-news
+            limit: 10
+            collapse-after: 5
+
+      - size: small
+        widgets:
+          - type: server-stats
+
+          - type: rss
+            title: Linux News
+            limit: 5
+            feeds:
+              - url: https://www.phoronix.com/rss.php
+                title: Phoronix
