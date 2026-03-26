@@ -1,6 +1,9 @@
 { pkgs, unstable, ... }:
 
 {
+
+  fonts.fontconfig.enable = true;
+
   home.packages = [
     pkgs.kitty
     pkgs.starship
@@ -21,11 +24,22 @@
     pkgs.btop
     pkgs.mpv
     pkgs.termius
+
+    # Fonts
+    pkgs.nerd-fonts.jetbrains-mono
+    pkgs.nerd-fonts.fira-code
+    pkgs.fira-code-symbols
+    pkgs.nerd-fonts.iosevka
+    pkgs.nerd-fonts.hack
+    pkgs.inter-nerdfont
+
     # Fish dependencies
     pkgs.fzf # fish : fzf-fish and forgit plugins
     pkgs.grc # fish : grc plugin
-    pkgs.nix-your-shell  # fish optional : Nix develop ~/home/configs/fish.nix line:44
+    pkgs.nix-your-shell  # fish  : Nix develop
+
     pkgs.nixd # Zed-Editor : language server
+
     # sops-nix
     pkgs.sops
     pkgs.age

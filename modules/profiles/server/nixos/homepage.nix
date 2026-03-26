@@ -15,7 +15,7 @@
             {
               size = "small";
               widgets = [
-                { type = "clock"; hour-format = "24h"; }
+                { type = "clock"; timezone = "Asia/Kolkata"; hour-format = "24h"; }
                 { type = "calendar"; }
               ];
             }
