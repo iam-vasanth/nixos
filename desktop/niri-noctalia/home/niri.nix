@@ -2,10 +2,13 @@
 
 {
 
+  ###########################################################################
+  # Niri ( Noctalia specific settings)
+  # https://docs.noctalia.dev/getting-started/keybinds/
+  ###########################################################################
+
   program.niri = {
-
     settings ={
-
       spawn-at-startup = [
         {
           command = [
@@ -15,12 +18,10 @@
       ];
 
       binds = with inputs.niri.lib; let
-      # you can also define Mod = "Mod4"; here
+      # you can also define custom Mod key = "Mod4"; here
       in {
         "Mod+O".action = "toggle-overview";
 
-        # Noctalia Specific
-        # Check https://docs.noctalia.dev/getting-started/keybinds/ for more
         "Mod+D".action.spawn = [ "noctalia-shell" "ipc" "call" "launcher" "toggle" ];
         "Mod+S".action.spawn = [ "noctalia-shell" "ipc" "call" "settings" "toggle" ];
         "Mod+V".action.spawn = [ "noctalia-shell" "ipc" "call" "launcher" "clipboard" ];

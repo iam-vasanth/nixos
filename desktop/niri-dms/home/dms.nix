@@ -1,11 +1,17 @@
-{ inputs, unstable, ... }:
-
 {
-
+  inputs,
+  pkgs,
+  unstable,
+  ...
+}: {
   imports = [
     inputs.dms.homeModules.dank-material-shell
     inputs.dms.homeModules.niri
   ];
+
+  ###########################################################################
+  # DMS
+  ###########################################################################
 
   programs.dank-material-shell = {
     enable = true;
@@ -18,6 +24,9 @@
     };
   };
 
-  services.udiskie.enable = true;
+  ###########################################################################
+  # Udiskie (For Auto USB/Device mounts)
+  ###########################################################################
 
+  services.udiskie.enable = true;
 }

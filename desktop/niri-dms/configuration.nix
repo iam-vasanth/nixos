@@ -1,24 +1,33 @@
 {
-  pkgs,
-  lib,
   inputs,
-  user,
   hostname,
+  user,
+  pkgs,
+  unstable,
   ...
 }: {
   imports = [
+    # Import nixos modules if needed ...
   ];
 
-  # ── Power profile ───────────────────────────────────────────────────────────
-  services.power-profiles-daemon.enable = true;
+  ###########################################################################
+  # Hostname
+  ###########################################################################
 
-  # ── Enables Niri and GDM with LUKS autoLogin ───────────────────────────────────────────────────────────
+  networking.hostName = "${hostname}";
+
+  ###########################################################################
+  # Enables Niri and GDM
+  ###########################################################################
+
+  # Niri with Sodiboo's niri cache
   nixpkgs.overlays = [ inputs.niri.overlays.niri ];
   programs.niri = {
     enable = true;
     package = pkgs.niri-unstable;
   };
 
+  # GDM auto login
   services.displayManager = {
     autoLogin = {
       enable = true;
@@ -30,18 +39,29 @@
       autoSuspend = false;
     };
   };
-  services.gnome.gnome-keyring.enable = true;
+
+  # Uncomment if using LUKS with GDM autologin for auto keyring unlock.
+  # services.gnome.gnome-keyring.enable = true;
 
   # Disabled default polkit to use DMS's built-in polkit
   systemd.user.services.niri-flake-polkit.enable = false;
 
-  # ── Hostname ───────────────────────────────────────────────────────────
-  networking.hostName = "${hostname}";
+  ###########################################################################
+  # Power profile
+  ###########################################################################
 
-  # ── USB handling ───────────────────────────────────────────────────────────
+  services.power-profiles-daemon.enable = true;
+
+  ###########################################################################
+  # USB handling
+  ###########################################################################
+
   services.udisks2.enable = true;
 
-  # ── Host specific packages ─────────────────────────────────────────────────────────────
+  ###########################################################################
+  # Host specific packages
+  ###########################################################################
+
   environment.systemPackages = [
     pkgs.kitty
     pkgs.nautilus
@@ -50,52 +70,10 @@
     pkgs.firefox
   ];
 
-  # # ── Disk layout (disko) ────────────────────────────────────────────────
-  # # Run: sudo nix run 'nixpkgs#disko' -- --mode destroy,format,mount /etc/nixos/disko.nix
-  # disko.devices = {
-  #   disk.nvme0 = {
-  #     type = "disk";
-  #     device = "/dev/nvme0n1"; # ← always verify with lsblk or ls /dev/disk/by-id/
-  #     content = {
-  #       type = "gpt";
-  #       partitions = {
-  #         esp = {
-  #           size = "1G";
-  #           type = "EF00";
-  #           content = {
-  #             type = "filesystem";
-  #             format = "vfat";
-  #             mountpoint = "/boot";
-  #           };
-  #         };
-  #         luks = {
-  #           size = "100%";
-  #           content = {
-  #             type = "luks";
-  #             name = "cryptroot";
-  #             settings.allowDiscards = true;  # enables TRIM on SSD
-  #             # You can add more settings here if needed, e.g.:
-  #             # extraOpenArgs = [ "--perf-options" "noop" ]; etc.
+  ###########################################################################
+  # Home Manager
+  ###########################################################################
 
-  #             content = {
-  #               type = "filesystem";
-  #               format = "ext4";
-  #               mountpoint = "/";
-  #               # Optional: add label and extra mount options
-  #               extraArgs = [ "-L" "${host1}" ];
-  #               mountOptions = [
-  #                 "noatime"          # reduces unnecessary writes → better SSD life
-  #                 "discard"          # enables periodic TRIM (complements allowDiscards)
-  #                 # "errors=remount-ro"  # optional safety
-  #               ];
-  #             };
-  #           };
-  #         };
-  #       };
-  #     };
-  #   };
-  # };
-
-  # ── Home Manager ───────────────────────────────────────────────────────
   home-manager.users.${user} = import ./home.nix;
+
 }

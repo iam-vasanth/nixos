@@ -1,25 +1,31 @@
 {
-  pkgs,
   lib,
   inputs,
+  hostname,
   user,
-  host1,
+  pkgs,
+  unstable,
   ...
 }: {
-  imports = [
-    # ...
-  ];
 
-  # ── Power profile ───────────────────────────────────────────────────────────
-  services.power-profiles-daemon.enable = true;
-  services.upower.enable = true;
+  ###########################################################################
+  # Identity
+  ###########################################################################
 
-  # ── Enables Niri and GDM with LUKS autoLogin ───────────────────────────────────────────────────────────
-  # programs.niri = {
-  #   enable = true;
-  #   package = pkgs.niri-unstable;
-  # };
+  networking.hostName = "${host1}";
 
+  ###########################################################################
+  # Enables Niri and GDM
+  ###########################################################################
+
+  # Niri with Sodiboo's niri cache
+  nixpkgs.overlays = [ inputs.niri.overlays.niri ];
+  programs.niri = {
+    enable = true;
+    package = pkgs.niri-unstable;
+  };
+
+  # GDM auto login
   services.displayManager = {
     autoLogin = {
       enable = true;
@@ -32,66 +38,30 @@
     };
   };
 
-  # Keyring gets unlocked automatically with LUKS but this will render the noctalia fprintd un-usable
+  # ncomment if using LUKS with GDM autologin for auto keyring unlocks but this will render the noctalia fprintd un-usable
   services.gnome.gnome-keyring.enable = true;
 
-  # ── Identity ───────────────────────────────────────────────────────────
-  networking.hostName = "${host1}";
+  ###########################################################################
+  # Power profile
+  ###########################################################################
 
-  # ── Host specific packages ─────────────────────────────────────────────────────────────
+  services.power-profiles-daemon.enable = true;
+  services.upower.enable = true;
+
+  ###########################################################################
+  # Host specific packages
+  ###########################################################################
+
   environment.systemPackages = [
     pkgs.kitty
     pkgs.nautilus
-    pkgs.wev
     pkgs.xwayland-satellite
   ];
 
-  # # ── Disk layout (disko) ────────────────────────────────────────────────
-  # # Run: sudo nix run 'nixpkgs#disko' -- --mode destroy,format,mount /etc/nixos/disko.nix
-  # disko.devices = {
-  #   disk.nvme0 = {
-  #     type = "disk";
-  #     device = "/dev/nvme0n1"; # ← always verify with lsblk or ls /dev/disk/by-id/
-  #     content = {
-  #       type = "gpt";
-  #       partitions = {
-  #         esp = {
-  #           size = "1G";
-  #           type = "EF00";
-  #           content = {
-  #             type = "filesystem";
-  #             format = "vfat";
-  #             mountpoint = "/boot";
-  #           };
-  #         };
-  #         luks = {
-  #           size = "100%";
-  #           content = {
-  #             type = "luks";
-  #             name = "cryptroot";
-  #             settings.allowDiscards = true;  # enables TRIM on SSD
-  #             # You can add more settings here if needed, e.g.:
-  #             # extraOpenArgs = [ "--perf-options" "noop" ]; etc.
+  ###########################################################################
+  # Home Manager
+  ###########################################################################
 
-  #             content = {
-  #               type = "filesystem";
-  #               format = "ext4";
-  #               mountpoint = "/";
-  #               # Optional: add label and extra mount options
-  #               extraArgs = [ "-L" "${host1}" ];
-  #               mountOptions = [
-  #                 "noatime"          # reduces unnecessary writes → better SSD life
-  #                 "discard"          # enables periodic TRIM (complements allowDiscards)
-  #                 # "errors=remount-ro"  # optional safety
-  #               ];
-  #             };
-  #           };
-  #         };
-  #       };
-  #     };
-  #   };
-  # };
-
-  # ── Home Manager ───────────────────────────────────────────────────────
   home-manager.users.${user} = import ./desktop/niri-noctalia/home.nix;
+
 }

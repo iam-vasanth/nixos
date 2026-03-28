@@ -1,8 +1,0 @@
-include "./display.kdl"
-include "./inputs.kdl"
-include "./keybinds.kdl"
-include "./applications.kdl"
-include "./ui.kdl"
-include "./env.kdl"
-
-include "./noctalia.kdl"

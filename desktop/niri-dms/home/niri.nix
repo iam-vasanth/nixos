@@ -2,8 +2,12 @@
 
 {
 
-  programs.niri = {
+  ###########################################################################
+  # Niri (DMS secific settings)
+  # https://danklinux.com/docs/dankmaterialshell/keybinds-ipc
+  ###########################################################################
 
+  programs.niri = {
     settings ={
       layer-rules = [
         {
@@ -11,14 +15,12 @@
           place-within-backdrop = true;
         }
       ];
-
       binds = with inputs.niri-flake.lib; let
-      # you can also define Mod = "Mod4"; here
+
+      # you can also define custom Mod key = "Mod4"; here
+
       in {
         "Mod+O".action.toggle-overview = {};
-
-        # Noctalia Specific
-        # Check https://docs.noctalia.dev/getting-started/keybinds/ for more
         "Mod+D".action.spawn = [ "dms" "ipc" "call" "spotlight" "toggle" ];
         "Mod+S".action.spawn = [ "dms" "ipc" "call" "settings" "toggle" ];
         "Mod+V".action.spawn = [ "dms" "ipc" "call" "launcher" "clipboard" ];
@@ -37,9 +39,6 @@
         # Brightness
         "XF86MonBrightnessUp".action.spawn = [ "dms" "ipc" "call" "brightness" "increment" "10" ];
         "XF86MonBrightnessDown".action.spawn = [ "dms" "ipc" "call" "brightness" "decrement" "10" ];
-
-        # Power profile
-        # "XF86Favorites".action.spawn = [ "dms" "ipc" "call" "powerProfile" "cycle" ];
       };
     };
   };
