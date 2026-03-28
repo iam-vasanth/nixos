@@ -119,6 +119,9 @@
     # ];
   };
 
+  # Systemd-resolved for DNS resolution
+  services.resolved.enable = true;
+
 
   # # ───────────────────────────────────────────────────────────
   # services.xserver.enable = true;
