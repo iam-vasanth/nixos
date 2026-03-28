@@ -12,7 +12,6 @@
     enableSystemMonitoring = true;
     dgop.package = unstable.dgop;
     enableDynamicTheming = true;
-    enableAudioWavelength = true;
     enableClipboardPaste = true;
     niri = {
       enableSpawn = true;

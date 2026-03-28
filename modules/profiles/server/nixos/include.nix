@@ -3,7 +3,7 @@
 {
   imports = [
     ./immich.nix
-    ./homepage.nix
+    ./glance.nix
     ./sops.nix
   ];
 

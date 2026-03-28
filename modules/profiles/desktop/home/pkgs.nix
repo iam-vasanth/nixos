@@ -18,8 +18,8 @@
     pkgs.bitwarden-desktop
     pkgs.amberol
     pkgs.signal-desktop
+    pkgs.vesktop
     pkgs.blanket
-    pkgs.obsidian
     pkgs._7zz-rar
     pkgs.btop
     pkgs.mpv
@@ -60,8 +60,8 @@
       { appId = "com.stremio.Stremio"; origin = "flathub"; }
       { appId = "com.usebottles.bottles"; origin = "flathub"; }
       { appId = "com.rustdesk.RustDesk"; origin = "flathub"; }
-      { appId = "org.equicord.equibop"; origin = "flathub"; }
       { appId = "net.codelogistics.webapps"; origin = "flathub"; }
+      { appId = "md.obsidian.Obsidian"; origin = "flathub"; }
 
       # { appId = "flathub:com.ml4w.dotfilesinstaller"; origin = "flathub" } # To add a flatpak
     ];

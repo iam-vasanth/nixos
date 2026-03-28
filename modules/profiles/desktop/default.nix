@@ -19,7 +19,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # ── Kernal ───────────────────────────────────────────────────────────
-  boot.kernelPackages = pkgs.linuxPackages_zen;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # ── Kernal Parameters ───────────────────────────────────────────────────────────
   boot.consoleLogLevel = 0;
@@ -208,14 +208,17 @@
   ];
 
   # ── Font packages ─────────────────────────────────────────────────────────────
-  fonts.packages = with pkgs; [
-    nerd-fonts.jetbrains-mono
-    nerd-fonts.fira-code
-    fira-code-symbols
-    nerd-fonts.iosevka
-    nerd-fonts.hack
-    inter-nerdfont
-  ];
+  #
+  # It is already installed at home manager level - Comment out if needed at system level
+  #
+  # fonts.packages = with pkgs; [
+  #   nerd-fonts.jetbrains-mono
+  #   nerd-fonts.fira-code
+  #   fira-code-symbols
+  #   nerd-fonts.iosevka
+  #   nerd-fonts.hack
+  #   inter-nerdfont
+  # ];
 
   # ── Nix cleanup ─────────────────────────────────────────────────────────────
   nix = {
@@ -231,15 +234,15 @@
   };
 
   # ── Boot / Secure Boot (lanzaboote) ───────────────────────────────────
+  #
+  # Too scared to enable - Fuck Microslop
+  #
   # boot.loader.systemd-boot.enable = lib.mkForce false;
   # boot.lanzaboote = {
   #   enable = true;
   #   pkiBundle = "/etc/secureboot";
   # };
   # boot.loader.efi.canTouchEfiVariables = true;
-
-  # ── Home Manager ───────────────────────────────────────────────────────
-  # home-manager.users.${user} = import ./modules/profiles/desktop/home.nix;
 
   system.stateVersion = "25.11"; # Do not touch this
 }

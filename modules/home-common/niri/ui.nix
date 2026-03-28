@@ -90,9 +90,6 @@
       prefer-no-csd                    = true;
       hotkey-overlay.skip-at-startup   = true;
       # screenshot-path = "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png";
-
-      # Environment variables (handled by home.sessionVariables or systemd user env)
-      # You can also set them via home.sessionVariables
     };
   };
 }
