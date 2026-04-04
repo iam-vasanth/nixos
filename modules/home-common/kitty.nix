@@ -1,6 +1,8 @@
-{ ... }:
+{...}: {
+  ###########################################################################
+  # kitty
+  ###########################################################################
 
-{
   programs.kitty = {
     enable = true;
 
@@ -28,6 +30,7 @@
       inactive_tab_font_style = "normal";
       background_opacity = "0.95";
     };
+
     keybindings = {
       "alt+t" = "new_tab";
       "alt+right" = "next_tab";
@@ -38,7 +41,6 @@
       "ctrl+0" = "change_font_size all 0";
     };
 
-    # Theme file
     extraConfig = ''
       include themes/noctalia.conf
       include dank-theme.conf

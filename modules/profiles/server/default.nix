@@ -6,19 +6,25 @@
   hostname,
   ...
 }: {
-
-  # ── External imports ───────────────────────────────────────────────────────────
   imports = [
     /etc/nixos/hardware-configuration.nix
     ./nixos/include.nix
   ];
 
-  # ── Bootloader ───────────────────────────────────────────────────────────
+  ###########################################################################
+  # Bootloader
+  ###########################################################################
+
   boot.loader.systemd-boot.enable = true;
-  boot.loader.systemd-boot.configurationLimit = 20;
+  boot.loader.systemd-boot.configurationLimit = 10;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # ── Kernal Parameters ───────────────────────────────────────────────────────────
+  ###########################################################################
+  # Kernal and Kernal parameters
+  ###########################################################################
+
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
   boot.consoleLogLevel = 0;
   boot.initrd.systemd.enable = true;
   boot.initrd.verbose = false;
@@ -31,7 +37,10 @@
     "vt.global_cursor_default=0"
   ];
 
-  # ── Silences systemd logs ───────────────────────────────────────────────────────────
+  ###########################################################################
+  # Silences systemd logs
+  ###########################################################################
+
   systemd = {
     services.NetworkManager-wait-online.enable = false;
     settings = {
@@ -42,88 +51,76 @@
     };
   };
 
-  # ── Kernal ───────────────────────────────────────────────────────────
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  ###########################################################################
+  # Swap file
+  ###########################################################################
 
-  # ── Networking ─────────────────────────────────────────────────────────
-  networking = {
-    hostName = "${hostname}";
-    networkmanager.enable = true;
-    useDHCP = false;
-    # interfaces.eth0.ipv4.addresses = [
-    #   {
-    #     address = "192.168.1.10";
-    #     prefixLength = 24;
-    #   }
-    # ];
-    # defaultGateway = "192.168.1.1";
-    # nameservers = [
-    #     "8.8.8.8"
-    #     "1.1.1.1"
-    #     "9.9.9.9"
-    #   ];
-    firewall = {
-      enable = true;
-      allowedTCPPorts = [22 80 443];
-    };
-  };
+  # Waiting for nix Zswap implementation
+  # https://github.com/NixOS/nixpkgs/pull/470366
 
-  programs.firefox.enable = true;
+  swapDevices = [
+    {
+      device = "/swapfile";
+      size = 16 * 1024;
+      randomEncryption.enable = true; # False if hibernating
+    }
+  ];
 
-  time.timeZone = "Asia/Kolkata";
+  ###########################################################################
+  # Enables flakes
+  ###########################################################################
 
-  # ── SSH hardening ──────────────────────────────────────────────────────
-  services.openssh = {
-    enable = true;
-    openFirewall = true;
-    settings = {
-      PasswordAuthentication = false;
-      PermitRootLogin = "no";
-      X11Forwarding = false;
-      AllowTcpForwarding = "no";
-      ClientAliveInterval = 300;
-      ClientAliveCountMax = 2;
-    };
-    # Only allow key-based auth
-    extraConfig = ''
-      AllowGroups wheel
-    '';
-  };
-
-  # ── Fail2ban ───────────────────────────────────────────────────────────
-  # services.fail2ban = {
-  #   enable = true;
-  #   maxretry = 5;
-  #   bantime = "1h";
-  #   bantime-increment = {
-  #     enable = true;
-  #     multipliers = "1 2 4 8 16 32 64";
-  #   };
-  #   # For whitelisting trusted IP's
-  #   # ignoreip = "192.168.1.0/24 10.0.0.0/8";
-  # };
-
-  # ── Enables flakes ───────────────────────────────────────────────────────────
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
-  # ── User ─────────────────────────────────────────────────────────────
+  ###########################################################################
+  # Unfree packages
+  ###########################################################################
+
+  nixpkgs.config.allowUnfree = true;
+
+  ###########################################################################
+  # Hostname
+  ###########################################################################
+
+  networking.hostName = "${hostname}";
+
+  ###########################################################################
+  # User
+  ###########################################################################
+
+  sops.secrets.zoro-password.neededForUsers = true;
+  users.mutableUsers = false;
+
   users.users.${user} = {
     isNormalUser = true;
+    hashedPasswordFile = config.sops.secrets.zoro-password.path;
     description = "ZORO";
-    extraGroups = ["networkmanager" "wheel" "docker" "podman" "fuse" "video" "libvirtd"];
+    extraGroups = ["networkmanager" "wheel" "docker" "podman" "fuse" "libvirtd"];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM8gMfrAx7QGMkIHLJhe5NI/PbGiTzomS4GgWoYpI/Ip vk.vasanth.r@gmail.com"
     ];
-    # openssh.authorizedKeys.keys = [
-    #   (builtins.readFile ../../../.secrets/public_keys/zoro_key.pub)
-    # ];
   };
 
-  # Systemd-resolved for DNS resolution
-  services.resolved.enable = true;
+  ###########################################################################
+  # Timezone
+  ###########################################################################
 
+  time.timeZone = "Asia/Kolkata";
 
-  # # ───────────────────────────────────────────────────────────
+  ###########################################################################
+  # Networking
+  ###########################################################################
+
+  networking = {
+    networkmanager.enable = true;
+    useDHCP = false;
+    firewall.enable = true;
+  };
+
+  ###########################################################################
+  # Minimal Gnome DE for fallback
+  ###########################################################################
+
   # services.xserver.enable = true;
   # services.desktopManager.gnome.enable = true;
   # services.displayManager = {
@@ -160,8 +157,52 @@
   #   gnome-software
   # ]);
 
-  # ── Nginx (reverse proxy) ──────────────────────────────────────────────
-  # Disabled because im usinf Nginx proxy manager (Docker Container)
+  ###########################################################################
+  # OpenSSH
+  ###########################################################################
+
+  services.openssh = {
+    enable = true;
+    openFirewall = true;
+    settings = {
+      PasswordAuthentication = false;
+      PermitRootLogin = "no";
+      X11Forwarding = false;
+      AllowTcpForwarding = "no";
+      ClientAliveInterval = 300;
+      ClientAliveCountMax = 2;
+      AllowGroups = ["wheel"];
+      LogLevel = "VERBOSE";
+    };
+  };
+
+  ###########################################################################
+  # Fail2ban
+  ###########################################################################
+
+  services.fail2ban = {
+    enable = true;
+    maxretry = 5;
+    bantime = "1h";
+    bantime-increment = {
+      enable = true;
+      multipliers = "1 2 4 8 16 32 64";
+    };
+    # For whitelisting trusted IP's
+    # ignoreip = "192.168.1.0/24 10.0.0.0/8";
+  };
+
+  ###########################################################################
+  # Systemd-resolved for DNS resolution
+  ###########################################################################
+
+  services.resolved.enable = true;
+
+  ###########################################################################
+  # Nginx ( Reverse proxy )
+  ###########################################################################
+
+  # Disabled because im using Nginx proxy manager (Docker Container)
   # services.nginx = {
   #   enable = true;
   #   recommendedGzipSettings = true;
@@ -169,7 +210,7 @@
   #   recommendedProxySettings = true;
   #   recommendedTlsSettings = true;
 
-  #   # Example vhost — add your own below
+  #   # Example vhost
   #   virtualHosts."example.com" = {
   #     enableACME = true;
   #     forceSSL = true;
@@ -180,20 +221,20 @@
   #   };
   # };
 
-  # ── ACME / Let's Encrypt ───────────────────────────────────────────────
-  # security.acme = {
-  #   acceptTerms = true;
-  #   defaults.email = "admin@example.com"; # ← your email
-  # };
+  ###########################################################################
+  # Podman (rootless containers)
+  ###########################################################################
 
-  # ── Podman (rootless containers) ───────────────────────────────────────
   virtualisation.podman = {
     enable = true;
     dockerCompat = true;
     defaultNetwork.settings.dns_enabled = true;
   };
 
-  # ── Monitoring ─────────────────────────────────────────────────────────
+  ###########################################################################
+  # Prometheus ( Using glance for minimal setup now )
+  ###########################################################################
+
   # services.prometheus = {
   #   enable = true;
   #   port = 9090;
@@ -212,6 +253,10 @@
   #   ];
   # };
 
+  ###########################################################################
+  # Grafana ( Using glance for minimal setup now )
+  ###########################################################################
+
   # services.grafana = {
   #   enable = true;
   #   settings = {
@@ -223,13 +268,19 @@
   #   };
   # };
 
-  # ── Logs ───────────────────────────────────────────────────────────────
+  ###########################################################################
+  # Journalctl logs ( Extra config )
+  ###########################################################################
+
   services.journald.extraConfig = ''
     SystemMaxUse=2G
     MaxRetentionSec=1month
   '';
 
-  # ── Server packages ────────────────────────────────────────────────────
+  ###########################################################################
+  # Host specific common packages
+  ###########################################################################
+
   environment.systemPackages = with pkgs; [
     podman-compose
     ncdu
@@ -245,16 +296,15 @@
     git
   ];
 
-  # ── Automatic updates ──────────────────────────────────────────────────
-  # system.autoUpgrade = {
-  #   enable = true;
-  #   flake = "github:yourusername/nixos-config#server"; # ← adjust
-  #   flags = ["--update-input" "nixpkgs"];
-  #   dates = "04:00";
-  #   randomizedDelaySec = "45min";
-  # };
+  ###########################################################################
+  # Home Manager
+  ###########################################################################
 
   home-manager.users.${user} = import ./home.nix;
 
-  system.stateVersion = "25.11"; # Do not touch this
+  ###########################################################################
+  # State version - Do not touch this
+  ###########################################################################
+
+  system.stateVersion = "25.11";
 }

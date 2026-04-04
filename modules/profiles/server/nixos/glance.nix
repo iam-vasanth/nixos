@@ -1,6 +1,8 @@
-{ pkgs, ... }:
+{...}: {
+  ###########################################################################
+  # Glance - Dashboard
+  ###########################################################################
 
-{
   services.glance = {
     enable = true;
     settings = {
@@ -15,8 +17,12 @@
             {
               size = "small";
               widgets = [
-                { type = "clock"; timezone = "Asia/Kolkata"; hour-format = "24h"; }
-                { type = "calendar"; }
+                {
+                  type = "clock";
+                  timezone = "Asia/Kolkata";
+                  hour-format = "24h";
+                }
+                {type = "calendar";}
               ];
             }
             {
@@ -28,8 +34,16 @@
                     {
                       title = "Services";
                       links = [
-                        { title = "Immich"; url = "http://192.168.122.130:2283"; icon = "sh:immich"; }
-                        { title = "Nginx Proxy Manager"; url = "http://192.168.122.130:81"; icon = "sh:nginx-proxy-manager"; }
+                        {
+                          title = "Immich";
+                          url = "http://192.168.122.130:2283";
+                          icon = "sh:immich";
+                        }
+                        {
+                          title = "Nginx Proxy Manager";
+                          url = "http://192.168.122.130:81";
+                          icon = "sh:nginx-proxy-manager";
+                        }
                       ];
                     }
                   ];
@@ -44,7 +58,7 @@
             {
               size = "small";
               widgets = [
-                { type = "server-stats"; }
+                {type = "server-stats";}
               ];
             }
           ];
@@ -53,5 +67,9 @@
     };
   };
 
-  networking.firewall.allowedTCPPorts = [ 2283 80 443 81 8080 ];
+  ###########################################################################
+  # Opens Firewall ports - Glance
+  ###########################################################################
+
+  networking.firewall.allowedTCPPorts = [2283 80 443 81 8080];
 }

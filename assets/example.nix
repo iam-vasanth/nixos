@@ -1,9 +1,14 @@
-
 # Order of module args
-{ config, lib, inputs, user, hostname, pkgs, unstable, ... }:
-
 {
-
+  config,
+  lib,
+  inputs,
+  user,
+  hostname,
+  pkgs,
+  unstable,
+  ...
+}: {
   ###########################################################################
   # Main heading (What is the code block for)
   ###########################################################################
@@ -15,7 +20,7 @@
   # Order of modules
   ###########################################################################
   # Imports
-  # Bootloader, kernal params and other boot stuffs
+  # Bootloader, kernal params, swap and other boot stuffs
   # Nix specific settings (Flakes, unfree package, ...)
   # Hostname
   # Users
@@ -27,5 +32,4 @@
   # Packages and font pkgs
   # Nix GC and Optimise
   # State version
-
 }

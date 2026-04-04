@@ -1,5 +1,5 @@
 {
-  description = "My NixOS multi-host flake (Niri-Noctalia / Niri-DMS / Cosmic)";
+  description = "NixOS multihost flake";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";

@@ -1,10 +1,15 @@
-{ ... }:
+{...}: {
+  ###########################################################################
+  # Starship
+  ###########################################################################
 
-{
   programs.starship = {
     enable = true;
+
     enableFishIntegration = true;
+
     enableTransience = false;
+
     settings = {
       "$schema" = "https://starship.rs/config-schema.json";
       command_timeout = 1000;

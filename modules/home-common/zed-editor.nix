@@ -1,6 +1,8 @@
-{ ... }:
+{...}: {
+  ###########################################################################
+  # Zed editor
+  ###########################################################################
 
-{
   programs.zed-editor = {
     enable = true;
 
@@ -38,14 +40,14 @@
       buffer_font_size = 14;
       buffer_font_family = "JetBrainsMono Nerd Font Mono";
       buffer_font_weight = 300.0;
-      buffer_line_height = { custom = 1.5; };
+      buffer_line_height = {custom = 1.5;};
 
       # Terminal
       terminal = {
         shell.program = "fish";
         font_family = "JetBrainsMono Nerd Font Mono";
         font_size = 14;
-        line_height = { custom = 1.4; };
+        line_height = {custom = 1.4;};
         blinking = "off";
       };
 
@@ -157,7 +159,7 @@
           tab_size = 2;
           format_on_save = "on";
           formatter = "language_server";
-          language_servers = [ "nixd" "!nil" ];
+          language_servers = ["nixd" "!nil"];
         };
       };
 

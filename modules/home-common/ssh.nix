@@ -1,18 +1,24 @@
-{ config, ... }:
+{config, ...}: {
+  ###########################################################################
+  # SSH configs
+  ###########################################################################
 
-{
   programs.ssh = {
     enable = true;
+
     enableDefaultConfig = false;
+
     matchBlocks = {
       "github.com" = {
         identityFile = config.sops.secrets."private_keys/zoro_key".path;
         addKeysToAgent = "yes";
       };
+
       "gitlab.com" = {
         identityFile = config.sops.secrets."private_keys/zoro_key".path;
         addKeysToAgent = "yes";
       };
+
       "vm-zoro" = {
         hostname = "192.168.122.130";
         user = "zoro";
@@ -20,9 +26,6 @@
         identitiesOnly = true;
       };
     };
-    # extraConfig = ''
-    #   AddKeysToAgent yes
-    # '';
   };
 
   services.gpg-agent = {

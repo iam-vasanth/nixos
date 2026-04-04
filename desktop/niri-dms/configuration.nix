@@ -3,7 +3,6 @@
   hostname,
   user,
   pkgs,
-  unstable,
   ...
 }: {
   imports = [
@@ -21,7 +20,7 @@
   ###########################################################################
 
   # Niri with Sodiboo's niri cache
-  nixpkgs.overlays = [ inputs.niri.overlays.niri ];
+  nixpkgs.overlays = [inputs.niri.overlays.niri];
   programs.niri = {
     enable = true;
     package = pkgs.niri-unstable;
@@ -53,6 +52,28 @@
   services.power-profiles-daemon.enable = true;
 
   ###########################################################################
+  # XDG Portals
+  ###########################################################################
+
+  xdg.portal = {
+    enable = true;
+
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk # fallback for file pickers, etc.
+      xdg-desktop-portal-gnome # required for screencast on Niri
+    ];
+
+    config = {
+      common = {
+        default = ["gtk"]; # GTK as general fallback
+
+        # Force ScreenCast to use the GNOME backend.
+        "org.freedesktop.impl.portal.ScreenCast" = ["gnome"];
+      };
+    };
+  };
+
+  ###########################################################################
   # USB handling
   ###########################################################################
 
@@ -75,5 +96,4 @@
   ###########################################################################
 
   home-manager.users.${user} = import ./home.nix;
-
 }

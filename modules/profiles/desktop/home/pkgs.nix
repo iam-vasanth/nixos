@@ -1,8 +1,17 @@
-{ pkgs, unstable, ... }:
-
 {
+  pkgs,
+  unstable,
+  ...
+}: {
+  ###########################################################################
+  # Font config generation ( User level )
+  ###########################################################################
 
   fonts.fontconfig.enable = true;
+
+  ###########################################################################
+  # User specific packages
+  ###########################################################################
 
   home.packages = [
     pkgs.kitty
@@ -24,6 +33,7 @@
     pkgs.btop
     pkgs.mpv
     pkgs.termius
+    # ... add more packages here
 
     # Fonts
     pkgs.nerd-fonts.jetbrains-mono
@@ -32,13 +42,15 @@
     pkgs.nerd-fonts.iosevka
     pkgs.nerd-fonts.hack
     pkgs.inter-nerdfont
+    # ... add more fonts here
 
     # Fish dependencies
-    pkgs.fzf # fish : fzf-fish and forgit plugins
-    pkgs.grc # fish : grc plugin
-    pkgs.nix-your-shell  # fish  : Nix develop
+    pkgs.fzf
+    pkgs.grc
+    pkgs.nix-your-shell
 
-    pkgs.nixd # Zed-Editor : language server
+    # Zed-Editor : nix language server
+    pkgs.nixd
 
     # sops-nix
     pkgs.sops
@@ -46,25 +58,72 @@
     pkgs.ssh-to-age
   ];
 
+  ###########################################################################
+  # Flatpaks
+  ###########################################################################
+
   services.flatpak = {
     enable = true;
-    packages = [
-      { appId = "app.zen_browser.zen"; origin = "flathub"; }
-      { appId = "com.spotify.Client"; origin = "flathub"; }
-      { appId = "de.haeckerfelix.Fragments"; origin = "flathub"; }
-      { appId = "com.github.tchx84.Flatseal"; origin = "flathub"; }
-      { appId = "org.videolan.VLC"; origin = "flathub"; }
-      { appId = "io.gitlab.adhami3310.Impression"; origin = "flathub"; }
-      { appId = "com.ranfdev.DistroShelf"; origin = "flathub"; }
-      { appId = "io.github.flattool.Warehouse"; origin = "flathub"; }
-      { appId = "com.stremio.Stremio"; origin = "flathub"; }
-      { appId = "com.usebottles.bottles"; origin = "flathub"; }
-      { appId = "com.rustdesk.RustDesk"; origin = "flathub"; }
-      { appId = "net.codelogistics.webapps"; origin = "flathub"; }
-      { appId = "md.obsidian.Obsidian"; origin = "flathub"; }
 
-      # { appId = "flathub:com.ml4w.dotfilesinstaller"; origin = "flathub" } # To add a flatpak
+    packages = [
+      {
+        appId = "app.zen_browser.zen";
+        origin = "flathub";
+      }
+      {
+        appId = "com.spotify.Client";
+        origin = "flathub";
+      }
+      {
+        appId = "de.haeckerfelix.Fragments";
+        origin = "flathub";
+      }
+      {
+        appId = "com.github.tchx84.Flatseal";
+        origin = "flathub";
+      }
+      {
+        appId = "org.videolan.VLC";
+        origin = "flathub";
+      }
+      {
+        appId = "io.gitlab.adhami3310.Impression";
+        origin = "flathub";
+      }
+      {
+        appId = "com.ranfdev.DistroShelf";
+        origin = "flathub";
+      }
+      {
+        appId = "io.github.flattool.Warehouse";
+        origin = "flathub";
+      }
+      {
+        appId = "com.stremio.Stremio";
+        origin = "flathub";
+      }
+      {
+        appId = "com.usebottles.bottles";
+        origin = "flathub";
+      }
+      {
+        appId = "com.rustdesk.RustDesk";
+        origin = "flathub";
+      }
+      {
+        appId = "net.codelogistics.webapps";
+        origin = "flathub";
+      }
+      {
+        appId = "md.obsidian.Obsidian";
+        origin = "flathub";
+      }
+      {
+        appId = "org.freedesktop.Platform.VulkanLayer.gamescope";
+        origin = "flathub";
+      }
     ];
+
     update.auto = {
       enable = true;
       onCalendar = "weekly";

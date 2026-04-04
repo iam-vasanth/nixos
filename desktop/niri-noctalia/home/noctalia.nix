@@ -1,6 +1,4 @@
-{ inputs, ... }:
-
-{
+{inputs, ...}: {
   imports = [
     inputs.noctalia.homeModules.default
   ];
@@ -17,5 +15,4 @@
   ###########################################################################
 
   services.udiskie.enable = true;
-
 }

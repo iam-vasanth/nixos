@@ -1,8 +1,13 @@
-{ pkgs, pkgs-unstable, ... }:
+{pkgs, ...}: {
+  ###########################################################################
+  # User specific packages
+  ###########################################################################
 
-{
   home.packages = [
-    pkgs.gedit
+    pkgs._7zz-rar
+    pkgs.btop
+    # ... add more packages here
+
     # sops-nix
     pkgs.sops
     pkgs.age

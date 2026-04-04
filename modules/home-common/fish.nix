@@ -1,6 +1,12 @@
-{ pkgs, hostname, ... }:
-
 {
+  hostname,
+  pkgs,
+  ...
+}: {
+  ###########################################################################
+  # Fish
+  ###########################################################################
+
   programs.fish = {
     enable = true;
 
@@ -48,15 +54,30 @@
 
       ports = "ss -tuln";
       myip = "curl ifconfig.me";
-      sshk="kitty +kitten ssh";
+      sshk = "kitty +kitten ssh";
     };
 
     plugins = [
-      { name = "forgit"; src = pkgs.fishPlugins.forgit.src; }         # Fuzzy git interactive
-      { name = "fzf-fish"; src = pkgs.fishPlugins.fzf-fish.src; }     # fzf for history/files/git
-      { name = "done"; src = pkgs.fishPlugins.done.src; }             # Notifications for long commands
-      { name = "autopair"; src = pkgs.fishPlugins.autopair.src; }     # Auto-close brackets/quotes
-      { name = "grc"; src = pkgs.fishPlugins.grc.src; }               # Colorize command output
+      {
+        name = "forgit";
+        src = pkgs.fishPlugins.forgit.src;
+      } # Fuzzy git interactive
+      {
+        name = "fzf-fish";
+        src = pkgs.fishPlugins.fzf-fish.src;
+      } # fzf for history/files/git
+      {
+        name = "done";
+        src = pkgs.fishPlugins.done.src;
+      } # Notifications for long commands
+      {
+        name = "autopair";
+        src = pkgs.fishPlugins.autopair.src;
+      } # Auto-close brackets/quotes
+      {
+        name = "grc";
+        src = pkgs.fishPlugins.grc.src;
+      } # Colorize command output
     ];
   };
 }

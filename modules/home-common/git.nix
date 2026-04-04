@@ -1,13 +1,17 @@
-{ config,  ... }:
+{config, ...}: {
+  ###########################################################################
+  # Git
+  ###########################################################################
 
-{
   programs.git = {
     enable = true;
+
     signing = {
       key = "${config.home.homeDirectory}/.ssh/zoro_key.pub";
       signByDefault = true;
       format = "ssh";
     };
+
     ignores = [
       "*.swp"
       "*~"
@@ -16,13 +20,14 @@
       "result"
       "result-*"
     ];
+
     settings = {
       user.name = "iam-vasanth";
       user.email = "vk.vasanth.r@gmail.com";
 
       url = {
-        "git@github.com:" = { insteadOf = "https://github.com/"; };
-        "git@gitlab.com:" = { insteadOf = "https://gitlab.com/"; };
+        "git@github.com:" = {insteadOf = "https://github.com/";};
+        "git@gitlab.com:" = {insteadOf = "https://gitlab.com/";};
       };
 
       extraConfig = {
@@ -36,10 +41,9 @@
     };
   };
 
-  home.file.".config/git/allowed_signers".text =
-    let
-      pubKey = builtins.readFile ../../.secrets/public_keys/zoro_key.pub;
-    in ''
-      @gmail.com namespaces="git" ${pubKey}
-    '';
+  home.file.".config/git/allowed_signers".text = let
+    pubKey = builtins.readFile ../../.secrets/public_keys/zoro_key.pub;
+  in ''
+    @gmail.com namespaces="git" ${pubKey}
+  '';
 }

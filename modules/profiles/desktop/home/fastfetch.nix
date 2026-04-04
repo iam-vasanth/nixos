@@ -1,10 +1,14 @@
-{ ... }:
+{...}: {
+  ###########################################################################
+  # Fastfetch
+  ###########################################################################
 
-{
   programs.fastfetch = {
     enable = true;
+
     settings = {
       schema = "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json";
+
       logo = {
         type = "file";
         source = "~/.config/fastfetch/ascii.txt";
@@ -14,9 +18,11 @@
           right = 2;
         };
       };
+
       display = {
         separator = "";
       };
+
       modules = [
         {
           type = "custom";

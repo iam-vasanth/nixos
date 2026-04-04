@@ -1,27 +1,28 @@
 {
   config,
-  pkgs,
-  lib,
-  inputs,
   user,
-  hostname,
+  pkgs,
   ...
 }: {
-  # ── External imports ───────────────────────────────────────────────────────────
   imports = [
     /etc/nixos/hardware-configuration.nix
     ./sops.nix
   ];
 
-  # ── Bootloader ───────────────────────────────────────────────────────────
+  ###########################################################################
+  # Bootloader
+  ###########################################################################
+
   boot.loader.systemd-boot.enable = true;
-  boot.loader.systemd-boot.configurationLimit = 20;
+  boot.loader.systemd-boot.configurationLimit = 10;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # ── Kernal ───────────────────────────────────────────────────────────
+  ###########################################################################
+  # Kernal and Kernal parameters
+  ###########################################################################
+
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  # ── Kernal Parameters ───────────────────────────────────────────────────────────
   boot.consoleLogLevel = 0;
   boot.initrd.systemd.enable = true;
   boot.initrd.verbose = false;
@@ -34,7 +35,10 @@
     "vt.global_cursor_default=0"
   ];
 
-  # ── Silences systemd logs ───────────────────────────────────────────────────────────
+  ###########################################################################
+  # Silences systemd logs
+  ###########################################################################
+
   systemd = {
     services.NetworkManager-wait-online.enable = false;
     settings = {
@@ -45,12 +49,13 @@
     };
   };
 
-  # Timezone
-  time.timeZone = "Asia/Kolkata";
+  ###########################################################################
+  # Swap file
+  ###########################################################################
 
-  # ── Swap file ─────────────────────────────────────────────────────────
   # Waiting for nix Zswap implementation
   # https://github.com/NixOS/nixpkgs/pull/470366
+
   swapDevices = [
     {
       device = "/swapfile";
@@ -59,26 +64,22 @@
     }
   ];
 
-  # ── Enables flakes ───────────────────────────────────────────────────────────
+  ###########################################################################
+  # Enables flakes
+  ###########################################################################
+
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
-  # ── Enables networking ───────────────────────────────────────────────────────────
-  networking.networkmanager.enable = true;
-  hardware.bluetooth.enable = true;
-  networking.firewall.enable = true;
+  ###########################################################################
+  # Unfree packages
+  ###########################################################################
 
-  # ── Enables sound with pipewire ───────────────────────────────────────────────────────────
-  services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    wireplumber.enable = true;
-  };
+  nixpkgs.config.allowUnfree = true;
 
-  # ── User ─────────────────────────────────────────────────────────────
+  ###########################################################################
+  # User
+  ###########################################################################
+
   sops.secrets.zoro-password.neededForUsers = true;
   users.mutableUsers = false;
 
@@ -89,67 +90,101 @@
     extraGroups = ["networkmanager" "wheel" "docker" "adbusers" "fuse" "video" "libvirtd"];
   };
 
-  # ── Unfree packages ─────────────────────────────────────────────────────────────
-  nixpkgs.config.allowUnfree = true;
+  ###########################################################################
+  # Timezone
+  ###########################################################################
 
-  # ── Dynamically linked executable ─────────────────────────────────────────────────────────────
-  programs.nix-ld.enable = true;
+  time.timeZone = "Asia/Kolkata";
 
-  # ── Enables flatpak ─────────────────────────────────────────────────────────────
-  services.flatpak.enable = true;
+  ###########################################################################
+  # Networking
+  ###########################################################################
 
-  # ── XDG Portals ────────────────────────────────────
-  xdg.portal = {
-    enable = true;
-
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-gtk      # fallback for file pickers, etc.
-      xdg-desktop-portal-gnome    # required for screencast on Niri
-    ];
-
-    config = {
-      common = {
-        default = [ "gtk" ];  # GTK as general fallback
-
-        # Force ScreenCast to use the GNOME backend (Niri provides the Mutter interface it needs)
-        "org.freedesktop.impl.portal.ScreenCast" = [ "gnome" ];
-
-        # Optional but helpful: force Screenshot too if you use portal-based screenshot tools
-        "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
-      };
-    };
+  networking = {
+    networkmanager.enable = true;
+    firewall.enable = true;
   };
 
-  # ── Enables ADB ─────────────────────────────────────────────────────────────
+  hardware.bluetooth.enable = true;
+
+  ###########################################################################
+  # Sound - Pipewire
+  ###########################################################################
+
+  services.pulseaudio.enable = false;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    wireplumber.enable = true;
+  };
+
+  ###########################################################################
+  # Dynamically linked executable
+  ###########################################################################
+
+  programs.nix-ld.enable = true;
+
+  ###########################################################################
+  # ADB for android
+  ###########################################################################
+
   programs.adb.enable = true;
 
-  # ── Android and Iphone mounting ───────────────────────────────────────────────────────────
+  ###########################################################################
+  # Android and Iphone mounting
+  ###########################################################################
+
   # Android
   services.gvfs.enable = true;
 
   # Iphones
   services.usbmuxd.enable = true;
 
-  # ── Thermal management for intel processors ─────────────────────────────────────────────────────────────
+  ###########################################################################
+  # Thermal management for intel processors
+  ###########################################################################
+
   services.thermald.enable = true;
 
-  # ── Firmware updates ─────────────────────────────────────────────────────────────
+  ###########################################################################
+  # Firmware updates
+  ###########################################################################
+
   services.fwupd.enable = true;
 
-  services.fprintd = {
-      enable = true;
-  };
+  ###########################################################################
+  # Fprintd
+  ###########################################################################
+  services.fprintd.enable = true;
 
-  # ── Localsend ─────────────────────────────────────────────────────────────
+  ###########################################################################
+  # Enables flatpak
+  ###########################################################################
+
+  services.flatpak.enable = true;
+
+  ###########################################################################
+  # Localsend
+  ###########################################################################
+
   programs.localsend = {
     enable = true;
     openFirewall = true;
   };
 
-  # ── Enables docker ─────────────────────────────────────────────────────────────
+  ###########################################################################
+  # Docker
+  ###########################################################################
+
   virtualisation.docker.enable = true;
 
-  # ── Virt-Manager setup ─────────────────────────────────────────────────────────────
+  ###########################################################################
+  # Virt-Manager
+  ###########################################################################
+
   programs.virt-manager.enable = true;
   virtualisation = {
     spiceUSBRedirection.enable = true;
@@ -178,17 +213,10 @@
     '';
   };
 
-  # ── Syncthing ─────────────────────────────────────────────────────────────
-  # services.syncthing = {
-  #   enable = true;
-  #   user = "${user}";
-  #   group = "users";
-  #   openDefaultPorts = true; # Open ports in the firewall for Syncthing. (NOTE: this will not open syncthing gui port)
-  #   dataDir = "/home/zoro/.syncthing";
-  #   configDir = "/home/zoro/.config/syncthing";
-  # };
+  ###########################################################################
+  # Host specific common packages
+  ###########################################################################
 
-  # ── Common packages ─────────────────────────────────────────────────────────────
   environment.systemPackages = [
     pkgs.neovim
     pkgs.wget
@@ -198,19 +226,20 @@
     pkgs.fuse
     pkgs.wev
     pkgs.bibata-cursors
+    # ... add more packages here
 
-    ### Android and IOS mounting ###
+    # Android and IOS mounting
     pkgs.go-mtpfs
     pkgs.jmtpfs
     pkgs.libimobiledevice
     pkgs.ifuse
-    ################################
   ];
 
-  # ── Font packages ─────────────────────────────────────────────────────────────
-  #
+  ###########################################################################
+  # Font packages
+  ###########################################################################
+
   # It is already installed at home manager level - Comment out if needed at system level
-  #
   # fonts.packages = with pkgs; [
   #   nerd-fonts.jetbrains-mono
   #   nerd-fonts.fira-code
@@ -220,7 +249,10 @@
   #   inter-nerdfont
   # ];
 
-  # ── Nix cleanup ─────────────────────────────────────────────────────────────
+  ###########################################################################
+  # Nix cleanup
+  ###########################################################################
+
   nix = {
     gc = {
       automatic = true;
@@ -233,8 +265,10 @@
     };
   };
 
-  # ── Boot / Secure Boot (lanzaboote) ───────────────────────────────────
-  #
+  ###########################################################################
+  # Secure Boot (lanzaboote)
+  ###########################################################################
+
   # Too scared to enable - Fuck Microslop
   #
   # boot.loader.systemd-boot.enable = lib.mkForce false;
@@ -242,7 +276,10 @@
   #   enable = true;
   #   pkiBundle = "/etc/secureboot";
   # };
-  # boot.loader.efi.canTouchEfiVariables = true;
 
-  system.stateVersion = "25.11"; # Do not touch this
+  ###########################################################################
+  # State version - Do not touch this
+  ###########################################################################
+
+  system.stateVersion = "25.11";
 }

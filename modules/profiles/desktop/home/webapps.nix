@@ -1,6 +1,5 @@
-{ pkgs, ... }:
-
-{
+# WIP
+{pkgs, ...}: {
   # xdg.desktopEntries = {
   #   chatgpt = {
   #     name = "ChatGPT";

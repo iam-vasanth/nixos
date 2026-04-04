@@ -1,13 +1,10 @@
 {
-  lib,
-  inputs,
   hostname,
   user,
   pkgs,
   unstable,
   ...
 }: {
-
   ###########################################################################
   # Identity
   ###########################################################################
@@ -19,7 +16,7 @@
   ###########################################################################
 
   # Niri with Sodiboo's niri cache
-  nixpkgs.overlays = [ inputs.niri.overlays.niri ];
+  nixpkgs.overlays = [inputs.niri.overlays.niri];
   programs.niri = {
     enable = true;
     package = pkgs.niri-unstable;
@@ -63,5 +60,4 @@
   ###########################################################################
 
   home-manager.users.${user} = import ./desktop/niri-noctalia/home.nix;
-
 }

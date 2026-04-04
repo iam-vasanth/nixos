@@ -1,14 +1,10 @@
-{ ... }:
-
-{
-
+{...}: {
   ###########################################################################
   # Niri settings (Universal)
   ###########################################################################
 
   programs.niri = {
     settings = {
-
       ###########################################################################
       # Input / keyboard / touchpad settings
       ###########################################################################
@@ -56,9 +52,9 @@
       outputs = {
         "eDP-1" = {
           scale = 2.0;
-          mode  = {
-            width   = 3840;
-            height  = 2160;
+          mode = {
+            width = 3840;
+            height = 2160;
             refresh = 60.0;
           };
         };
@@ -72,14 +68,14 @@
 
       window-rules = [
         {
-          matches = [{ title = "Picture-in-Picture"; }];
+          matches = [{title = "Picture-in-Picture";}];
           open-floating = true;
         }
         {
           geometry-corner-radius = {
-            top-left     = 15.0;
-            top-right    = 15.0;
-            bottom-left  = 15.0;
+            top-left = 15.0;
+            top-right = 15.0;
+            bottom-left = 15.0;
             bottom-right = 15.0;
           };
           clip-to-geometry = true;
@@ -95,37 +91,37 @@
         center-focused-column = "never";
         # background-color = ""
         preset-column-widths = [
-          { proportion = 0.33333; }
-          { proportion = 0.5;     }
-          { proportion = 0.66667; }
+          {proportion = 0.33333;}
+          {proportion = 0.5;}
+          {proportion = 0.66667;}
         ];
-        default-column-width = { proportion = 0.5; };
+        default-column-width = {proportion = 0.5;};
         focus-ring = {
           enable = true;
           width = 2;
-          active.color   = "#bdc2ff";
+          active.color = "#bdc2ff";
           inactive.color = "#131316";
-          urgent.color   = "#ffb4ab";
+          urgent.color = "#ffb4ab";
         };
         border = {
           enable = true;
           width = 2;
-          active.color   = "#bdc2ff";
+          active.color = "#bdc2ff";
           inactive.color = "#131316";
-          urgent.color   = "#ffb4ab";
+          urgent.color = "#ffb4ab";
         };
         shadow = {
           enable = true;
-          color  = "#00000070";
+          color = "#00000070";
         };
         tab-indicator = {
           enable = true;
           active.color = "#bdc2ff";
-          inactive.color  = "#353e90";
+          inactive.color = "#353e90";
           urgent.color = "#ffb4ab";
         };
         insert-hint = {
-          enable  = true;
+          enable = true;
           display.color = "#bdc2ff80";
         };
       };
@@ -134,43 +130,43 @@
         slowdown = 0.6;
         horizontal-view-movement.kind.spring = {
           damping-ratio = 1.0;
-          stiffness     = 1200;
-          epsilon       = 0.0001;
+          stiffness = 1200;
+          epsilon = 0.0001;
         };
         window-movement.kind.spring = {
           damping-ratio = 1.0;
-          stiffness     = 1200;
-          epsilon       = 0.0001;
+          stiffness = 1200;
+          epsilon = 0.0001;
         };
         window-resize = {
           kind.easing = {
             duration-ms = 120;
-            curve       = "ease-out-cubic";
+            curve = "ease-out-cubic";
           };
         };
         window-open = {
           kind.easing = {
             duration-ms = 120;
-            curve       = "ease-out-cubic";
+            curve = "ease-out-cubic";
           };
         };
         window-close = {
           kind.easing = {
-          duration-ms = 120;
-          curve       = "ease-out-cubic";
+            duration-ms = 120;
+            curve = "ease-out-cubic";
+          };
         };
-      };
       };
 
       cursor = {
-        theme          = "Bibata-Modern-Classic";
-        size           = 24;
-        hide-when-typing       = false;
+        theme = "Bibata-Modern-Classic";
+        size = 24;
+        hide-when-typing = false;
         hide-after-inactive-ms = 10000;
       };
 
-      prefer-no-csd                    = true;
-      hotkey-overlay.skip-at-startup   = true;
+      prefer-no-csd = true;
+      hotkey-overlay.skip-at-startup = true;
       # screenshot-path = "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png";
 
       ###########################################################################
@@ -182,27 +178,27 @@
         "Mod+E".action.spawn = "thunar";
         "Mod+B".action.spawn = "firefox";
 
-        "Print".action.screenshot        = {};
+        "Print".action.screenshot = {};
         "Ctrl+Print".action.screenshot-screen = {};
-        "Alt+Print".action.screenshot-window  = {};
+        "Alt+Print".action.screenshot-window = {};
 
-        "Mod+Q".action.close-window      = {};
-        "Mod+Left".action.focus-column-left   = {};
-        "Mod+Down".action.focus-window-down   = {};
-        "Mod+Up".action.focus-window-up       = {};
+        "Mod+Q".action.close-window = {};
+        "Mod+Left".action.focus-column-left = {};
+        "Mod+Down".action.focus-window-down = {};
+        "Mod+Up".action.focus-window-up = {};
         "Mod+Right".action.focus-column-right = {};
-        "Mod+Shift+Left".action.move-column-left   = {};
-        "Mod+Shift+Down".action.move-window-down   = {};
-        "Mod+Shift+Up".action.move-window-up       = {};
+        "Mod+Shift+Left".action.move-column-left = {};
+        "Mod+Shift+Down".action.move-window-down = {};
+        "Mod+Shift+Up".action.move-window-up = {};
         "Mod+Shift+Right".action.move-column-right = {};
 
-        "Mod+Ctrl+H".action.focus-monitor-left  = {};
-        "Mod+Ctrl+J".action.focus-monitor-down  = {};
-        "Mod+Ctrl+K".action.focus-monitor-up    = {};
+        "Mod+Ctrl+H".action.focus-monitor-left = {};
+        "Mod+Ctrl+J".action.focus-monitor-down = {};
+        "Mod+Ctrl+K".action.focus-monitor-up = {};
         "Mod+Ctrl+L".action.focus-monitor-right = {};
-        "Mod+Shift+Ctrl+H".action.move-column-to-monitor-left  = {};
-        "Mod+Shift+Ctrl+J".action.move-column-to-monitor-down  = {};
-        "Mod+Shift+Ctrl+K".action.move-column-to-monitor-up    = {};
+        "Mod+Shift+Ctrl+H".action.move-column-to-monitor-left = {};
+        "Mod+Shift+Ctrl+J".action.move-column-to-monitor-down = {};
+        "Mod+Shift+Ctrl+K".action.move-column-to-monitor-up = {};
         "Mod+Shift+Ctrl+L".action.move-column-to-monitor-right = {};
 
         "Mod+1".action.focus-workspace = 1;
@@ -211,20 +207,20 @@
         "Mod+Shift+2".action.move-column-to-workspace = 2;
 
         "Mod+R".action.switch-preset-column-width = {};
-        "Mod+F".action.maximize-column             = {};
-        "Mod+Shift+F".action.fullscreen-window     = {};
-        "Mod+C".action.center-column               = {};
-        "Mod+Minus".action.set-column-width        = "-10%";
-        "Mod+Equal".action.set-column-width        = "+10%";
+        "Mod+F".action.maximize-column = {};
+        "Mod+Shift+F".action.fullscreen-window = {};
+        "Mod+C".action.center-column = {};
+        "Mod+Minus".action.set-column-width = "-10%";
+        "Mod+Equal".action.set-column-width = "+10%";
         "Mod+Shift+Minus".action.set-window-height = "-10%";
         "Mod+Shift+Equal".action.set-window-height = "+10%";
 
         "Mod+Comma".action.consume-window-into-column = {};
-        "Mod+Period".action.expel-window-from-column  = {};
+        "Mod+Period".action.expel-window-from-column = {};
 
-        "XF86AudioPlay".action.spawn = [ "playerctl" "play-pause" ];
-        "XF86AudioNext".action.spawn = [ "playerctl" "next" ];
-        "XF86AudioPrev".action.spawn = [ "playerctl" "previous" ];
+        "XF86AudioPlay".action.spawn = ["playerctl" "play-pause"];
+        "XF86AudioNext".action.spawn = ["playerctl" "next"];
+        "XF86AudioPrev".action.spawn = ["playerctl" "previous"];
       };
 
       ###########################################################################
@@ -252,5 +248,6 @@
       # extraConfig = ''
       #   some unsupported kdl here
       # '';
+    };
   };
 }
