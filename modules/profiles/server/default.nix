@@ -1,9 +1,8 @@
 {
-  pkgs,
-  lib,
-  inputs,
+  config,
   user,
   hostname,
+  pkgs,
   ...
 }: {
   imports = [
@@ -95,7 +94,7 @@
     isNormalUser = true;
     hashedPasswordFile = config.sops.secrets.zoro-password.path;
     description = "ZORO";
-    extraGroups = ["networkmanager" "wheel" "docker" "podman" "fuse" "libvirtd"];
+    extraGroups = ["networkmanager" "wheel" "docker" "fuse" "libvirtd"];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM8gMfrAx7QGMkIHLJhe5NI/PbGiTzomS4GgWoYpI/Ip vk.vasanth.r@gmail.com"
     ];
@@ -225,10 +224,10 @@
   # Podman (rootless containers)
   ###########################################################################
 
-  virtualisation.podman = {
+  virtualisation.docker = {
     enable = true;
-    dockerCompat = true;
-    defaultNetwork.settings.dns_enabled = true;
+    # dockerCompat = true;
+    # defaultNetwork.settings.dns_enabled = true;
   };
 
   ###########################################################################
@@ -267,6 +266,12 @@
   #     };
   #   };
   # };
+
+  ###########################################################################
+  # Tailscale
+  ###########################################################################
+
+  services.tailscale.enable = true;
 
   ###########################################################################
   # Journalctl logs ( Extra config )
