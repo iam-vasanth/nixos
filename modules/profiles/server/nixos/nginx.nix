@@ -20,11 +20,10 @@
         # Optional: Disable IPv6 if needed
         # DISABLE_IPV6 = "true";
       };
-      extraOptions = [ "--restart=unless-stopped" ];
     };
   };
 
-  # Make sure the directories exist with correct permissions
+  # Permissions for the directories
   systemd.tmpfiles.rules = [
     "d /var/lib/nginx-proxy-manager/data 0755 root root -"
     "d /var/lib/nginx-proxy-manager/letsencrypt 0755 root root -"
