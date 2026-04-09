@@ -36,12 +36,12 @@
                       links = [
                         {
                           title = "Immich";
-                          url = "http://192.168.122.130:2283";
+                          url = "http://192.168.18.67:2283";
                           icon = "sh:immich";
                         }
                         {
                           title = "Nginx Proxy Manager";
-                          url = "http://192.168.122.130:81";
+                          url = "http://192.168.18.67:81";
                           icon = "sh:nginx-proxy-manager";
                         }
                       ];
