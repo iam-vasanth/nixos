@@ -4,7 +4,7 @@
     #../../home-common/git.nix
     #../../home-common/ssh.nix
     ./home/pkgs.nix
-    ./home/symlinks.nix
+    # ./home/symlinks.nix
   ];
 
   ###########################################################################
