@@ -25,6 +25,13 @@
         identityFile = config.sops.secrets."private_keys/zoro_key".path;
         identitiesOnly = true;
       };
+
+      "hades" = {
+        hostname = "192.168.18.67";
+        user = "zoro";
+        identityFile = config.sops.secrets."private_keys/zoro_key".path;
+        identitiesOnly = true;
+      };
     };
   };
 
