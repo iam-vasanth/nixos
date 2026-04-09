@@ -4,6 +4,6 @@
     ./glance.nix
     ./nginx.nix
     ./portainer.nix
-    ./sops.nix
+    # ./sops.nix
   ];
 }

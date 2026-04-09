@@ -124,41 +124,41 @@
   # Minimal Gnome DE for fallback
   ###########################################################################
 
-  # services.xserver.enable = true;
-  # services.desktopManager.gnome.enable = true;
-  # services.displayManager = {
-  #   autoLogin = {
-  #     enable = true;
-  #     user = "${user}";
-  #   };
-  #   gdm = {
-  #     enable = true;
-  #     wayland = true;
-  #     autoSuspend = false;
-  #   };
-  # };
+  services.xserver.enable = true;
+  services.desktopManager.gnome.enable = true;
+  services.displayManager = {
+    autoLogin = {
+      enable = true;
+      user = "${user}";
+    };
+    gdm = {
+      enable = true;
+      wayland = true;
+      autoSuspend = false;
+    };
+  };
 
-  # environment.gnome.excludePackages = (with pkgs; [
-  #   simple-scan
-  #   gnome-photos
-  #   gnome-tour
-  #   cheese
-  #   gnome-music
-  #   epiphany
-  #   geary
-  #   gnome-characters
-  #   tali
-  #   iagno
-  #   hitori
-  #   atomix
-  #   yelp
-  #   gnome-contacts
-  #   gnome-initial-setup
-  #   baobab
-  #   gnome-text-editor
-  #   gnome-music
-  #   gnome-software
-  # ]);
+  environment.gnome.excludePackages = (with pkgs; [
+    simple-scan
+    gnome-photos
+    gnome-tour
+    cheese
+    gnome-music
+    epiphany
+    geary
+    gnome-characters
+    tali
+    iagno
+    hitori
+    atomix
+    yelp
+    gnome-contacts
+    gnome-initial-setup
+    baobab
+    gnome-text-editor
+    gnome-music
+    gnome-software
+  ]);
 
   ###########################################################################
   # OpenSSH
