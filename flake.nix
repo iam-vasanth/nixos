@@ -86,9 +86,6 @@
         server = [
           # Default server configuration.nix
           ./modules/profiles/server/default.nix
-
-          # Default server home.nix
-          ./modules/profiles/server/home.nix
         ];
         vm-desktop = [
           # VM specific configuration
