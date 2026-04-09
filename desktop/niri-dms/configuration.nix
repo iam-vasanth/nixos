@@ -26,12 +26,14 @@
     package = pkgs.niri-unstable;
   };
 
+  services.desktopManager.gnome.enable = true;
+
   # GDM auto login
   services.displayManager = {
-    autoLogin = {
-      enable = true;
-      user = "${user}";
-    };
+    # autoLogin = {
+    #   enable = true;
+    #   user = "${user}";
+    # };
     gdm = {
       enable = true;
       wayland = true;

@@ -1,6 +1,4 @@
-{ ... }:
-
-{
+{...}: {
   virtualisation.oci-containers = {
     backend = "docker";
     containers.portainer = {
@@ -16,5 +14,5 @@
     };
   };
 
-  networking.firewall.allowedTCPPorts = [ 9000 ];
+  networking.firewall.allowedTCPPorts = [9000];
 }

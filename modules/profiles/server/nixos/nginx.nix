@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   virtualisation.oci-containers = {
     backend = "docker";
     containers."nginx-proxy-manager" = {
@@ -29,5 +31,5 @@
     "d /var/lib/nginx-proxy-manager/letsencrypt 0755 root root -"
   ];
 
-  networking.firewall.allowedTCPPorts = [ 8081 8443 81 ];
+  networking.firewall.allowedTCPPorts = [8081 8443 81];
 }
