@@ -87,12 +87,12 @@
   # User
   ###########################################################################
 
-  sops.secrets.zoro-password.neededForUsers = true;
-  users.mutableUsers = false;
+  # sops.secrets.zoro-password.neededForUsers = true;
+  # users.mutableUsers = false;
 
   users.users.${user} = {
     isNormalUser = true;
-    hashedPasswordFile = config.sops.secrets.zoro-password.path;
+    # hashedPasswordFile = config.sops.secrets.zoro-password.path;
     description = "ZORO";
     extraGroups = ["networkmanager" "wheel" "docker" "fuse" "libvirtd"];
     openssh.authorizedKeys.keys = [
