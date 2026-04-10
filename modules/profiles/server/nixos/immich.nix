@@ -10,6 +10,7 @@
     host = "0.0.0.0";
     port = 2283;
     mediaLocation = "/data/immich";
+    machine-learning.enable = false;
   };
 
   ###########################################################################
