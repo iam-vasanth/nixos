@@ -4,7 +4,7 @@
   services.code-server = {
     enable = true;
     host = "0.0.0.0";
-    port = "6767";
+    port = 6767;
     auth = "none";
     # auth = "password";
     user = "zoro";
