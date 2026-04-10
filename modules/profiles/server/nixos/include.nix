@@ -5,5 +5,6 @@
     ./nginx.nix
     ./portainer.nix
     # ./sops.nix
+    ./cloudflared.nix
   ];
 }

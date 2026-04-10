@@ -277,8 +277,6 @@
 
   services.tailscale.enable = true;
 
-  services.cloudflared.enable = true;
-
   ###########################################################################
   # Journalctl logs ( Extra config )
   ###########################################################################
