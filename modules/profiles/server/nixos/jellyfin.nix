@@ -3,8 +3,8 @@
 {
   services.jellyfin = {
     enable = true;
-    listenAddress = "0.0.0.0";
-    port = 8086;
+    #listenAddress = "0.0.0.0";
+    #port = 8086;
     user = "jellyfin";
     group = "services";
     dataDir = "/data/media";
