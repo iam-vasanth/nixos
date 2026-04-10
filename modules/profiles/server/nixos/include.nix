@@ -7,5 +7,6 @@
     # ./sops.nix
     ./cloudflared.nix
     ./jellyfin.nix
+    ./vscode.nix
   ];
 }
