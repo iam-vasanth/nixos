@@ -10,6 +10,13 @@
     dataDir = "/data/media";
   };
 
+  systemd.tmpfiles.rules = [
+    "d ${config.services.jellyfin.dataDir} 0770 ${config.services.jellyfin.user} ${config.services.jellyfin.group} -"
+
+    # Ensure recursive ownership on rebuild
+    "Z ${config.services.jellyfin.dataDir} 0770 ${config.services.jellyfin.user} ${config.services.jellyfin.group} - -"
+  ];
+
   environment.systemPackages = with pkgs; [
     jellyfin
     jellyfin-web
