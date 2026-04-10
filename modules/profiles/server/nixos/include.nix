@@ -6,5 +6,6 @@
     ./portainer.nix
     # ./sops.nix
     ./cloudflared.nix
+    ./jellyfin.nix
   ];
 }
