@@ -27,7 +27,7 @@
       };
 
       "hades" = {
-        hostname = "100.125.83.16";
+        hostname = "100.117.30.13";
         user = "zoro";
         identityFile = config.sops.secrets."private_keys/zoro_key".path;
         identitiesOnly = true;
