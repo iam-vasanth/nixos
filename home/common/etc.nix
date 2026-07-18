@@ -51,18 +51,21 @@
   # Symlinks
   ###########################################################################
 
-  home.file."Pictures/Wallpapers".source = ../../../../assets/Wallpapers;
+  home.file."Pictures/Wallpapers".source = ../../assets/Wallpapers;
   home.file.".config/fastfetch/fastfetch.txt".source = ../../assets/fastfetch.txt;
-  home.file.".ssh/zoro_key.pub".source = ../../../../.secrets/public_keys/zoro_key.pub;
+  # home.file.".ssh/zoro_key.pub".source = ../../../../.secrets/public_keys/zoro_key.pub;
 
   ###########################################################################
   # Virt-manager connection
   ###########################################################################
 
-  dconf.settings = {
-    "org/virt-manager/virt-manager/connections" = {
-      autoconnect = ["qemu:///system"];
-      uris = ["qemu:///system"];
+  dconf = {
+    enable = true;
+    settings = {
+      "org/virt-manager/virt-manager/connections" = {
+        autoconnect = ["qemu:///system"];
+        uris = ["qemu:///system"];
+      };
     };
   };
 }

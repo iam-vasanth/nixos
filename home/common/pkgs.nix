@@ -29,6 +29,7 @@
     pkgs._7zz-rar
     pkgs.btop
     pkgs.mpv
+    pkgs.android-tools
     # ... add more packages here
 
     # Fonts

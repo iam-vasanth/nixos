@@ -5,7 +5,6 @@
 
   programs.ssh = {
     enable = true;
-
     enableDefaultConfig = false;
 
     # matchBlocks = {
@@ -38,10 +37,5 @@
   services.gpg-agent = {
     enable = true;
     enableSshSupport = true;
-  };
-
-  services.ssh-agent = {
-    enable = true;
-    enableFishIntegration = true;
   };
 }

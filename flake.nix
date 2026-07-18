@@ -19,8 +19,8 @@
 
     dgop = {
       url = "github:AvengeMedia/dgop";
-      inputs.nixpkgs.follows = "nixpkgs"
-    }
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
 

@@ -1,12 +1,15 @@
 {
   config,
+  hostname,
   user,
   pkgs,
   ...
 }: {
   imports = [
     /etc/nixos/hardware-configuration.nix
-    ./sops.nix
+    ./desktop/niri-dms/niri-dms.nix
+    ./home/common/vm.nix
+    # ./sops.nix
   ];
 
   ###########################################################################
@@ -134,12 +137,6 @@
   programs.nix-ld.enable = true;
 
   ###########################################################################
-  # ADB for android
-  ###########################################################################
-
-  programs.adb.enable = true;
-
-  ###########################################################################
   # Android and Iphone mounting
   ###########################################################################
 
@@ -180,6 +177,12 @@
   services.tailscale.enable = true;
 
   ###########################################################################
+  # SSH-Agent
+  ###########################################################################
+
+  programs.ssh.startAgent = true;
+
+  ###########################################################################
   # Localsend
   ###########################################################################
 
@@ -205,7 +208,6 @@
       enable = true;
       qemu = {
         package = pkgs.qemu_kvm;
-        ovmf.enable = true;
         swtpm.enable = true;
         vhostUserPackages = [pkgs.virtiofsd];
       };
@@ -275,5 +277,5 @@
   # State version - Do not touch this
   ###########################################################################
 
-  system.stateVersion = "25.11";
+  system.stateVersion = "26.05";
 }

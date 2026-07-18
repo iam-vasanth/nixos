@@ -5,8 +5,12 @@
   ...
 }: {
   imports = [
+    inputs.dms.homeModules.dank-material-shell
+    inputs.dms.homeModules.niri
     # Import nixos or home modules if needed ...
   ];
+
+  programs.dank-material-shell.niri.includes.enable = false;
 
   ###########################################################################
   # Adds DMS zen theme to the zen default profile folder
@@ -23,6 +27,12 @@
         ln -sf "$HOME/.config/DankMaterialShell/zen.css" "$PROFILE_DIR/chrome/userChrome.css"
     done
   '';
+
+  ###########################################################################
+  # Udiskie (For Auto USB/Device mounts)
+  ###########################################################################
+
+  services.udiskie.enable = true;
 
   ###########################################################################
   # Niri (DMS Specific)

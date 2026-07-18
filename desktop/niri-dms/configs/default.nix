@@ -17,17 +17,16 @@
   programs.dank-material-shell = {
     enable = true;
     enableDynamicTheming = true;
-    niri.includes.enable = false;
     systemd = {
       enable = true;
       restartIfChanged = true;
     };
-    greeter = {
-      enable = true;
-      compositor.name = "niri";
-      configHome = "/home/${user}";
-    };
-  }
+    # greeter = {
+    #   enable = true;
+    #   compositor.name = "niri";
+    #   configHome = "/home/${user}";
+    # };
+  };
 
   ###########################################################################
   # Enables Niri and GDM
@@ -64,28 +63,27 @@
   # XDG Portals
   ###########################################################################
 
-  # xdg.portal = {
-  #   enable = true;
+  xdg.portal = {
+    enable = true;
 
-  #   extraPortals = with pkgs; [
-  #     xdg-desktop-portal-gtk # fallback for file pickers, etc.
-  #     xdg-desktop-portal-gnome # required for screencast on Niri
-  #   ];
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk # fallback for file pickers, etc.
+      xdg-desktop-portal-gnome # required for screencast on Niri
+    ];
 
-  #   config = {
-  #     common = {
-  #       default = ["gtk"]; # GTK as general fallback
+    config = {
+      common = {
+        default = ["gtk"]; # GTK as general fallback
 
-  #       # Force ScreenCast to use the GNOME backend.
-  #       "org.freedesktop.impl.portal.ScreenCast" = ["gnome"];
-  #     };
-  #   };
-  # };
+        # Force ScreenCast to use the GNOME backend.
+        "org.freedesktop.impl.portal.ScreenCast" = ["gnome"];
+      };
+    };
+  };
 
   ###########################################################################
   # USB handling
   ###########################################################################
 
   services.udisks2.enable = true;
-  services.udiskie.enable = true;
 }

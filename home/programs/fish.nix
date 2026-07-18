@@ -25,7 +25,7 @@
 
       # Git
       lg = "lazygit";
-      ld = "lazydocker"
+      ld = "lazydocker";
       g = "git";
       gs = "git status";
       ga = "git add";
@@ -37,7 +37,7 @@
       glog = "git log --oneline --graph --decorate";
 
       # Nix
-      rebuild = "sudo nixos-rebuild switch --flake .${hostname} --impure";
+      rebuild = "sudo nixos-rebuild switch --flake .#${hostname} --impure";
       nso = "sudo nix store optimise";
       ngc = "sudo nix-collect-garbage -d";
       nsearch = "nix search nixpkgs";
