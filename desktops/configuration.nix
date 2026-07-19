@@ -6,9 +6,10 @@
   ...
 }: {
   imports = [
-    /etc/nixos/hardware-configuration.nix
-    ./athena/default.nix
-    # ./sops.nix
+    ./dms/default.nix
+    ./noctalia/default.nix
+    ./options.nix
+    ./vm-guest.nix
   ];
 
   ###########################################################################
@@ -52,19 +53,17 @@
   };
 
   ###########################################################################
-  # Swap file
+  # Zram swap
   ###########################################################################
 
-  # Waiting for nix Zswap implementation
-  # https://github.com/NixOS/nixpkgs/pull/470366
+  zramSwap = {
+    enable = true;
+    algorithm = "zstd";
+    memoryPercent = 50;
+    priority = 100;
+  };
 
-  swapDevices = [
-    {
-      device = "/swapfile";
-      size = 16 * 1024;
-      randomEncryption.enable = true; # False if hibernating
-    }
-  ];
+  systemd.oomd.enable = true;
 
   ###########################################################################
   # Enables flakes

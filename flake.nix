@@ -22,11 +22,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    noctalia.url = "github:noctalia-dev/noctalia/cachix";
+
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
 
     sops-nix.url = "github:mic92/sops-nix";
 
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
+
+    disko.url = "github:nix-community/disko";
   };
 
   outputs = {
@@ -63,31 +67,68 @@
     #   Have to write Kubernetes and docker, AWS, Rust, Python, SOPS... dev shells
     # };
 
-    nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {
+    mkHost = {hostname, hardwareModules ? [], desktop, vm ? false}: nixpkgs.lib.nixosSystem {
       inherit system;
-      specialArgs = {inherit inputs hostname user desktop unstable;};
+      specialArgs = {inherit inputs hostname user unstable;};
 
       modules = [
-        ./hosts/configuration.nix
+        ./configuration.nix
 
+        {
+          nix.desktop = desktop;
+          nix.vm.enable = vm;
+        }
+
+        disko.nixosModules.disko
         sops-nix.nixosModules.sops
-        home-manager.nixosModules.home-manager
         niri.nixosModules.niri
+        home-manager.nixosModules.home-manager
 
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.backupFileExtension = "bak";
-          home-manager.extraSpecialArgs = {inherit inputs user hostname desktop unstable;};
+          home-manager.extraSpecialArgs = {inherit inputs user hostname unstable;};
           home-manager.sharedModules = [
             sops-nix.homeManagerModules.sops
             nix-flatpak.homeManagerModules.nix-flatpak
           ];
         }
+      ] ++ hardwareModules;
+    };
 
-        nixos-hardware.nixosModules.lenovo-thinkpad-x1-10th-gen
-        nixos-hardware.nixosModules.common-cpu-intel
-      ];
+    nixosConfigurations = {
+      Ares = mkHost {
+        hostname = "Ares";
+        desktop = "dms";
+        hardwareModules = [
+          nixos-hardware.nixosModules.lenovo-thinkpad-x1-10th-gen
+          nixos-hardware.nixosModules.common-cpu-intel
+        ];
+      };
+
+      Athena = mkHost {
+        hostname = "Athena";
+        desktop = "noctalia";
+        hardwareModules = [
+          nixos-hardware.nixosModules.lenovo-thinkpad-x1-10th-gen
+          nixos-hardware.nixosModules.common-cpu-intel
+        ];
+      };
+
+      Hestia = mkHost {
+        hostname = "Hestia";
+        desktop = "dms";
+        vm = true;
+        hardwareModules = [];
+      };
+
+      # future hardware — just add hardware-configuration.nix + pick a desktop
+      # NewMachine = mkHost {
+      #   hostname = "NewMachine";
+      #   desktop = "noctalia";
+      #   hardwareModules = [ nixos-hardware.nixosModules.common-cpu-amd ];
+      # };
     };
   };
 }

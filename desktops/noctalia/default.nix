@@ -7,33 +7,31 @@
   unstable,
   ...
 }:
-lib.mkIf (config.mycustom.desktop == "dms") {
+lib.mkIf (config.mycustom.desktop == "noctalia") {
 
 ###########################################################################
 # NixOS-level modules
 ###########################################################################
 
   imports = [
-    inputs.dms.nixosModules.dank-material-shell
-    inputs.dms.nixosModules.greeter
+    inputs.noctalia.nixosModules.default
   ];
 
   ###########################################################################
-  # Enables DMS
+  # Noctalia shell
   ###########################################################################
 
-  programs.dank-material-shell = {
+  programs.noctalia-shell = {
     enable = true;
-    enableDynamicTheming = true;
-    systemd = {
-      enable = true;
-      restartIfChanged = true;
-    };
-    greeter = {
-      enable = true;
-      compositor.name = "niri";
-      configHome = "/home/${user}";
-    };
+    recommendedServices.enable = true;
+    systemd.enable = true;
+    launch_apps_as_systemd_services = true;
+  };
+
+  # Noctalia cache
+  nix.settings = {
+    extra-substituters = [ "https://noctalia.cachix.org" ];
+    extra-trusted-public-keys = [ "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4=" ];
   };
 
   ###########################################################################
@@ -42,7 +40,8 @@ lib.mkIf (config.mycustom.desktop == "dms") {
 
   programs.niri = {
     enable = true;
-    package = pkg
+    package = unstable.niri;
+  };
 
   # GDM auto login
   # services.displayManager = {
@@ -70,28 +69,29 @@ lib.mkIf (config.mycustom.desktop == "dms") {
   ###########################################################################
 
   services.power-profiles-daemon.enable = true;
+  services.upower.enable = true;
 
   ###########################################################################
   # XDG Portals
   ###########################################################################
 
-  xdg.portal = {
-    enable = true;
+  # xdg.portal = {
+  #   enable = true;
 
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-gtk # fallback for file pickers, etc.
-      xdg-desktop-portal-gnome # required for screencast on Niri
-    ];
+  #   extraPortals = with pkgs; [
+  #     xdg-desktop-portal-gtk # fallback for file pickers, etc.
+  #     xdg-desktop-portal-gnome # required for screencast on Niri
+  #   ];
 
-    config = {
-      common = {
-        default = ["gtk"]; # GTK as general fallback
+  #   config = {
+  #     common = {
+  #       default = ["gtk"]; # GTK as general fallback
 
-        # Force ScreenCast to use the GNOME backend.
-        "org.freedesktop.impl.portal.ScreenCast" = ["gnome"];
-      };
-    };
-  };
+  #       # Force ScreenCast to use the GNOME backend.
+  #       "org.freedesktop.impl.portal.ScreenCast" = ["gnome"];
+  #     };
+  #   };
+  # };
 
   ###########################################################################
   # USB handling
@@ -111,8 +111,7 @@ lib.mkIf (config.mycustom.desktop == "dms") {
 
   home-manager.users.${user} = {lib, ...}: {
     imports = [
-      inputs.dms.homeModules.dank-material-shell
-      inputs.dms.homeModules.niri
+      inputs.noctalia.homeModules.default
 
       ../../modules/home/common/etc.nix
       ../../modules/home/common/mimeapps.nix
@@ -129,66 +128,65 @@ lib.mkIf (config.mycustom.desktop == "dms") {
       ../../modules/home/programs/zed.nix
     ];
 
-    programs.dank-material-shell.niri.includes.enable = false;
-
     ###########################################################################
-    # Adds DMS zen theme to the zen default profile folder
+    # Niri (Noctalia Specific)
     ###########################################################################
 
-    home.activation.zenChrome = lib.hm.dag.entryAfter ["writeBoundary"] ''
-      for PROFILE_DIR in \
-          "$(find ~/.zen -maxdepth 1 -type d -name "*.Default Profile" 2>/dev/null | head -n 1)" \
-          "$(find "$HOME/.config/zen" -maxdepth 1 -type d -name "*Default (release)" 2>/dev/null | head -n 1)" \
-          "$(find "$HOME/.var/app/app.zen_browser.zen/.zen" -maxdepth 1 -type d -name "*Default (release)" 2>/dev/null | head -n 1)"
-      do
-          [ -z "$PROFILE_DIR" ] && continue
-          mkdir -p "$PROFILE_DIR/chrome"
-          ln -sf "$HOME/.config/DankMaterialShell/zen.css" "$PROFILE_DIR/chrome/userChrome.css"
-      done
-    '';
-
-    ###########################################################################
-    # Udiskie (For Auto USB/Device mounts)
-    ###########################################################################
-
-    services.udiskie.enable = true;
-
-    ###########################################################################
-    # Niri (DMS Specific)
-    ###########################################################################
-
-    programs.niri = {
+    program.niri = {
       settings = {
+        spawn-at-startup = [
+          {
+            command = [
+              "noctalia"
+            ];
+          }
+        ];
         layer-rules = [
           {
-            matches = [{namespace = "dms:blurwallpaper";}];
+            matches = [{namespace = "^noctalia-backdrop";}];
             place-within-backdrop = true;
           }
         ];
-        binds = with inputs.niri-flake.lib; let
+        window-rules = [
+          {
+            matches = [{app-id="dev.noctalia.Noctalia";}];
+            open-floating = true;
+            default-column-width = {fixed 1080;}
+            default-column-height = {fixed 920;}
+          }
+        ];
+        binds = with inputs.niri.lib; let
           # you can also define custom Mod key = "Mod4"; here
         in {
-          "Mod+O".action.toggle-overview = {};
-          "Mod+D".action.spawn = ["dms" "ipc" "call" "spotlight" "toggle"];
-          "Mod+S".action.spawn = ["dms" "ipc" "call" "settings" "toggle"];
-          "Mod+V".action.spawn = ["dms" "ipc" "call" "launcher" "clipboard"];
-          "Mod+Grave".action.spawn = ["dms" "ipc" "call" "launcher" "emoji"];
-          "Mod+W".action.spawn = ["dms" "ipc" "call" "wallpaper" "toggle"];
-          "Mod+Escape".action.spawn = ["dms" "ipc" "call" "sessionMenu" "toggle"];
-          "Mod+L".action.spawn = ["dms" "ipc" "call" "lock" "lock"];
+          "Mod+O".action = "toggle-overview";
+
+          "Mod+D".action.spawn = ["noctalia" "msg" "panel-toggle" "launcher"];
+          "Mod+S".action.spawn = ["noctalia" "msg" "settings-toggle"];
+          "Mod+V".action.spawn = ["noctalia" "msg" "panel-toggle" "clipboard"];
+          "Mod+Grave".action.spawn = ["noctalia" "msg" "panel-toggle" "launcher" "/emoji"];
+          "Mod+W".action.spawn = ["noctalia" "msg" "panel-toggle" "wallpaper"];
+          "Mod+Escape".action.spawn = ["noctalia" "msg" "panel-toggle" "session"];
+          "Alt+Tab".action.spawn = ["noctalia" "msg" "window-switcher"];
+          "Mod+L".action.spawn = ["noctalia" "msg" "session" "lock"];
 
           # Volume controls
-          "XF86AudioRaiseVolume".action.spawn = ["dms" "ipc" "call" "audio" "increment" "10"];
-          "XF86AudioLowerVolume".action.spawn = ["dms" "ipc" "call" "audio" "decrement" "10"];
-          "XF86AudioMute".action.spawn = ["dms" "ipc" "call" "audio" "mute"];
+          "XF86AudioRaiseVolume".action.spawn = ["noctalia" "msg" "volume-up" "10"];
+          "XF86AudioLowerVolume".action.spawn = ["noctalia" "msg" "volume-down" "10"];
+          "XF86AudioMute".action.spawn = ["noctalia" "msg" "volume-mute"];
 
-          "XF86AudioMicMute".action.spawn = ["dms" "ipc" "call" "audio" "micmute"];
+          "Mod+XF86AudioRaiseVolume".action.spawn = ["noctalia" "msg" "mic-volume-up" "10%"];
+          "Mod+XF86AudioLowerVolume".action.spawn = ["noctalia" "msg" "mic-volume-down" "10%"];
+          "XF86AudioMicMute".action.spawn = ["noctalia" "msg" "mic-mute"];
 
           # Brightness
-          "XF86MonBrightnessUp".action.spawn = ["dms" "ipc" "call" "brightness" "increment" "10"];
-          "XF86MonBrightnessDown".action.spawn = ["dms" "ipc" "call" "brightness" "decrement" "10"];
+          "XF86MonBrightnessUp".action.spawn = ["noctalia" "msg" "brightness-up" "*" "5%"];
+          "XF86MonBrightnessDown".action.spawn = ["noctalia" "msg" "brightness-down" "*" "5%"];
+
+          # Power profile
+          "XF86Favorites".action.spawn = ["noctalia" "msg" "power-cycle"];
         };
       };
+      debug = "honor-xdg-activation-with-invalid-serial";
     };
     ###########################################################################
     # Home state version - Do not touch this

@@ -1,5 +1,5 @@
 {lib, ...}: {
-  options.mycustom = {
+  options.nix = {
     desktop = lib.mkOption {
       type = lib.types.enum ["dms" "noctalia"];
       default = "dms";
