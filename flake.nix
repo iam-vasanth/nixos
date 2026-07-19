@@ -67,12 +67,14 @@
     #   Have to write Kubernetes and docker, AWS, Rust, Python, SOPS... dev shells
     # };
 
-    mkHost = {hostname, hardwareModules ? [], desktop, vm ? false}: nixpkgs.lib.nixosSystem {
+    mkHost = {hostname, host, hardwareModules ? [], desktop, vm ? false}: nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = {inherit inputs hostname user unstable;};
 
       modules = [
-        ./configuration.nix
+        ./hosts/configuration.nix
+        ./hosts/${hosts}/disko.nix
+        ./hosts/${hosts}/hardware-configuration.nix
 
         {
           nix.desktop = desktop;
@@ -100,6 +102,7 @@
     nixosConfigurations = {
       Ares = mkHost {
         hostname = "Ares";
+        host = "thinkpad-x1"
         desktop = "dms";
         hardwareModules = [
           nixos-hardware.nixosModules.lenovo-thinkpad-x1-10th-gen
@@ -109,6 +112,7 @@
 
       Athena = mkHost {
         hostname = "Athena";
+        host = "thinkpad-x1"
         desktop = "noctalia";
         hardwareModules = [
           nixos-hardware.nixosModules.lenovo-thinkpad-x1-10th-gen
