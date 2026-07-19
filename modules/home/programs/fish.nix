@@ -53,6 +53,10 @@
       dcu = "docker compose up -d";
       dcd = "docker compose down";
 
+      # Virt-manager
+      vm list = "virsh -c qemu:///system list --all";
+      vmip = "virsh -c qemu:///system domifaddr"
+
       ports = "ss -tuln";
       myip = "curl ifconfig.me";
       sshk = "kitty +kitten ssh";

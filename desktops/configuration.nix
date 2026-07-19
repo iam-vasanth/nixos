@@ -7,8 +7,7 @@
 }: {
   imports = [
     /etc/nixos/hardware-configuration.nix
-    ./desktop/niri-dms/niri-dms.nix
-    ./home/common/vm.nix
+    ./athena/default.nix
     # ./sops.nix
   ];
 
@@ -272,10 +271,4 @@
       dates = ["weekly"];
     };
   };
-
-  ###########################################################################
-  # State version - Do not touch this
-  ###########################################################################
-
-  system.stateVersion = "26.05";
 }

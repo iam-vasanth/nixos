@@ -89,7 +89,7 @@
       layout = {
         gaps = 16;
         center-focused-column = "never";
-        # background-color = ""
+        background-color = "transparent";
         preset-column-widths = [
           {proportion = 0.33333;}
           {proportion = 0.5;}
@@ -228,13 +228,15 @@
       ###########################################################################
 
       environment = {
+        XDG_CURRENT_DESKTOP = "niri";
         GDK_BACKEND = "wayland";
         GTK_USE_PORTAL = "1";
         QT_QPA_PLATFORMTHEME = "gtk3";
+        QT_QPA_PLATFORMTHEME_QT6 = "gtk3";
         QT_AUTO_SCREEN_SCALE_FACTOR = "0";
         QT_QPA_PLATFORM = "wayland";
         MOZ_ENABLE_WAYLAND = "1";
-        ELECTRON_OZONE_PLATFORM_HINT = "wayland";
+        ELECTRON_OZONE_PLATFORM_HINT = "auto";
         # GDK_SCALE = "2";    # Uncomment if GTK apps appear too small
       };
 

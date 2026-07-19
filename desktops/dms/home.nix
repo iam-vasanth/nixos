@@ -7,7 +7,6 @@
   imports = [
     inputs.dms.homeModules.dank-material-shell
     inputs.dms.homeModules.niri
-    # Import nixos or home modules if needed ...
   ];
 
   programs.dank-material-shell.niri.includes.enable = false;
@@ -42,7 +41,7 @@
     settings = {
       layer-rules = [
         {
-          matches = [{namespace = "^quickshell$";}];
+          matches = [{namespace = "dms:blurwallpaper";}];
           place-within-backdrop = true;
         }
       ];

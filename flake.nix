@@ -68,7 +68,7 @@
       specialArgs = {inherit inputs hostname user desktop unstable;};
 
       modules = [
-        ./configuration.nix
+        ./hosts/configuration.nix
 
         sops-nix.nixosModules.sops
         home-manager.nixosModules.home-manager

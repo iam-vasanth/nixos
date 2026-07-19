@@ -1,4 +1,5 @@
-{...}: {
+{lib, config, ...}:
+lib.mkIf config.mycustom.vm.enable {
 
   ###########################################################################
   # SSH for VM guest
@@ -24,8 +25,8 @@
   # Filesystem mount
   ###########################################################################
 
-  fileSystems."/home/zoro/nix" = {
-    device = "nix";
+  fileSystems."/home/zoro/nixos" = {
+    device = "nixos";
     fsType = "virtiofs";
     options = ["defaults" "nofail"];
   };
