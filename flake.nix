@@ -24,6 +24,11 @@
 
     noctalia.url = "github:noctalia-dev/noctalia/cachix";
 
+    sysc-greet = {
+      url = "github:Nomadcxx/sysc-greet";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
 
     sops-nix.url = "github:mic92/sops-nix";
@@ -40,6 +45,7 @@
     home-manager,
     niri,
     dms,
+    sysc-greet,
     nixos-hardware,
     sops-nix,
     nix-flatpak,
@@ -73,6 +79,7 @@
         disko.nixosModules.disko
         sops-nix.nixosModules.sops
         niri.nixosModules.niri
+        sysc-greet.nixosModules.default
         home-manager.nixosModules.home-manager
 
         {

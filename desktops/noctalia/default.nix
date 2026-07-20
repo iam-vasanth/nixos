@@ -43,6 +43,11 @@
       package = unstable.niri;
     };
 
+    services.sysc-greet = {
+      enable = true;
+      compositor = "niri";
+    };
+
     # GDM auto login
     # services.displayManager = {
     #   autoLogin = {
