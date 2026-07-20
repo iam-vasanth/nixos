@@ -2,7 +2,7 @@
   disko.devices = {
     disk.main = {
       type = "disk";
-      device = "/dev/disk/by-id/ata-QEMU_DVD-ROM_QM00001";
+      device = "/dev/disk/by-path/virtio-pci-0000:04:00.0";
 
       content = {
         type = "gpt";
