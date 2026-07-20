@@ -10,6 +10,7 @@
     ./noctalia/default.nix
     ./options.nix
     ./vm-guest.nix
+    ./niri-session-patch.nix
   ];
 
   ###########################################################################
@@ -24,7 +25,7 @@
   # Kernal and Kernal parameters
   ###########################################################################
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_zen;
 
   boot.consoleLogLevel = 0;
   boot.initrd.systemd.enable = true;
@@ -36,6 +37,15 @@
     "rd.udev.log_level=3"
     "udev.log_priority=3"
     "vt.global_cursor_default=0"
+    "systemd.show_status=false"
+  ];
+
+  boot.blacklistedKernelModules = [
+    "watchdog"
+    "softdog"
+    "sp5100_tco"
+    "iTCO_wdt"
+    "iTCO_vendor_support"
   ];
 
   ###########################################################################
@@ -226,6 +236,8 @@
       ${pkgs.libvirt}/bin/virsh net-start default || true
     '';
   };
+
+  systemd.services.libvirt-guests.enable = false;
 
   ###########################################################################
   # Host specific common packages

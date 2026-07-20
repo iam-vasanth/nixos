@@ -43,6 +43,7 @@
 
     programs.niri = {
       enable = true;
+      # Uses the custom patched niri from above.
       package = unstable.niri;
     };
 
@@ -129,6 +130,7 @@
         ../../modules/home/programs/ssh.nix
         ../../modules/home/programs/starship.nix
         ../../modules/home/programs/zed.nix
+        ../../modules/home/programs/zathura.nix
       ];
 
       programs.dank-material-shell.niri.includes.enable = false;
@@ -161,6 +163,16 @@
 
       programs.niri = {
         settings = {
+          window-rules = [
+            {
+              geometry-corner-radius = {
+                top-left = 10.0;
+                top-right = 10.0;
+                bottom-left = 10.0;
+                bottom-right = 10.0;
+              };
+            }
+          ];
           layer-rules = [
             {
               matches = [{namespace = "dms:blurwallpaper";}];

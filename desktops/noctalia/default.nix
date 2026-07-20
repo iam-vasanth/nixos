@@ -28,12 +28,6 @@
       systemd.enable = true;
     };
 
-    # Noctalia cache
-    nix.settings = {
-      extra-substituters = [ "https://noctalia.cachix.org" ];
-      extra-trusted-public-keys = [ "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4=" ];
-    };
-
     ###########################################################################
     # Enables Niri and GDM
     ###########################################################################
@@ -43,9 +37,19 @@
       package = unstable.niri;
     };
 
-    services.sysc-greet = {
+    services.greetd = {
       enable = true;
-      compositor = "niri";
+
+      settings.default_session = {
+        command = ''
+          ${pkgs.tuigreet}/bin/tuigreet \
+            --time \
+            --remember \
+            --remember-session \
+            --asterisks
+        '';
+        user = "greeter";
+      };
     };
 
     # GDM auto login
@@ -80,23 +84,23 @@
     # XDG Portals
     ###########################################################################
 
-    # xdg.portal = {
-    #   enable = true;
+    xdg.portal = {
+      enable = true;
 
-    #   extraPortals = with pkgs; [
-    #     xdg-desktop-portal-gtk # fallback for file pickers, etc.
-    #     xdg-desktop-portal-gnome # required for screencast on Niri
-    #   ];
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-gtk # fallback for file pickers, etc.
+        xdg-desktop-portal-gnome # required for screencast on Niri
+      ];
 
-    #   config = {
-    #     common = {
-    #       default = ["gtk"]; # GTK as general fallback
+      config = {
+        common = {
+          default = ["gtk"]; # GTK as general fallback
 
-    #       # Force ScreenCast to use the GNOME backend.
-    #       "org.freedesktop.impl.portal.ScreenCast" = ["gnome"];
-    #     };
-    #   };
-    # };
+          # Force ScreenCast to use the GNOME backend.
+          "org.freedesktop.impl.portal.ScreenCast" = ["gnome"];
+        };
+      };
+    };
 
     ###########################################################################
     # USB handling
@@ -131,6 +135,7 @@
         ../../modules/home/programs/ssh.nix
         ../../modules/home/programs/starship.nix
         ../../modules/home/programs/zed.nix
+        ../../modules/home/programs/zathura.nix
       ];
 
       ###########################################################################
