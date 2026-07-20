@@ -43,6 +43,7 @@
     nixos-hardware,
     sops-nix,
     nix-flatpak,
+    disko,
     ...
   } @ inputs: let
     system = "x86_64-linux";
@@ -55,24 +56,12 @@
       inherit system;
       config.allowUnfree = true;
     };
-  in {
-    formatter.${system} = pkgs.alejandra;
-
-    # # Dev shells
-    # devShells.${system} = {
-    #   default  = import ./devshells/default.nix  { inherit pkgs unstable; };
-    #   backend  = import ./devshells/backend.nix  { inherit pkgs unstable; };
-    #   frontend = import ./devshells/frontend.nix { inherit pkgs unstable; };
-    #   ci       = import ./devshells/ci.nix       { inherit pkgs unstable; };
-    #   Have to write Kubernetes and docker, AWS, Rust, Python, SOPS... dev shells
-    # };
-
-    mkHost = {hostname, host, hardwareModules ? [], desktop, vm ? false}: nixpkgs.lib.nixosSystem {
+    mkHost = {hostname, hosts, hardwareModules ? [], desktop, vm ? false}: nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = {inherit inputs hostname user unstable;};
 
       modules = [
-        ./hosts/configuration.nix
+        ./desktops/configuration.nix
         ./hosts/${hosts}/disko.nix
         ./hosts/${hosts}/hardware-configuration.nix
 
@@ -99,10 +88,22 @@
       ] ++ hardwareModules;
     };
 
+  in {
+    formatter.${system} = pkgs.alejandra;
+
+    # # Dev shells
+    # devShells.${system} = {
+    #   default  = import ./devshells/default.nix  { inherit pkgs unstable; };
+    #   backend  = import ./devshells/backend.nix  { inherit pkgs unstable; };
+    #   frontend = import ./devshells/frontend.nix { inherit pkgs unstable; };
+    #   ci       = import ./devshells/ci.nix       { inherit pkgs unstable; };
+    #   Have to write Kubernetes and docker, AWS, Rust, Python, SOPS... dev shells
+    # };
+    #
     nixosConfigurations = {
       Ares = mkHost {
         hostname = "Ares";
-        host = "thinkpad-x1"
+        hosts = "thinkpad-x1";
         desktop = "dms";
         hardwareModules = [
           nixos-hardware.nixosModules.lenovo-thinkpad-x1-10th-gen
@@ -112,7 +113,7 @@
 
       Athena = mkHost {
         hostname = "Athena";
-        host = "thinkpad-x1"
+        hosts = "thinkpad-x1";
         desktop = "noctalia";
         hardwareModules = [
           nixos-hardware.nixosModules.lenovo-thinkpad-x1-10th-gen
@@ -122,6 +123,7 @@
 
       Hestia = mkHost {
         hostname = "Hestia";
+        hosts = "vm";
         desktop = "dms";
         vm = true;
         hardwareModules = [];
