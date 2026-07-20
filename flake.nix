@@ -1,6 +1,12 @@
 {
   description = "NixOS flake - Athena.";
 
+  # Noctalia cachix
+  nixConfig = {
+    extra-substituters = [ "https://noctalia.cachix.org" ];
+    extra-trusted-public-keys = [ "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4=" ];
+  };
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -131,7 +137,7 @@
       Hestia = mkHost {
         hostname = "Hestia";
         hosts = "vm";
-        desktop = "dms";
+        desktop = "noctalia";
         vm = true;
         hardwareModules = [];
       };

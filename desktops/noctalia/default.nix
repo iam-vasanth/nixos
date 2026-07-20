@@ -137,7 +137,7 @@
       # Noctalia shell (Home)
       ###########################################################################
 
-      programs.noctalia-shell.settings = {
+      programs.noctalia.settings = {
         launch_apps_as_systemd_services = true;
       };
 
@@ -145,15 +145,15 @@
       # Niri (Noctalia Specific)
       ###########################################################################
 
-      program.niri = {
+      programs.niri = {
         settings = {
-          spawn-at-startup = [
-            {
-              command = [
-                "noctalia"
-              ];
-            }
-          ];
+          # spawn-at-startup = [
+          #   {
+          #     command = [
+          #       "noctalia"
+          #     ];
+          #   }
+          # ];
           layer-rules = [
             {
               matches = [{namespace = "^noctalia-backdrop";}];
@@ -165,13 +165,13 @@
               matches = [{app-id="dev.noctalia.Noctalia";}];
               open-floating = true;
               default-column-width = {fixed = 1080;};
-              default-column-height = {fixed = 920;};
+              default-window-height = {fixed = 920;};
             }
           ];
           binds = with inputs.niri.lib; let
             # you can also define custom Mod key = "Mod4"; here
           in {
-            "Mod+O".action = "toggle-overview";
+            "Mod+O".action.toggle-overview = [];
 
             "Mod+D".action.spawn = ["noctalia" "msg" "panel-toggle" "launcher"];
             "Mod+S".action.spawn = ["noctalia" "msg" "settings-toggle"];
@@ -198,8 +198,10 @@
             # Power profile
             "XF86Favorites".action.spawn = ["noctalia" "msg" "power-cycle"];
           };
+          debug = {
+            honor-xdg-activation-with-invalid-serial = [];
+          };
         };
-        debug = "honor-xdg-activation-with-invalid-serial";
       };
       ###########################################################################
       # Home state version - Do not touch this
