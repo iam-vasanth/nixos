@@ -106,7 +106,11 @@
     # USB handling
     ###########################################################################
 
-    services.udisks2.enable = true;
+    services.udiskie = {
+      enable = true;
+      tray = "never";
+      notify = false;
+    };
 
     ###########################################################################
     # NixOS state version - Do not touch this
