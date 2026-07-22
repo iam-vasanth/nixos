@@ -117,20 +117,20 @@
         inputs.dms.homeModules.dank-material-shell
         inputs.dms.homeModules.niri
 
-        ../../modules/home/common/etc.nix
-        ../../modules/home/common/mimeapps.nix
-        ../../modules/home/common/niri.nix
-        ../../modules/home/common/pkgs.nix
+        ../../home/common/etc.nix
+        ../../home/common/mimeapps.nix
+        ../../home/common/niri.nix
+        ../../home/common/pkgs.nix
 
-        ../../modules/home/programs/fastfetch.nix
-        ../../modules/home/programs/fish.nix
-        ../../modules/home/programs/fastfetch.nix
-        ../../modules/home/programs/git.nix
-        ../../modules/home/programs/kitty.nix
-        ../../modules/home/programs/ssh.nix
-        ../../modules/home/programs/starship.nix
-        ../../modules/home/programs/zed.nix
-        ../../modules/home/programs/zathura.nix
+        ../../home/programs/fastfetch.nix
+        ../../home/programs/fish.nix
+        ../../home/programs/fastfetch.nix
+        ../../home/programs/git.nix
+        ../../home/programs/kitty.nix
+        ../../home/programs/ssh.nix
+        ../../home/programs/starship.nix
+        ../../home/programs/zed.nix
+        ../../home/programs/zathura.nix
       ];
 
       programs.dank-material-shell.niri.includes.enable = false;
