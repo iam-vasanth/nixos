@@ -42,6 +42,13 @@ else
 fi
 
 # ---------------------------------------------------------------------------
+# Clone the flake
+# ---------------------------------------------------------------------------
+rm -rf "$WORKDIR"
+eval "$GIT_CMD clone \"$FLAKE_REPO\" \"$WORKDIR\""
+cd "$WORKDIR"
+
+# ---------------------------------------------------------------------------
 # Pick host
 # ---------------------------------------------------------------------------
 echo "Select host to install:"
@@ -56,13 +63,6 @@ case "$HOSTNAME" in
 esac
 
 # ---------------------------------------------------------------------------
-# Clone the flake
-# ---------------------------------------------------------------------------
-rm -rf "$WORKDIR"
-eval "$GIT_CMD clone \"$FLAKE_REPO\" \"$WORKDIR\""
-cd "$WORKDIR"
-
-# ---------------------------------------------------------------------------
 # Confirm disk wipe
 # ---------------------------------------------------------------------------
 echo
@@ -71,6 +71,29 @@ grep -m1 '^[[:space:]]*device =' hosts/$HOSTDIR/disko.nix
 echo
 read -rp "Type 'yes' to continue: " CONFIRM
 [[ "$CONFIRM" == "yes" ]] || { echo "Aborted."; exit 1; }
+
+
+# ---------------------------------------------------------------------------
+# User and Root password
+# ---------------------------------------------------------------------------
+
+echo
+echo "Root account:"
+select ROOT_CHOICE in "Lock root (recommended — use sudo via 'zoro')" "Also set a root password"; do
+  [[ -n "${ROOT_CHOICE:-}" ]] && break
+done
+
+ROOT_PASSWD=""
+if [[ "$ROOT_CHOICE" == "Also set a root password" ]]; then
+  while true; do
+    read -rsp "New password for root: " ROOT_PASSWD; echo
+    read -rsp "Confirm root password: " ROOT_PASSWD_CONFIRM; echo
+    [[ "$ROOT_PASSWD" == "$ROOT_PASSWD_CONFIRM" && -n "$ROOT_PASSWD" ]] && break
+    echo "Passwords didn't match (or were empty) — try again."
+  done
+  unset ROOT_PASSWD_CONFIRM
+fi
+
 
 # ---------------------------------------------------------------------------
 # Partition + format + mount via disko
@@ -99,9 +122,16 @@ nixos-install --flake "/mnt/etc/nixos#$HOSTNAME" --no-root-passwd
 # Set user password inside the new system
 # ---------------------------------------------------------------------------
 echo
-echo "Set a login password for your user now:"
-nixos-enter --root /mnt -c "passwd zoro"
+printf '%s:%s\n' "zoro" "$PASSWORD" | nixos-enter --root /mnt -c "chpasswd"
+unset PASSWORD
+
+if [[ -n "$ROOT_PASSWD" ]]; then
+  printf '%s:%s\n' "root" "$ROOT_PASSWD" | nixos-enter --root /mnt -c "chpasswd"
+fi
+unset ROOT_PASSWD
 
 echo
 echo "== Install complete =="
-echo "Reboot into the new system with: reboot"
+echo "Rebooting in 10 seconds..."
+sleep 10
+reboot
