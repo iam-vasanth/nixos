@@ -67,7 +67,7 @@ cd "$WORKDIR"
 # ---------------------------------------------------------------------------
 echo
 echo "!! This will WIPE the disk defined in hosts/$HOSTDIR/disko.nix !!"
-grep -m1 device "hosts/$HOSTDIR/disko.nix"
+grep -m1 '^[[:space:]]*device =' hosts/$HOSTDIR/disko.nix
 echo
 read -rp "Type 'yes' to continue: " CONFIRM
 [[ "$CONFIRM" == "yes" ]] || { echo "Aborted."; exit 1; }
