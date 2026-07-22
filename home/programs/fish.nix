@@ -1,0 +1,93 @@
+{
+  hostname,
+  pkgs,
+  ...
+}: {
+  ###########################################################################
+  # Fish
+  ###########################################################################
+
+  programs.fish = {
+    enable = true;
+
+    # Disable default greeting
+    interactiveShellInit = ''
+      set fish_greeting
+      nix-your-shell fish | source
+    '';
+
+    # Aliases
+    shellAliases = {
+      c = "cd ..";
+      ll = "ls -lAh";
+      la = "ls -A";
+      tree = "ls --tree";
+
+      # Git
+      lg = "lazygit";
+      ld = "lazydocker";
+      g = "git";
+      gs = "git status";
+      ga = "git add";
+      gc = "git commit -m";
+      gco = "git checkout";
+      gp = "git push";
+      gl = "git pull";
+      gd = "git diff";
+      glog = "git log --oneline --graph --decorate";
+
+      # Nix
+      rebuild = "sudo nixos-rebuild switch --flake .#${hostname} --impure";
+      nso = "sudo nix store optimise";
+      ngc = "sudo nix-collect-garbage -d";
+      nsearch = "nix search nixpkgs";
+
+      # Tools
+      grep = "grep --color=auto";
+      diff = "diff --color=auto";
+      ip = "ip --color=auto";
+
+      # Containers
+      d = "docker";
+      dc = "docker compose";
+      dcu = "docker compose up -d";
+      dcd = "docker compose down";
+
+      # Virt-manager
+      vmlist = "virsh -c qemu:///system list --all";
+      vmip = "virsh -c qemu:///system domifaddr";
+
+      ports = "ss -tuln";
+      myip = "curl ifconfig.me";
+      sshk = "kitty +kitten ssh";
+    };
+
+    plugins = [
+      {
+        # Fuzzy git interactive
+        name = "forgit";
+        src = pkgs.fishPlugins.forgit.src;
+      }
+      {
+        # fzf for history/files/git
+        name = "fzf-fish";
+        src = pkgs.fishPlugins.fzf-fish.src;
+      }
+      {
+        # Notifications for long commands
+        name = "done";
+        src = pkgs.fishPlugins.done.src;
+      }
+      {
+        # Auto-close brackets/quotes
+        name = "autopair";
+        src = pkgs.fishPlugins.autopair.src;
+      }
+      {
+        # Colorize command output
+        name = "grc";
+        src = pkgs.fishPlugins.grc.src;
+      }
+    ];
+  };
+}
