@@ -1,0 +1,172 @@
+# Universal gitignore file
+
+###########################################################################
+# Editor & OS
+###########################################################################
+*.swp
+*.swo
+*~
+.DS_Store
+.Thumbs.db
+desktop.ini
+.directory
+
+# VSCode
+.vscode/
+*.code-workspace
+
+# JetBrains
+.idea/
+*.iml
+
+# Zed
+.zed/
+
+###########################################################################
+# Python
+###########################################################################
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# Virtualenvs
+.venv/
+venv/
+env/
+ENV/
+.env
+
+# Packaging
+*.egg-info/
+*.egg
+dist/
+build/
+wheels/
+sdist/
+.eggs/
+
+# Testing
+.pytest_cache/
+.tox/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+*.lcov
+.hypothesis/
+
+# Type checking
+.mypy_cache/
+.pytype/
+.pyre/
+.ruff_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+###########################################################################
+# Rust
+###########################################################################
+target/
+Cargo.lock
+*.rlib
+*.rmeta
+*.pdb
+
+###########################################################################
+# Shell / Bash
+###########################################################################
+*.bak
+*.tmp
+*.log
+*.pid
+
+###########################################################################
+# Nix
+###########################################################################
+result
+result-*
+.direnv/
+.devenv/
+.devenv.flake.nix
+
+###########################################################################
+# Docker
+###########################################################################
+.docker/
+docker-compose.override.yml
+*.env.local
+*.env.*.local
+
+###########################################################################
+# Kubernetes
+###########################################################################
+kubeconfig
+*.kubeconfig
+.kube/
+*.decoded.yml
+override.yaml
+override.yml
+
+# Helm
+charts/*.tgz
+.helmignore
+
+###########################################################################
+# AWS
+###########################################################################
+.aws/credentials
+.aws/config
+*.pem
+*.p12
+*.pfx
+
+# CDK
+cdk.out/
+cdk.context.json
+
+# SAM
+.aws-sam/
+samconfig.toml
+
+# Terraform (common with AWS)
+.terraform/
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfplan
+crash.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+###########################################################################
+# Secrets & Keys
+###########################################################################
+*.key
+*.pub
+!~/.ssh/*.pub
+.secrets/
+secrets/
+.env
+.env.*
+!.env.example
+*.secret
+*_rsa
+*_ed25519
+*_ecdsa
+*.age
+sops.yaml
+.sops.yaml
+
+###########################################################################
+# Universal
+###########################################################################
+/logs
+/.misc
+/.ideas
