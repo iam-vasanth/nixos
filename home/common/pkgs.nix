@@ -29,6 +29,7 @@
     pkgs.btop
     pkgs.mpv
     pkgs.android-tools
+    pkgs.obsidian
     # ... add more packages here
 
     # Fonts
@@ -98,10 +99,6 @@
         origin = "flathub";
       }
       {
-        appId = "md.obsidian.Obsidian";
-        origin = "flathub";
-      }
-      {
         appId = "com.github.marhkb.Pods";
         origin = "flathub";
       }
@@ -122,7 +119,7 @@
         origin = "flathub";
       }
       {
-        appId = "com.bitwarden.desktop";
+        appId = "dev.vencord.Vesktop";
         origin = "flathub";
       }
     ];
