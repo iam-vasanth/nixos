@@ -18,6 +18,11 @@
 
     niri.url = "github:sodiboo/niri-flake";
 
+    mangowm = {
+      url = "github:mangowm/mango";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
     dms = {
       url = "github:AvengeMedia/DankMaterialShell/stable";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -50,6 +55,7 @@
     nixpkgs-unstable,
     home-manager,
     niri,
+    mangowm,
     dms,
     sysc-greet,
     nixos-hardware,
@@ -59,9 +65,7 @@
     ...
   } @ inputs: let
     system = "x86_64-linux";
-    hostname = "Athena";
     user = "zoro";
-    desktop = "niri-dms";
 
     pkgs = nixpkgs.legacyPackages.${system};
     unstable = import nixpkgs-unstable {
@@ -84,7 +88,8 @@
 
         disko.nixosModules.disko
         sops-nix.nixosModules.sops
-        niri.nixosModules.niri
+        niri.nixosModules.nirimangowm.nixosModules.mango
+        mangowm.nixosModules.mango
         sysc-greet.nixosModules.default
         home-manager.nixosModules.home-manager
 
