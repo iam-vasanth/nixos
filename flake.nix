@@ -88,7 +88,7 @@
 
         disko.nixosModules.disko
         sops-nix.nixosModules.sops
-        niri.nixosModules.nirimangowm.nixosModules.mango
+        niri.nixosModules.niri
         mangowm.nixosModules.mango
         sysc-greet.nixosModules.default
         home-manager.nixosModules.home-manager

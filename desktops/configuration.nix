@@ -7,10 +7,10 @@
 }: {
   imports = [
     ./dms/default.nix
-    ./noctalia/default.nix
+    ./noctalia/mango.nix
     ./options.nix
     ./vm-guest.nix
-    ./niri-session-patch.nix
+    # ./niri-session-patch.nix
   ];
 
   ###########################################################################
@@ -249,7 +249,7 @@
     pkgs.bibata-cursors
     pkgs.nautilus
     pkgs.wev
-    pkgs.xwayland-satellite
+    #pkgs.xwayland-satellite
     # ... add more packages here
   ];
 

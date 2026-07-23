@@ -43,10 +43,4 @@
       };
     };
   };
-
-  # home.file.".config/git/allowed_signers".text = let
-  #   pubKey = builtins.readFile ../../.secrets/public_keys/zoro_key.pub;
-  # in ''
-  #   @gmail.com namespaces="git" ${pubKey}
-  # '';
 }
