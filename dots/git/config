@@ -1,0 +1,59 @@
+[user]
+  name = iam-vasanth
+  email = vk.vasanth.r@gmail.com
+  signingKey = ~/.ssh/git_zoro.pub
+
+[gpg]
+  format = ssh
+
+[gpg "ssh"]
+  allowedSignersFile = ~/.config/git/allowed_signers
+
+[commit]
+  gpgSign = true
+
+[tag]
+  gpgSign = true
+
+[fetch]
+  prune = true
+  pruneTags = true
+
+[init]
+  defaultBranch = main
+
+[core]
+  pager = delta
+  editor = zed --wait
+
+[interactive]
+  diffFilter = delta --color-only
+
+[pull]
+  rebase = true
+
+[push]
+  autoSetupRemote = true
+  followTags = true
+
+[rebase]
+  updateRefs = true
+  autoSquash = true
+
+[diff]
+  algorithm = histogram
+
+[branch]
+  sort = -committerdate
+
+[column]
+  ui = auto
+
+[url "git@github.com:"]
+  insteadOf = https://github.com/
+
+[url "git@gitlab.com:"]
+  insteadOf = https://gitlab.com/
+
+[core]
+  excludesFile = ~/.config/git/ignore

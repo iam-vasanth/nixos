@@ -107,6 +107,18 @@
     extraGroups = ["networkmanager" "wheel" "docker" "adbusers" "fuse" "video" "libvirtd"];
   };
 
+  security = {
+    sudo = {
+      enable = true;
+      wheelNeedsPassword = false;
+      extraConfig = ''
+        Defaults pwfeedback
+        Defaults env_keep += "EDITOR PATH DISPLAY"
+        Defaults passprompt = "[sudo  ]: "
+      '';
+    };
+  };
+
   ###########################################################################
   # Timezone
   ###########################################################################

@@ -1,0 +1,108 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+
+  "logo": {
+    "type": "file",
+    "source": "~/.config/fastfetch/fastfetch.txt",
+    "padding": {
+      "top": 2,
+      "left": 2,
+      "right": 2
+    }
+  },
+
+  "display": {
+    "separator": ""
+  },
+
+  "modules": [
+    {
+      "type": "custom",
+      "key": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    },
+    {
+      "type": "title",
+      "key": " PRFIL  ",
+      "outputColor": "white",
+      "format": "{user-name} {home-dir}"
+    },
+    {
+      "type": "custom",
+      "key": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    },
+    {
+      "type": "cpu",
+      "key": " PROCS  ",
+      "outputColor": "white",
+      "format": "{name} ({cores-logical}) {freq-max}"
+    },
+    {
+      "type": "gpu",
+      "key": " GRAPH 󰊗 ",
+      "outputColor": "white",
+      "format": "{vendor} {name} - {type}"
+    },
+    {
+      "type": "memory",
+      "key": " MEMRY  ",
+      "outputColor": "white",
+      "format": ""
+    },
+    {
+      "type": "custom",
+      "key": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    },
+    {
+      "type": "os",
+      "key": " OPSYS 󰒓 ",
+      "outputColor": "white",
+      "format": "{pretty-name}"
+    },
+    {
+      "type": "custom",
+      "key": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    },
+    {
+      "type": "display",
+      "key": " DISPY 󰍹 ",
+      "outputColor": "white",
+      "format": "{inch}\" {refresh-rate}Hz {width}x{height} {name}"
+    },
+    {
+      "type": "custom",
+      "key": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    },
+    {
+      "type": "shell",
+      "key": " SHELL  ",
+      "outputColor": "white",
+      "format": "{process-name}"
+    },
+    {
+      "type": "terminal",
+      "key": " TRMAL  ",
+      "outputColor": "white",
+      "format": "{pretty-name}"
+    },
+    {
+      "type": "terminalfont",
+      "key": " TRFNT  ",
+      "outputColor": "white",
+      "format": "{name}"
+    },
+    {
+      "type": "custom",
+      "key": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    },
+    {
+      "type": "disk",
+      "key": " DISKS  ",
+      "outputColor": "white",
+      "format": ""
+    },
+    {
+      "type": "custom",
+      "key": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    }
+  ]
+}

@@ -11,9 +11,9 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    home-manager = {
-      url = "github:nix-community/home-manager/release-26.05";
-      inputs.nixpkgs.follows = "nixpkgs";
+    hjem = {
+      url = "github:feel-co/hjem";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
     niri.url = "github:sodiboo/niri-flake";
@@ -23,22 +23,7 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
-    dms = {
-      url = "github:AvengeMedia/DankMaterialShell/stable";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    dgop = {
-      url = "github:AvengeMedia/dgop";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     noctalia.url = "github:noctalia-dev/noctalia/cachix";
-
-    sysc-greet = {
-      url = "github:Nomadcxx/sysc-greet";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
 
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
 
@@ -53,11 +38,8 @@
     self,
     nixpkgs,
     nixpkgs-unstable,
-    home-manager,
     niri,
     mangowm,
-    dms,
-    sysc-greet,
     nixos-hardware,
     sops-nix,
     nix-flatpak,
@@ -67,6 +49,15 @@
     system = "x86_64-linux";
     user = "zoro";
 
+    paths = {
+      dots = ./dots;
+      devsh = ./devshells;
+      modules = ./modules;
+      pkgs = ./pkgs;
+      templates = ./templates;
+      secrets = ./secrets;
+    };
+
     pkgs = nixpkgs.legacyPackages.${system};
     unstable = import nixpkgs-unstable {
       inherit system;
@@ -74,7 +65,7 @@
     };
     mkHost = {hostname, hosts, hardwareModules ? [], desktop, vm ? false}: nixpkgs.lib.nixosSystem {
       inherit system;
-      specialArgs = {inherit inputs hostname user unstable;};
+      specialArgs = {inherit inputs hostname user unstable paths;};
 
       modules = [
         ./desktops/configuration.nix
@@ -90,18 +81,15 @@
         sops-nix.nixosModules.sops
         niri.nixosModules.niri
         mangowm.nixosModules.mango
-        sysc-greet.nixosModules.default
-        home-manager.nixosModules.home-manager
+        inputs.hjem.nixosModules.default
 
         {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.backupFileExtension = "bak";
-          home-manager.extraSpecialArgs = {inherit inputs user hostname unstable;};
-          home-manager.sharedModules = [
-            sops-nix.homeManagerModules.sops
-            nix-flatpak.homeManagerModules.nix-flatpak
-          ];
+          hjem.users = {
+            alice = {
+              user = "${user}";
+              directory = "/home/alice";
+            };
+          };
         }
       ] ++ hardwareModules;
     };
