@@ -71,13 +71,13 @@
       modules = [
         ./hosts/default.nix
         ./hosts/${hostname}/default.nix
-        ./hosts/${hostname}/disko.nix
-        ./hosts/${hostname}/hardware-configuration.nix
+        # ./hosts/${hostname}/disko.nix
+        # ./hosts/${hostname}/hardware-configuration.nix
         ./modules/default.nix
 
         disko.nixosModules.disko
         sops-nix.nixosModules.sops
-        niri.nixosModules.niri
+        # niri.nixosModules.niri
         mangowm.nixosModules.mango
         inputs.hjem.nixosModules.default
         nix-flatpak.nixosModules.nix-flatpak

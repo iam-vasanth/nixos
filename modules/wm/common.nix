@@ -28,32 +28,30 @@ in
       default = false;
       description = "Wayland compositor.";
     };
-    config = lib.mkIf config.wm.niri.enable {
-
-      programs.niri.enable = true;
+    config = lib.mkIf config.wm.common.enable {
 
       hjf = {
         ".config/gtk-4.0/gtk.css".text = noRounding;
         ".config/gtk-3.0/gtk.css".text = noRounding;
       };
 
-      programs.uwsm = {
-        enable = true;
+      # programs.uwsm = {
+      #   enable = true;
 
-        waylandCompositors = {
-          niri = {
-            prettyName = "Niri";
-            comment = "Niri compositor managed by UWSM";
-            binPath = "/run/current-system/sw/bin/niri-session";
-          };
+      #   waylandCompositors = {
+      #     niri = {
+      #       prettyName = "Niri";
+      #       comment = "Niri compositor managed by UWSM";
+      #       binPath = "/run/current-system/sw/bin/niri-session";
+      #     };
 
-          mango = {
-            prettyName = "MangoWM";
-            comment = "MangoWM compositor managed by UWSM";
-            binPath = "/run/current-system/sw/bin/mango";
-          };
-        };
-      };
+      #     mango = {
+      #       prettyName = "MangoWM";
+      #       comment = "MangoWM compositor managed by UWSM";
+      #       binPath = "/run/current-system/sw/bin/mango";
+      #     };
+      #   };
+      # };
 
       xdg = {
         terminal-exec = {
@@ -63,15 +61,16 @@ in
           ];
         };
 
-        portal = {
-          enable = true;
+        # portal = {
+        #   enable = true;
 
-          extraPortals = [
-            pkgs.xdg-desktop-portal-gtk
-            pkgs.xdg-desktop-portal-gnome
-            pkgs.xdg-desktop-portal-termfilechooser
-          ];
-        };
+        #   extraPortals = [
+        #     pkgs.kdePackages.xdg-desktop-portal-kde
+        #     pkgs.xdg-desktop-portal-gtk
+        #     pkgs.xdg-desktop-portal-gnome
+        #     pkgs.xdg-desktop-portal-termfilechooser
+        #   ];
+        # };
       };
     };
   }

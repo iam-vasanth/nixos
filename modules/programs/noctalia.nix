@@ -11,7 +11,6 @@
         enable = true;
         systemd = {
           enable = true;
-          target = "graphical-session.target";
         };
       };
       # xdg.config.files = {
@@ -19,17 +18,28 @@
       # };
     };
 
-    services.greetd = {
-      enable = true;
-      settings = {
-        initial_session = {
-          command = "niri";
-          user = user;
-        };
-        default_session = {
-          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --cmd niri";
-          user = "greeter";
-        };
+    # services.greetd = {
+    #   enable = true;
+    #   settings = {
+    #     initial_session = {
+    #       command = "niri";
+    #       user = user;
+    #     };
+    #     default_session = {
+    #       command = "${pkgs.tuigreet}/bin/tuigreet --cmd niri";
+    #       user = "greeter";
+    #     };
+    #   };
+    # };
+
+    services.displayManager = {
+      autoLogin = {
+        enable = true;
+        user = "${user}";
+      };
+      gdm = {
+        enable = true;
+        autoSuspend = false;
       };
     };
   };

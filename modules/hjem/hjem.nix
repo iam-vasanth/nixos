@@ -14,7 +14,7 @@
   ];
 
   hjem = {
-    linker = inputs.hjem.packages.${pkgs.stdenv.hostPlatform.system}.smfh;
+    # linker = inputs.hjem.packages.${pkgs.stdenv.hostPlatform.system}.smfh;
     clobberByDefault = true;
     extraModules = [
       inputs.noctalia.hjemModules.default

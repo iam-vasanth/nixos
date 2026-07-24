@@ -1,4 +1,4 @@
-{ inputs, lib, config, user, hostname, pkgs, paths, ... }:
+{ inputs, lib, config, user, hostname, pkgs, unstable, paths, ... }:
 
 {
   options.wm.niri.enable = lib.mkOption {
@@ -9,21 +9,24 @@
 
   config = lib.mkIf config.wm.niri.enable {
     hjf = {
-      "niri/config.kdl".source = paths.dots + "/niri/${hostname}.kdl";
+      # "niri/config.kdl".source = paths.dots + "/niri/${hostname}.kdl";
       # "niri/noctalia.kdl".source = paths.dots + "/niri/noctalia.kdl";
     };
 
-    programs.niri.enable = true;
-
-    xdg.portal = {
-      config.niri = {
-        default = [ "kde" ];
-        "org.freedesktop.impl.portal.FileChooser" = [ "gnome" ];
-        "org.freedesktop.portal.ScreenCast" = "wlr";
-        "org.freedesktop.impl.portal.ScreenCast" = "wlr";
-        "org.freedesktop.impl.portal.Screenshot" = "kde";
-      };
+    programs.niri = {
+      enable = true;
+      package = unstable.niri;
     };
+
+    # xdg.portal = {
+    #   config.niri = {
+    #     default = lib.mkForce [ "kde" ];
+    #     "org.freedesktop.impl.portal.FileChooser" = [ "gnome" ];
+    #     "org.freedesktop.portal.ScreenCast" = "wlr";
+    #     "org.freedesktop.impl.portal.ScreenCast" = "wlr";
+    #     "org.freedesktop.impl.portal.Screenshot" = "kde";
+    #   };
+    # };
 
     environment.systemPackages = [
       pkgs.xwayland-satellite

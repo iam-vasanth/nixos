@@ -6,6 +6,7 @@
   ...
 }: {
   imports = [
+    /etc/nixos/hardware-configuration.nix
     ./vm-guest.nix
     # ./niri-session-patch.nix
   ];
@@ -308,4 +309,9 @@
       dates = ["weekly"];
     };
   };
+  ###########################################################################
+  # NixOS state version - Do not touch this
+  ###########################################################################
+
+  system.stateVersion = "26.05";
 }

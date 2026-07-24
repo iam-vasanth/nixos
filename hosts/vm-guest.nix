@@ -1,5 +1,6 @@
 {lib, config, ...}:
-lib.mkIf config.nix.vm.enable {
+# lib.mkIf config.nix.vm.enable
+{
 
   ###########################################################################
   # SSH for VM guest

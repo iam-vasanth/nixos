@@ -3,7 +3,7 @@
   imports = [
     # Hjem
     ./hjem/hjem.nix
-    ./hjem/theming.nix
+    # ./hjem/theming.nix
 
     # Programs
     ./programs/noctalia.nix
