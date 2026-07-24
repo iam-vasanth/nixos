@@ -51,7 +51,6 @@
     disko,
     ...
   } @ inputs: let
-    lib = nixpkgs.lib;
     system = "x86_64-linux";
     user = "zoro";
 
@@ -65,7 +64,7 @@
       inherit system;
       config.allowUnfree = true;
     };
-    mkHost = {hostname, hosts, hardwareModules ? [],}: nixpkgs.lib.nixosSystem {
+    mkHost = {hostname, hosts, hardwareModules ? []}: nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = {inherit inputs hostname user unstable paths;};
 
@@ -81,6 +80,7 @@
         niri.nixosModules.niri
         mangowm.nixosModules.mango
         inputs.hjem.nixosModules.default
+        nix-flatpak.nixosModules.nix-flatpak
 
       ] ++ hardwareModules;
     };
@@ -108,11 +108,11 @@
         ];
       };
 
-      Hestia = mkHost {
-        hostname = "Hestia";
-        hosts = "vm";
-        hardwareModules = [];
-      };
+      # Hestia = mkHost {
+      #   hostname = "Hestia";
+      #   hosts = "vm";
+      #   hardwareModules = [];
+      # };
 
       # future hardware — just add hardware-configuration.nix + pick a desktop
       # NewMachine = mkHost {

@@ -6,6 +6,7 @@
   ...
 }: {
   imports = [
+    ./vm-guest.nix
     # ./niri-session-patch.nix
   ];
 
@@ -272,9 +273,9 @@
     pkgs.bibata-cursors
     pkgs.nautilus
     pkgs.wev
-    pkgs.breeze
-    pkgs.breeze.qt5
-    pkgs.breeze-icons
+    pkgs.kdePackages.breeze
+    pkgs.kdePackages.breeze.qt5
+    pkgs.kdePackages.breeze-icons
     # ... add more packages here
   ];
 
