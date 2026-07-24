@@ -1,40 +1,34 @@
 {
-  inputs,
-  self,
-  user,
   lib,
-  username,
+  inputs,
+  user,
+  pkgs,
+  config,
+  paths,
   ...
 }:
 {
-  modules.hjem._ =
-    {
-      pkgs,
-      config,
-      ...
-    }:
-    {
-      imports = [
-        (lib.mkAliasOptionModule [ "hj" ] [ "hjem" "users" "${username}" ])
-        (lib.mkAliasOptionModule [ "hjxdg" ] [ "hjem" "users" "${username}" "xdg" "config" "files" ])
-      ];
+  imports = [
+    (lib.mkAliasOptionModule [ "hj" ] [ "hjem" "users" "${user}" ])
+    (lib.mkAliasOptionModule [ "hjf" ] [ "hjem" "users" "${user}" "files" ])
+  ];
 
-      hjem = {
-        linker = inputs.hjem.packages.${pkgs.stdenv.hostPlatform.system}.smfh;
-        clobberByDefault = true;
-        extraModules = [
-          # inputs.qtengine.hjemModules.default
-          # inputs.hjem-impure.hjemModules.default
-          inputs.hjem-rum.hjemModules.default
-        ];
-      };
-      hjem.users.${username} = {
-        clobberFiles = true;
-        user = user;
-        directory = config.users.users.${username}.home;
-        files = {
-          ".face.icon".source = self.paths.dots + "/profile.png";
-        };
-      };
+  hjem = {
+    linker = inputs.hjem.packages.${pkgs.stdenv.hostPlatform.system}.smfh;
+    clobberByDefault = true;
+    extraModules = [
+      inputs.noctalia.hjemModules.default
+      inputs.qtengine.hjemModules.default
+      # inputs.hjem-impure.hjemModules.default
+      # inputs.hjem-rum.hjemModules.default
+    ];
+  };
+  hjem.users.${user} = {
+    clobberFiles = true;
+    user = user;
+    directory = config.users.users.${user}.home;
+    files = {
+      ".face.icon".source = paths.dots + "/profile.png";
     };
+  };
 }

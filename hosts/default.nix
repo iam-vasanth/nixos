@@ -6,10 +6,6 @@
   ...
 }: {
   imports = [
-    ./dms/default.nix
-    ./noctalia/mango.nix
-    ./options.nix
-    ./vm-guest.nix
     # ./niri-session-patch.nix
   ];
 
@@ -79,7 +75,7 @@
   # Enables flakes
   ###########################################################################
 
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.experimental-features = ["nix-command" "flakes" "pipe-operators"];
 
   ###########################################################################
   # Unfree packages
@@ -173,16 +169,31 @@
   services.thermald.enable = true;
 
   ###########################################################################
+  # Power profile
+  ###########################################################################
+
+  services.power-profiles-daemon.enable = true;
+  services.upower.enable = true;
+
+  ###########################################################################
   # Firmware updates
   ###########################################################################
 
   services.fwupd.enable = true;
+
+  services.gnome.gcr-ssh-agent.enable = false;
 
   ###########################################################################
   # Fprintd
   ###########################################################################
 
   services.fprintd.enable = true;
+
+  ###########################################################################
+  # USB handling
+  ###########################################################################
+
+  services.udisks2.enable = true;
 
   ###########################################################################
   # Enables flatpak
@@ -261,7 +272,9 @@
     pkgs.bibata-cursors
     pkgs.nautilus
     pkgs.wev
-    #pkgs.xwayland-satellite
+    pkgs.breeze
+    pkgs.breeze.qt5
+    pkgs.breeze-icons
     # ... add more packages here
   ];
 
@@ -270,14 +283,14 @@
   ###########################################################################
 
   # It is already installed at home manager level - Comment out if needed at system level
-  # fonts.packages = with pkgs; [
-  #   nerd-fonts.jetbrains-mono
-  #   nerd-fonts.fira-code
-  #   fira-code-symbols
-  #   nerd-fonts.iosevka
-  #   nerd-fonts.hack
-  #   inter-nerdfont
-  # ];
+  fonts.packages = with pkgs; [
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.fira-code
+    fira-code-symbols
+    nerd-fonts.iosevka
+    nerd-fonts.hack
+    inter-nerdfont
+  ];
 
   ###########################################################################
   # Nix cleanup

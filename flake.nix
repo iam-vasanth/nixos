@@ -16,6 +16,11 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
+    qtengine = {
+      url = "github:kossLAN/qtengine";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
     niri.url = "github:sodiboo/niri-flake";
 
     mangowm = {
@@ -46,16 +51,13 @@
     disko,
     ...
   } @ inputs: let
+    lib = nixpkgs.lib;
     system = "x86_64-linux";
     user = "zoro";
 
     paths = {
       dots = ./dots;
       devsh = ./devshells;
-      modules = ./modules;
-      pkgs = ./pkgs;
-      templates = ./templates;
-      secrets = ./secrets;
     };
 
     pkgs = nixpkgs.legacyPackages.${system};
@@ -63,19 +65,16 @@
       inherit system;
       config.allowUnfree = true;
     };
-    mkHost = {hostname, hosts, hardwareModules ? [], desktop, vm ? false}: nixpkgs.lib.nixosSystem {
+    mkHost = {hostname, hosts, hardwareModules ? [],}: nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = {inherit inputs hostname user unstable paths;};
 
       modules = [
-        ./desktops/configuration.nix
-        ./hosts/${hosts}/disko.nix
-        ./hosts/${hosts}/hardware-configuration.nix
-
-        {
-          nix.desktop = desktop;
-          nix.vm.enable = vm;
-        }
+        ./hosts/default.nix
+        ./hosts/${hostname}/default.nix
+        ./hosts/${hostname}/disko.nix
+        ./hosts/${hostname}/hardware-configuration.nix
+        ./modules/default.nix
 
         disko.nixosModules.disko
         sops-nix.nixosModules.sops
@@ -83,14 +82,6 @@
         mangowm.nixosModules.mango
         inputs.hjem.nixosModules.default
 
-        {
-          hjem.users = {
-            alice = {
-              user = "${user}";
-              directory = "/home/alice";
-            };
-          };
-        }
       ] ++ hardwareModules;
     };
 
@@ -107,20 +98,10 @@
     # };
     #
     nixosConfigurations = {
-      Ares = mkHost {
-        hostname = "Ares";
-        hosts = "thinkpad-x1";
-        desktop = "dms";
-        hardwareModules = [
-          nixos-hardware.nixosModules.lenovo-thinkpad-x1-10th-gen
-          nixos-hardware.nixosModules.common-cpu-intel
-        ];
-      };
 
       Athena = mkHost {
         hostname = "Athena";
         hosts = "thinkpad-x1";
-        desktop = "noctalia";
         hardwareModules = [
           nixos-hardware.nixosModules.lenovo-thinkpad-x1-10th-gen
           nixos-hardware.nixosModules.common-cpu-intel
@@ -130,8 +111,6 @@
       Hestia = mkHost {
         hostname = "Hestia";
         hosts = "vm";
-        desktop = "noctalia";
-        vm = true;
         hardwareModules = [];
       };
 

@@ -1,47 +1,32 @@
-{
-  lib,
-  pkgs,
-  config,
-  niri,
-  hostname,
-  ...
-}:
-{
-  imports = [
-    self.modules
-    niri.nixosModules.default
-  ];
+{ inputs, lib, config, user, hostname, pkgs, paths, ... }:
 
-  hjxdg = {
-    "niri/config.kdl" = config.paths.dots + "/niri/${hostname}.kdl";
-    "niri/noctalia.kdl" = config.paths.dots + "/niri/noctalia.kdl";
-  };
-
+{
   options.wm.niri.enable = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
+    type = lib.types.bool;
+    default = false;
+    description = "Niri compositor.";
   };
 
-  config = (lib.mkIf config.wm.niri.enable) {
-    programs.niri = {
-      enable = true;
-      useNautilus = false;
-      withUWSM = false;
-      withXDG = false;
+  config = lib.mkIf config.wm.niri.enable {
+    hjf = {
+      "niri/config.kdl".source = paths.dots + "/niri/${hostname}.kdl";
+      # "niri/noctalia.kdl".source = paths.dots + "/niri/noctalia.kdl";
     };
-  };
 
-  xdg.portal = {
-    config.niri = {
-      default = [ "kde" ];
-      "org.freedesktop.impl.portal.FileChooser" = [ "termfilechooser" ];
-      "org.freedesktop.portal.ScreenCast" = "wlr";
-      "org.freedesktop.impl.portal.ScreenCast" = "wlr";
-      "org.freedesktop.impl.portal.Screenshot" = "kde";
+    programs.niri.enable = true;
+
+    xdg.portal = {
+      config.niri = {
+        default = [ "kde" ];
+        "org.freedesktop.impl.portal.FileChooser" = [ "gnome" ];
+        "org.freedesktop.portal.ScreenCast" = "wlr";
+        "org.freedesktop.impl.portal.ScreenCast" = "wlr";
+        "org.freedesktop.impl.portal.Screenshot" = "kde";
+      };
     };
-  };
 
-  environment.systemPackages = [
-    pkgs.xwayland-satellite
-  ];
+    environment.systemPackages = [
+      pkgs.xwayland-satellite
+    ];
+  };
 }

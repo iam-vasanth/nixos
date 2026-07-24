@@ -68,8 +68,6 @@
     # Uncomment if using LUKS with GDM autologin for auto keyring unlock.
     # services.gnome.gnome-keyring.enable = true;
 
-    services.gnome.gcr-ssh-agent.enable = false;
-
     # Disabled default polkit to use DMS's built-in polkit
     systemd.user.services.niri-flake-polkit.enable = false;
 
