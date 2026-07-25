@@ -14,21 +14,20 @@
   ];
 
   hjem = {
-    # linker = inputs.hjem.packages.${pkgs.stdenv.hostPlatform.system}.smfh;
+    linker = inputs.hjem.packages.${pkgs.stdenv.hostPlatform.system}.smfh;
     clobberByDefault = true;
     extraModules = [
-      inputs.noctalia.hjemModules.default
       inputs.qtengine.hjemModules.default
       # inputs.hjem-impure.hjemModules.default
       # inputs.hjem-rum.hjemModules.default
     ];
   };
-  hjem.users.${user} = {
+  hj = {
     clobberFiles = true;
     user = user;
     directory = config.users.users.${user}.home;
     files = {
-      ".face.icon".source = paths.dots + "/profile.png";
+      "Pictures/.face.png".source = paths.dots + /profile.png;
     };
   };
 }

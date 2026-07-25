@@ -1,6 +1,9 @@
 { inputs, lib, config, user, hostname, pkgs, unstable, paths, ... }:
 
 {
+  imports = [
+    ./niri-session-patch.nix
+  ];
   options.wm.niri.enable = lib.mkOption {
     type = lib.types.bool;
     default = false;
@@ -8,9 +11,10 @@
   };
 
   config = lib.mkIf config.wm.niri.enable {
+
     hjf = {
-      # "niri/config.kdl".source = paths.dots + "/niri/${hostname}.kdl";
-      # "niri/noctalia.kdl".source = paths.dots + "/niri/noctalia.kdl";
+      ".config/niri/config.kdl".source = paths.dots + /niri/config.kdl;
+      ".config/noctalia/config.toml".source = paths.dots + /noctalia/niri.toml;
     };
 
     programs.niri = {

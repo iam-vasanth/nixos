@@ -5,8 +5,14 @@
     ./hjem/hjem.nix
     # ./hjem/theming.nix
 
+    # Packages
+    ./packages/system.nix
+    ./packages/flatpak.nix
+
     # Programs
     ./programs/noctalia.nix
+    ./programs/mpv.nix
+    # ./programs/spicetify.nix # Too broke for a premium
 
     # WM
     ./wm/common.nix

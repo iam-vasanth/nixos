@@ -6,9 +6,6 @@
   ...
 }: {
   imports = [
-    /etc/nixos/hardware-configuration.nix
-    ./vm-guest.nix
-    # ./niri-session-patch.nix
   ];
 
   ###########################################################################
@@ -129,7 +126,7 @@
 
   networking = {
     networkmanager.enable = true;
-    firewall.enable = true;
+    firewall.enable = false;
   };
 
   hardware.bluetooth.enable = true;
@@ -263,36 +260,6 @@
   };
 
   systemd.services.libvirt-guests.enable = false;
-
-  ###########################################################################
-  # Host specific common packages
-  ###########################################################################
-
-  environment.systemPackages = [
-    pkgs.gitFull
-    pkgs.fuse
-    pkgs.bibata-cursors
-    pkgs.nautilus
-    pkgs.wev
-    pkgs.kdePackages.breeze
-    pkgs.kdePackages.breeze.qt5
-    pkgs.kdePackages.breeze-icons
-    # ... add more packages here
-  ];
-
-  ###########################################################################
-  # Font packages
-  ###########################################################################
-
-  # It is already installed at home manager level - Comment out if needed at system level
-  fonts.packages = with pkgs; [
-    nerd-fonts.jetbrains-mono
-    nerd-fonts.fira-code
-    fira-code-symbols
-    nerd-fonts.iosevka
-    nerd-fonts.hack
-    inter-nerdfont
-  ];
 
   ###########################################################################
   # Nix cleanup

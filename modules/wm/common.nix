@@ -1,12 +1,14 @@
 { inputs, lib, config, user, pkgs, ... }:
 let
   noRounding = ''
+    @import url("noctalia.css");
+
     * {
-      border-radius: 0px !important;
+      border-radius: 10px;
     }
 
     window {
-      border-radius: 0px !important;
+      border-radius: 10px;
     }
 
     window,
@@ -14,11 +16,11 @@ let
     decoration-overlay,
     headerbar,
     .titlebar {
-      border-radius: 0px !important;
-      border-bottom-left-radius: 0px !important;
-      border-bottom-right-radius: 0px !important;
-      border-top-left-radius: 0px !important;
-      border-top-right-radius: 0px !important;
+      border-radius: 10px;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
     }
   '';
 in
@@ -35,24 +37,6 @@ in
         ".config/gtk-3.0/gtk.css".text = noRounding;
       };
 
-      # programs.uwsm = {
-      #   enable = true;
-
-      #   waylandCompositors = {
-      #     niri = {
-      #       prettyName = "Niri";
-      #       comment = "Niri compositor managed by UWSM";
-      #       binPath = "/run/current-system/sw/bin/niri-session";
-      #     };
-
-      #     mango = {
-      #       prettyName = "MangoWM";
-      #       comment = "MangoWM compositor managed by UWSM";
-      #       binPath = "/run/current-system/sw/bin/mango";
-      #     };
-      #   };
-      # };
-
       xdg = {
         terminal-exec = {
           enable = true;
@@ -61,16 +45,14 @@ in
           ];
         };
 
-        # portal = {
-        #   enable = true;
-
-        #   extraPortals = [
-        #     pkgs.kdePackages.xdg-desktop-portal-kde
-        #     pkgs.xdg-desktop-portal-gtk
-        #     pkgs.xdg-desktop-portal-gnome
-        #     pkgs.xdg-desktop-portal-termfilechooser
-        #   ];
-        # };
+        portal = {
+          enable = true;
+          extraPortals = [
+            pkgs.xdg-desktop-portal-gtk
+            pkgs.xdg-desktop-portal-gnome
+            pkgs.xdg-desktop-portal-termfilechooser
+          ];
+        };
       };
     };
   }

@@ -30,6 +30,8 @@
 
     noctalia.url = "github:noctalia-dev/noctalia/cachix";
 
+    noctalia-greeter.url = "github:noctalia-dev/noctalia-greeter";
+
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
 
     sops-nix.url = "github:mic92/sops-nix";
@@ -37,6 +39,8 @@
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
 
     disko.url = "github:nix-community/disko";
+
+    spotatui.url = "github:LargeModGames/spotatui";
   };
 
   outputs = {
@@ -49,6 +53,7 @@
     sops-nix,
     nix-flatpak,
     disko,
+    spotatui,
     ...
   } @ inputs: let
     system = "x86_64-linux";
@@ -64,7 +69,7 @@
       inherit system;
       config.allowUnfree = true;
     };
-    mkHost = {hostname, hosts, hardwareModules ? []}: nixpkgs.lib.nixosSystem {
+    mkHost = {hostname, hardwareModules ? []}: nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = {inherit inputs hostname user unstable paths;};
 
@@ -101,23 +106,20 @@
 
       Athena = mkHost {
         hostname = "Athena";
-        hosts = "thinkpad-x1";
         hardwareModules = [
           nixos-hardware.nixosModules.lenovo-thinkpad-x1-10th-gen
           nixos-hardware.nixosModules.common-cpu-intel
         ];
       };
 
-      # Hestia = mkHost {
-      #   hostname = "Hestia";
-      #   hosts = "vm";
-      #   hardwareModules = [];
-      # };
+      Hestia = mkHost {
+        hostname = "Hestia";
+        hardwareModules = [];
+      };
 
-      # future hardware — just add hardware-configuration.nix + pick a desktop
+      # future hardware — just add hardware-configuration.nix
       # NewMachine = mkHost {
       #   hostname = "NewMachine";
-      #   desktop = "noctalia";
       #   hardwareModules = [ nixos-hardware.nixosModules.common-cpu-amd ];
       # };
     };
