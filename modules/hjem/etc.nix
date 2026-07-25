@@ -1,13 +1,14 @@
 {
   config,
   lib,
+  user,
   ...
 }: {
   ###########################################################################
   # Directories
   ###########################################################################
 
-  files = {
+  hjf = {
     #########################################################################
     # Create Projects directory
     #########################################################################
@@ -19,22 +20,19 @@
     #########################################################################
 
     ".config/gtk-3.0/bookmarks".text = ''
-      file://${config.home.directory}/Downloads
-      file://${config.home.directory}/Documents
-      file://${config.home.directory}/Projects
-      file://${config.home.directory}/Pictures
-      file://${config.home.directory}/Videos
-      file://${config.home.directory}/Music
+      file://${config.users.users.${user}.home}/Downloads
+      file://${config.users.users.${user}.home}/Documents
+      file://${config.users.users.${user}.home}/Projects
+      file://${config.users.users.${user}.home}/Pictures
+      file://${config.users.users.${user}.home}/Videos
+      file://${config.users.users.${user}.home}/Music
     '';
 
     #########################################################################
     # Symlinks
     #########################################################################
 
-    "Pictures/Wallpapers".source = ../../assets/Wallpapers;
-
-    ".config/fastfetch/fastfetch.txt".source =
-      ../../assets/fastfetch.txt;
+    "Pictures/Wallpapers".source = ./../../assets/Wallpapers;
 
     # ".ssh/zoro_key.pub".source =
     #   ../../../../.secrets/public_keys/zoro_key.pub;

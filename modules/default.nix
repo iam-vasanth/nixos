@@ -3,7 +3,7 @@
   imports = [
     # Hjem
     ./hjem/hjem.nix
-    # ./hjem/theming.nix
+    ./hjem/etc.nix
 
     # Packages
     ./packages/system.nix

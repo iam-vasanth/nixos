@@ -27,6 +27,7 @@ width = 600
     show_events_card = false
 
 [dock]
+auto_hide = true
 background_opacity = 0.59999998658895493
 cross_axis_padding = 5
 enabled = true
@@ -189,17 +190,17 @@ wallpaper_scheme = "m3-monochrome"
     community_ids = [ "spicetify", "obsidian", "zed", "lazygit", "papirus-icons", "telegram", "zathura" ]
 
 [wallpaper]
-directory = "/home/zoro/nixos/assets/Wallpapers"
+directory = "/home/zoro/Pictures/Wallpapers"
 fill_mode = "stretch"
 
     [wallpaper.default]
-    path = "/home/zoro/nixos/assets/Wallpapers/wall-13.png"
+    path = "/home/zoro/Pictures/Wallpapers/wall-16.png"
 
     [wallpaper.last]
-    path = "/home/zoro/nixos/assets/Wallpapers/wall-13.png"
+    path = "/home/zoro/Pictures/Wallpapers/wall-16.png"
 
     [wallpaper.monitors.Virtual-1]
-    path = "/home/zoro/nixos/assets/Wallpapers/wall-13.png"
+    path = "/home/zoro/Pictures/Wallpapers/wall-16.png"
 
 [weather]
 enabled = false
@@ -213,7 +214,7 @@ format = "{:%d:%m}"
 [widget.launcher]
 capsule = true
 capsule_opacity = 0.5
-custom_image = "/home/zoro/nixos/assets/nix.png"
+custom_image = "/home/zoro/Pictures/.nix.png"
 custom_image_colorize = true
 
 [widget.spacer_2]

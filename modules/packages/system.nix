@@ -34,7 +34,6 @@
     pkgs._7zz-rar
     pkgs.btop
     pkgs.mpv
-    pkgs.mpv-shim-default-shaders
     pkgs.android-tools
     pkgs.obsidian
 
