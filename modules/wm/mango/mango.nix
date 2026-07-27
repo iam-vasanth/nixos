@@ -1,6 +1,14 @@
-{ inputs, lib, config, user, hostname, pkgs, unstable, paths, ... }:
-
 {
+  lib,
+  config,
+  pkgs,
+  unstable,
+  ...
+}: {
+  ###########################################################################
+  # Mango
+  ###########################################################################
+
   imports = [
     #./mango-desktop-patch.nix
   ];
@@ -11,7 +19,6 @@
   };
 
   config = lib.mkIf config.wm.mango.enable {
-
     hjf = {
       # ".config/mango/config.conf".source = paths.dots + /mango/config.conf;
       # ".config/noctalia/config.toml".source = paths.dots + /noctalia/niri/main-config.toml;

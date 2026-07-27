@@ -6,12 +6,16 @@
   config,
   paths,
   ...
-}:
-{
+}: {
   imports = [
-    (lib.mkAliasOptionModule [ "hj" ] [ "hjem" "users" "${user}" ])
-    (lib.mkAliasOptionModule [ "hjf" ] [ "hjem" "users" "${user}" "files" ])
+    # Aliases
+    (lib.mkAliasOptionModule ["hj"] ["hjem" "users" "${user}"])
+    (lib.mkAliasOptionModule ["hjf"] ["hjem" "users" "${user}" "files"])
   ];
+
+  ###########################################################################
+  # Hjem configuration
+  ###########################################################################
 
   hjem = {
     linker = inputs.hjem.packages.${pkgs.stdenv.hostPlatform.system}.smfh;

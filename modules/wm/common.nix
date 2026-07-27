@@ -1,4 +1,12 @@
-{ inputs, lib, config, user, pkgs, ... }:
+{
+  lib,
+  config,
+  ...
+}:
+###########################################################################
+# Common WM config
+###########################################################################
+
 let
   noRounding = ''
     @import url("noctalia.css");
@@ -23,41 +31,25 @@ let
       border-top-right-radius: 10px;
     }
   '';
-in
-{
-    options.wm.common.enable = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = "Wayland compositor.";
+in {
+  options.wm.common.enable = lib.mkOption {
+    type = lib.types.bool;
+    default = false;
+    description = "Wayland compositor.";
+  };
+  config = lib.mkIf config.wm.common.enable {
+    hjf = {
+      ".config/gtk-4.0/gtk.css".text = noRounding;
+      ".config/gtk-3.0/gtk.css".text = noRounding;
     };
-    config = lib.mkIf config.wm.common.enable {
 
-      hjf = {
-        ".config/gtk-4.0/gtk.css".text = noRounding;
-        ".config/gtk-3.0/gtk.css".text = noRounding;
-      };
-
-      xdg = {
-        terminal-exec = {
-          enable = true;
-          settings.default = [
-            "kitty.desktop"
-          ];
-        };
-
-        # portal = {
-        #   enable = true;
-        #   configPackages = [
-        #     pkgs.kdePackages.xdg-desktop-portal-kde
-        #   ];
-        #   extraPortals = [
-        #     pkgs.kdePackages.xdg-desktop-portal-kde
-        #     pkgs.xdg-desktop-portal-gnome
-        #     pkgs.xdg-desktop-portal-wlr
-        #     pkgs.xdg-desktop-portal-gtk
-        #     pkgs.xdg-desktop-portal-termfilechooser
-        #   ];
-        # };
+    xdg = {
+      terminal-exec = {
+        enable = true;
+        settings.default = [
+          "foot.desktop"
+        ];
       };
     };
-  }
+  };
+}

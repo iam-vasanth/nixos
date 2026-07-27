@@ -1,6 +1,15 @@
-{ inputs, lib, config, user, hostname, pkgs, unstable, paths, ... }:
-
 {
+  lib,
+  config,
+  pkgs,
+  unstable,
+  paths,
+  ...
+}: {
+  ###########################################################################
+  # Niri
+  ###########################################################################
+
   imports = [
     ./niri-session-patch.nix
   ];
@@ -11,7 +20,6 @@
   };
 
   config = lib.mkIf config.wm.niri.enable {
-
     hjf = {
       ".config/niri/config.kdl".source = paths.dots + /niri/config.kdl;
       ".config/noctalia/config.toml".source = paths.dots + /noctalia/niri/main-config.toml;

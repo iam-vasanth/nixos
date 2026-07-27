@@ -1,17 +1,18 @@
-{ pkgs, unstable,... }:
 {
-
+  pkgs,
+  unstable,
+  ...
+}: {
   environment.systemPackages = [
-
     ###########################################################################
-    # System
+    # Core
     ###########################################################################
 
-    pkgs.gitFull
     pkgs.wev
-    pkgs.kitty
-    pkgs.firefox
+    pkgs.wlr-randr
     pkgs.ffmpeg
+    pkgs.nautilus
+    pkgs.foot
 
     ###########################################################################
     # Normal
@@ -20,12 +21,8 @@
     unstable.spotatui
     unstable.spotube
     pkgs.yt-dlp
-    pkgs.nautilus
     pkgs.loupe
-    pkgs.zed-editor
     pkgs.neovim
-    pkgs.starship
-    pkgs.fastfetch
     pkgs.lazygit
     pkgs.lazydocker
     pkgs.distrobox
@@ -38,7 +35,6 @@
     pkgs.obsidian
     pkgs.grim
     pkgs.fuzzel
-    pkgs.wlr-randr
 
     ###########################################################################
     # Themes and Fonts
@@ -63,18 +59,7 @@
     # Others
     ###########################################################################
 
-    # Fish dependencies
-    pkgs.fishPlugins.forgit    # Fuzzy git interactive
-    pkgs.fishPlugins.fzf-fish  # fzf for history/files/git
-    pkgs.fishPlugins.done      # Notifications for long commands
-    pkgs.fishPlugins.autopair  # Auto-close brackets/quotes
-    pkgs.fishPlugins.grc       # Colorize command output
-    pkgs.nix-your-shell
-
-
     # Zed-Editor : nix language server
     pkgs.nixd
-
   ];
-
 }

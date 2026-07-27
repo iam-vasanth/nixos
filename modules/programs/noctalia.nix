@@ -1,15 +1,28 @@
-{ inputs, lib, config, user, pkgs, paths, ... }:{
+{
+  inputs,
+  lib,
+  config,
+  user,
+  pkgs,
+  paths,
+  ...
+}: {
   imports = [
     inputs.noctalia-greeter.nixosModules.default
   ];
+
+  ###########################################################################
+  # Noctalia shell
+  ###########################################################################
+
   options.programs.noctalia.enable = lib.mkOption {
     type = lib.types.bool;
     default = false;
-    description = "Noctalia shell.";
+    description = "Noctalia shell";
   };
 
   config = lib.mkIf config.programs.noctalia.enable {
-    hjem.extraModules = [ inputs.noctalia.hjemModules.default ];
+    hjem.extraModules = [inputs.noctalia.hjemModules.default];
     hj = {
       programs.noctalia = {
         enable = true;
@@ -20,14 +33,15 @@
       };
       files = {
         "Pictures/.nix.png".source = paths.dots + /nix.png;
-      #   "noctalia/config.toml".source = paths.dots + "/noctalia/config.toml";
       };
     };
 
+    ###########################################################################
+    # Noctalia greeter and fallback options
+    ###########################################################################
+
     programs.noctalia-greeter = {
       enable = true;
-
-      # Optional configuration
       greeter-args = "";
       settings = {
         cursor = {

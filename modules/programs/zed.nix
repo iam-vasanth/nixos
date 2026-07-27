@@ -1,6 +1,15 @@
-{ pkgs, ... }:
+  {
+    config,
+    lib,
+    pkgs,
+    unstable,
+    ...
+  }:
+###########################################################################
+# Zed-editor
+###########################################################################
 let
-  jsonFormat = pkgs.formats.json { };
+  jsonFormat = pkgs.formats.json {};
 
   settings = {
     vim_mode = false;
@@ -23,13 +32,13 @@ let
     buffer_font_size = 14;
     buffer_font_family = "JetBrainsMono Nerd Font Mono";
     buffer_font_weight = 300.0;
-    buffer_line_height = { custom = 1.5; };
+    buffer_line_height = {custom = 1.5;};
 
     terminal = {
       shell.program = "fish";
       font_family = "JetBrainsMono Nerd Font Mono";
       font_size = 14;
-      line_height = { custom = 1.4; };
+      line_height = {custom = 1.4;};
       blinking = "off";
     };
 
@@ -138,7 +147,7 @@ let
         tab_size = 2;
         format_on_save = "on";
         formatter = "language_server";
-        language_servers = [ "nixd" "!nil" ];
+        language_servers = ["nixd" "!nil"];
       };
     };
 
@@ -167,6 +176,14 @@ let
     };
   };
 in {
-  hjf.".config/zed/settings.json".source =
-    jsonFormat.generate "zed-settings.json" settings;
+  options.programs.zed.enable = lib.mkOption {
+    type = lib.types.bool;
+    default = false;
+  };
+
+  environment.systemPackages = [pkgs.zed-editor];
+
+  config = lib.mkIf config.programs.zed.enable {
+    hjf.".config/zed/settings.json".source = jsonFormat.generate "zed-settings.json" settings;
+  };
 }

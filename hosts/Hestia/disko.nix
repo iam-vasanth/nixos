@@ -1,4 +1,4 @@
-{ ... }:{
+{...}: {
   disko.devices = {
     disk.main = {
       type = "disk";
@@ -25,7 +25,7 @@
             size = "100%";
             content = {
               type = "btrfs";
-              extraArgs = [ "-f" ];
+              extraArgs = ["-f"];
 
               subvolumes = {
                 "@root" = {

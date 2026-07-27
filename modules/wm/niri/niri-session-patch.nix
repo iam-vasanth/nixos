@@ -4,13 +4,14 @@
   pkgs,
   unstable,
   ...
-}:{
+}: {
   ###########################################################################
   # Patches niri-session to silence the "Calling import-environment without a list of variable names is deprecated."
   # https://github.com/niri-wm/niri/issues/254
   ###########################################################################
-    config = lib.mkIf config.wm.niri.enable {
-      programs.niri.package = lib.mkForce (
+
+  config = lib.mkIf config.wm.niri.enable {
+    programs.niri.package = lib.mkForce (
       (pkgs.symlinkJoin {
         name = "niri-quiet-session";
         paths = [unstable.niri];

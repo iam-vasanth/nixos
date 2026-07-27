@@ -3,8 +3,8 @@
 
   # Noctalia cachix
   nixConfig = {
-    extra-substituters = [ "https://noctalia.cachix.org" ];
-    extra-trusted-public-keys = [ "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4=" ];
+    extra-substituters = ["https://noctalia.cachix.org"];
+    extra-trusted-public-keys = ["noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="];
   };
 
   inputs = {
@@ -34,21 +34,17 @@
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
 
     disko.url = "github:nix-community/disko";
-
-    spotatui.url = "github:LargeModGames/spotatui";
   };
 
   outputs = {
     self,
     nixpkgs,
     nixpkgs-unstable,
-    niri,
     mangowm,
     nixos-hardware,
     sops-nix,
     nix-flatpak,
     disko,
-    spotatui,
     ...
   } @ inputs: let
     system = "x86_64-linux";
@@ -64,27 +60,30 @@
       inherit system;
       config.allowUnfree = true;
     };
-    mkHost = {hostname, hardwareModules ? []}: nixpkgs.lib.nixosSystem {
-      inherit system;
-      specialArgs = {inherit inputs hostname user unstable paths;};
+    mkHost = {
+      hostname,
+      hardwareModules ? [],
+    }:
+      nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = {inherit inputs hostname user unstable paths;};
 
-      modules = [
-        ./hosts/default.nix
-        ./hosts/${hostname}/default.nix
-        # ./hosts/${hostname}/disko.nix
-        # ./hosts/${hostname}/hardware-configuration.nix
-        ./modules/default.nix
+        modules =
+          [
+            ./hosts/default.nix
+            ./hosts/${hostname}/default.nix
+            ./hosts/${hostname}/disko.nix
+            ./hosts/${hostname}/hardware-configuration.nix
+            ./modules/default.nix
 
-        disko.nixosModules.disko
-        sops-nix.nixosModules.sops
-        # niri.nixosModules.niri
-        mangowm.nixosModules.mango
-        inputs.hjem.nixosModules.default
-        nix-flatpak.nixosModules.nix-flatpak
-
-      ] ++ hardwareModules;
-    };
-
+            disko.nixosModules.disko
+            sops-nix.nixosModules.sops
+            mangowm.nixosModules.mango
+            inputs.hjem.nixosModules.default
+            nix-flatpak.nixosModules.nix-flatpak
+          ]
+          ++ hardwareModules;
+      };
   in {
     formatter.${system} = pkgs.alejandra;
 
@@ -98,7 +97,6 @@
     # };
     #
     nixosConfigurations = {
-
       Athena = mkHost {
         hostname = "Athena";
         hardwareModules = [

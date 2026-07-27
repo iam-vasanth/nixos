@@ -1,7 +1,26 @@
-{ paths,... }:{
+{
+  config,
+  lib,
+  pkgs,
+  unstable,
+  paths,
+  ...
+}: {
+  ###########################################################################
+  # Git
+  ###########################################################################
 
-  hjf = {
-    ".gitconfig".source = paths.dots + /git/config;
-    ".gitignore".source = paths.dots + /git/ignore;
+  options.programs.git.enable = lib.mkOption {
+    type = lib.types.bool;
+    default = false;
+  };
+
+  environment.systemPackages = [pkgs.gitFull];
+
+  config = lib.mkIf config.programs.git.enable {
+    hjf = {
+      ".gitconfig".source = paths.dots + /git/config;
+      ".gitignore".source = paths.dots + /git/ignore;
+    };
   };
 }

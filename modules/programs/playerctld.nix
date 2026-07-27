@@ -1,14 +1,14 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   ###########################################################################
   # playerctld - MPRIS daemon
   ###########################################################################
 
-  environment.systemPackages = [ pkgs.playerctl ];
+  environment.systemPackages = [pkgs.playerctl];
 
   systemd.user.services.playerctld = {
     description = "MPRIS daemon for playerctl";
-    wantedBy = [ "graphical-session.target" ];
-    partOf = [ "graphical-session.target" ];
+    wantedBy = ["graphical-session.target"];
+    partOf = ["graphical-session.target"];
 
     serviceConfig = {
       Type = "dbus";

@@ -1,9 +1,13 @@
-{ pkgs, ... }: {
+{
+  pkgs,
+  unstable,
+  ...
+}: {
   ###########################################################################
-  # GPG agent (with SSH support, replaces home-manager's services.gpg-agent)
+  # GPG agent
   ###########################################################################
 
-  environment.systemPackages = [ pkgs.gnupg pkgs.pinentry-gtk2 ];
+  environment.systemPackages = [pkgs.gnupg pkgs.pinentry-gtk2];
 
   hjf.".gnupg/gpg-agent.conf" = {
     text = ''
@@ -30,16 +34,16 @@
 
   systemd.user.sockets.gpg-agent-ssh = {
     description = "GnuPG cryptographic agent (ssh-agent emulation)";
-    listenStreams = [ "%t/gnupg/S.gpg-agent.ssh" ];
+    listenStreams = ["%t/gnupg/S.gpg-agent.ssh"];
     socketConfig = {
       FileDescriptorName = "ssh";
       Service = "gpg-agent.service";
       SocketMode = "0600";
       DirectoryMode = "0700";
     };
-    wantedBy = [ "sockets.target" ];
+    wantedBy = ["sockets.target"];
   };
 
-  # Point SSH_AUTH_SOCK at gpg-agent's ssh-emulation socket
+  # Points SSH_AUTH_SOCK at gpg-agent's ssh-emulation socket
   environment.sessionVariables.SSH_AUTH_SOCK = "$XDG_RUNTIME_DIR/gnupg/S.gpg-agent.ssh";
 }

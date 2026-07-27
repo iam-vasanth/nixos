@@ -7,6 +7,7 @@
   hostname,
   pkgs,
   unstable,
+  custom-inputs,
   ...
 }: {
   ###########################################################################
@@ -32,4 +33,6 @@
   # Packages and font pkgs
   # Nix GC and Optimise
   # State version
+
+  # disko and hardware-configuration are an exception.
 }
