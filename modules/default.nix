@@ -15,6 +15,7 @@
     ./programs/git.nix
     ./programs/gpg-agent.nix
     ./programs/kitty.nix
+    ./programs/mimeapps.nix
     ./programs/mpv.nix
     ./programs/noctalia.nix
     ./programs/playerctld.nix
