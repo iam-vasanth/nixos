@@ -7,19 +7,19 @@
   ...
 }: {
   ###########################################################################
-  # Starship
+  # Kitty
   ###########################################################################
 
-  options.programs.starship.enable = lib.mkOption {
+  options.program.kitty.enable = lib.mkOption {
     type = lib.types.bool;
     default = false;
   };
 
-  environment.systemPackages = [pkgs.starship];
+  config = lib.mkIf config.program.kitty.enable {
+    environment.systemPackages = [pkgs.kitty];
 
-  config = lib.mkIf config.programs.starship.enable {
     hjf = {
-      ".config/starship/starship.toml".source = paths.dots + /starship/starship.toml;
+      ".config/kitty/kitty.conf".source = paths.dots + /kitty/kitty.conf;
     };
   };
 }

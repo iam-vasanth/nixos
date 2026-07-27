@@ -10,14 +10,14 @@
   # Git
   ###########################################################################
 
-  options.programs.git.enable = lib.mkOption {
+  options.program.git.enable = lib.mkOption {
     type = lib.types.bool;
     default = false;
   };
 
-  environment.systemPackages = [pkgs.gitFull];
+  config = lib.mkIf config.program.git.enable {
+    environment.systemPackages = [pkgs.gitFull];
 
-  config = lib.mkIf config.programs.git.enable {
     hjf = {
       ".gitconfig".source = paths.dots + /git/config;
       ".gitignore".source = paths.dots + /git/ignore;

@@ -7,19 +7,19 @@
   ...
 }: {
   ###########################################################################
-  # Kitty
+  # Zathura
   ###########################################################################
 
-  options.programs.kitty.enable = lib.mkOption {
+  options.program.zathura.enable = lib.mkOption {
     type = lib.types.bool;
     default = false;
   };
 
-  environment.systemPackages = [pkgs.kitty];
+  config = lib.mkIf config.program.zathura.enable {
+    environment.systemPackages = [pkgs.zathura];
 
-  config = lib.mkIf config.programs.kitty.enable {
     hjf = {
-      ".config/kitty/kitty.conf".source = paths.dots + /kitty/kitty.conf;
+      ".config/zathura/zathurarc".source = paths.dots + /zathura/zathurarc;
     };
   };
 }

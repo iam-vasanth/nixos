@@ -9,20 +9,20 @@
     ./packages/flatpak.nix
 
     # Programs
-    ./programs/fastfetch.nix
-    ./programs/fish.nix
-    ./programs/git.nix
-    ./programs/gpg-agent.nix
-    ./programs/kitty.nix
-    ./programs/mimeapps.nix
-    ./programs/mpv.nix
-    ./programs/noctalia.nix
-    ./programs/playerctld.nix
-    ./programs/ssh.nix
-    ./programs/starship.nix
-    ./programs/udiskie.nix
-    ./programs/zathura.nix
-    ./programs/zed.nix
+    ./program/fastfetch.nix
+    ./program/fish.nix
+    ./program/git.nix
+    ./program/gpg-agent.nix
+    ./program/kitty.nix
+    ./program/mimeapps.nix
+    ./program/mpv.nix
+    ./program/noctalia.nix
+    ./program/playerctld.nix
+    ./program/ssh.nix
+    ./program/starship.nix
+    ./program/udiskie.nix
+    ./program/zathura.nix
+    ./program/zed.nix
     # ./programs/spicetify.nix # Too broke for a premium
 
     # WM

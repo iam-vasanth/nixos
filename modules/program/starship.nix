@@ -7,19 +7,19 @@
   ...
 }: {
   ###########################################################################
-  # Zathura
+  # Starship
   ###########################################################################
 
-  options.programs.zathura.enable = lib.mkOption {
+  options.program.starship.enable = lib.mkOption {
     type = lib.types.bool;
     default = false;
   };
 
-  environment.systemPackages = [pkgs.zathura];
+  config = lib.mkIf config.program.starship.enable {
+    environment.systemPackages = [pkgs.starship];
 
-  config = lib.mkIf config.programs.zathura.enable {
     hjf = {
-      ".config/zathura/zathurarc".source = paths.dots + /zathura/zathurarc;
+      ".config/starship.toml".source = paths.dots + /starship/starship.toml;
     };
   };
 }

@@ -16,10 +16,9 @@ let
 
     theme = {
       mode = "dark";
-      light = "DankShell Light Transparent";
-      dark = "DankShell Dark Transparent";
+      light = "Noctalia Light";
+      dark = "Noctalia Dark";
     };
-
     icon_theme = {
       mode = "dark";
       light = "Colored Zed Icons Theme Light";
@@ -176,14 +175,14 @@ let
     };
   };
 in {
-  options.programs.zed.enable = lib.mkOption {
+  options.program.zed.enable = lib.mkOption {
     type = lib.types.bool;
     default = false;
   };
 
-  environment.systemPackages = [pkgs.zed-editor];
+  config = lib.mkIf config.program.zed.enable {
+    environment.systemPackages = [pkgs.zed-editor];
 
-  config = lib.mkIf config.programs.zed.enable {
-    hjf.".config/zed/settings.json".source = jsonFormat.generate "zed-settings.json" settings;
+   hjf.".config/zed/settings.json".source = jsonFormat.generate "zed-settings.json" settings;
   };
 }

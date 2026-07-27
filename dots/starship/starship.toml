@@ -3,8 +3,7 @@
 command_timeout = 1000
 add_newline = true
 
-format = "(bold cyan)$username$hostname$directory$git_branch$git_status$git_state$nix_shell$container\n(bold cyan)$character";
-(bold cyan)$character""
+format = "(bold cyan)$username$hostname$directory$git_branch$git_status$git_state$nix_shell$container\n(bold cyan)$character"
 right_format = "$cmd_duration"
 
 [character]

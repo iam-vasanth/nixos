@@ -10,26 +10,26 @@
   # Fastfetch
   ###########################################################################
 
-  options.programs.fish.enable = lib.mkOption {
+  options.program.fish.enable = lib.mkOption {
     type = lib.types.bool;
     default = false;
   };
 
-  environment.systemPackages = [
-    pkgs.fish
-    pkgs.grc
-    pkgs.nix-your-shell
+  config = lib.mkIf config.program.fish.enable {
+    environment.systemPackages = [
+      pkgs.fish
+      pkgs.grc
+      pkgs.nix-your-shell
 
-    # Fish dependencies
-    pkgs.fishPlugins.forgit
-    pkgs.fishPlugins.fzf-fish
-    pkgs.fishPlugins.done
-    pkgs.fishPlugins.autopair
-    pkgs.fishPlugins.grc
-    pkgs.nix-your-shell
-  ];
+      # Fish dependencies
+      pkgs.fishPlugins.forgit
+      pkgs.fishPlugins.fzf-fish
+      pkgs.fishPlugins.done
+      pkgs.fishPlugins.autopair
+      pkgs.fishPlugins.grc
+      pkgs.nix-your-shell
+    ];
 
-  config = lib.mkIf config.programs.fish.enable {
     programs.fish = {
       enable = true;
 

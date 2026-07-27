@@ -15,13 +15,13 @@
   # Noctalia shell
   ###########################################################################
 
-  options.programs.noctalia.enable = lib.mkOption {
+  options.program.noctalia.enable = lib.mkOption {
     type = lib.types.bool;
     default = false;
     description = "Noctalia shell";
   };
 
-  config = lib.mkIf config.programs.noctalia.enable {
+  config = lib.mkIf config.program.noctalia.enable {
     hjem.extraModules = [inputs.noctalia.hjemModules.default];
     hj = {
       programs.noctalia = {

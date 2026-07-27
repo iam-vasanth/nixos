@@ -5,9 +5,17 @@
 
   wm.niri.enable = true;
   wm.common.enable = true;
-  programs.noctalia.enable = true;
+  program.noctalia.enable = true;
 
   ###########################################################################
-  # Main heading (What is the code block for)
+  # Programs
   ###########################################################################
+
+  program.fastfetch.enable = true;
+  program.fish.enable = true;
+  program.git.enable = true;
+  program.kitty.enable = true;
+  program.starship.enable = true;
+  program.zathura.enable = true;
+  program.zed.enable = true;
 }
