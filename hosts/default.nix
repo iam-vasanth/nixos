@@ -20,28 +20,37 @@
   # Kernal and Kernal parameters
   ###########################################################################
 
-  boot.kernelPackages = pkgs.linuxPackages_zen;
+  boot = {
+    kernelPackages = pkgs.linuxPackages_zen;
+    consoleLogLevel = 0;
+    initrd.systemd.enable = true;
+    initrd.verbose = false;
+    kernelParams = [
+      "quiet"
+      "loglevel=3"
+      "boot.shell_on_fail"
+      "rd.systemd.show_status=false"
+      "rd.udev.log_level=0"
+      "udev.log_priority=0"
+      "nowatchdog"
+      "nohibernate"
+      "vt.global_cursor_default=0"
+      "systemd.show_status=false"
+    ];
 
-  boot.consoleLogLevel = 0;
-  boot.initrd.systemd.enable = true;
-  boot.initrd.verbose = false;
-  boot.kernelParams = [
-    "quiet"
-    "loglevel=3"
-    "rd.systemd.show_status=false"
-    "rd.udev.log_level=3"
-    "udev.log_priority=3"
-    "vt.global_cursor_default=0"
-    "systemd.show_status=false"
-  ];
+    kernelModules = [
+      "drm"
+      "i2c-dev"
+    ];
 
-  boot.blacklistedKernelModules = [
-    "watchdog"
-    "softdog"
-    "sp5100_tco"
-    "iTCO_wdt"
-    "iTCO_vendor_support"
-  ];
+    blacklistedKernelModules = [
+      "watchdog"
+      "softdog"
+      "sp5100_tco"
+      "iTCO_wdt"
+      "iTCO_vendor_support"
+    ];
+  };
 
   ###########################################################################
   # Silences systemd logs

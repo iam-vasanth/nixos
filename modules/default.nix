@@ -10,8 +10,12 @@
     ./packages/flatpak.nix
 
     # Programs
-    ./programs/noctalia.nix
+    ./programs/fastfetch.nix
+    ./programs/git.nix
     ./programs/mpv.nix
+    ./programs/noctalia.nix
+    ./programs/playerctld.nix
+    ./programs/udiskie.nix
     # ./programs/spicetify.nix # Too broke for a premium
 
     # WM

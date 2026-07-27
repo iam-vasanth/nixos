@@ -65,6 +65,7 @@
     pkgs.grc
     pkgs.nix-your-shell
 
+
     # Zed-Editor : nix language server
     pkgs.nixd
 
