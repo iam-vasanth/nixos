@@ -16,11 +16,6 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
-    qtengine = {
-      url = "github:kossLAN/qtengine";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
-
     niri.url = "github:sodiboo/niri-flake";
 
     mangowm = {

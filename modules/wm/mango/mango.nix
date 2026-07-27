@@ -2,24 +2,23 @@
 
 {
   imports = [
-    ./niri-session-patch.nix
   ];
-  options.wm.niri.enable = lib.mkOption {
+  options.wm.mango.enable = lib.mkOption {
     type = lib.types.bool;
     default = false;
-    description = "Niri compositor.";
+    description = "Mango compositor.";
   };
 
-  config = lib.mkIf config.wm.niri.enable {
+  config = lib.mkIf config.wm.mango.enable {
 
-    hjf = {
-      ".config/niri/config.kdl".source = paths.dots + /niri/config.kdl;
-      ".config/noctalia/config.toml".source = paths.dots + /noctalia/niri/main-config.toml;
-    };
+    # hjf = {
+    #   ".config/niri/config.kdl".source = paths.dots + /niri/config.kdl;
+    #   ".config/noctalia/config.toml".source = paths.dots + /noctalia/niri/main-config.toml;
+    # };
 
-    programs.niri = {
+    programs.mango = {
       enable = true;
-      package = unstable.niri;
+      addLoginEntry = true;
     };
 
     # xdg.portal = {
