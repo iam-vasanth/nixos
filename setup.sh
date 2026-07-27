@@ -52,26 +52,13 @@ cd "$WORKDIR"
 # Pick host
 # ---------------------------------------------------------------------------
 echo "Select host to install:"
-select HOSTNAME in "Ares" "Hestia"; do
+select HOSTNAME in "Athena" "Hestia"; do
   [[ -n "${HOSTNAME:-}" ]] && break
 done
-
-
-# ---------------------------------------------------------------------------
-# Confirm disk wipe
-# ---------------------------------------------------------------------------
-echo
-echo "!! This will WIPE the disk defined in hosts/$HOSTNAME/disko.nix !!"
-grep -m1 '^[[:space:]]*device =' hosts/$HOSTNAME/disko.nix
-echo
-read -rp "Type 'yes' to continue: " CONFIRM
-[[ "$CONFIRM" == "yes" ]] || { echo "Aborted."; exit 1; }
-
 
 # ---------------------------------------------------------------------------
 # User and Root password
 # ---------------------------------------------------------------------------
-
 echo
 echo "Root account:"
 select ROOT_CHOICE in \
@@ -104,6 +91,15 @@ while true; do
 done
 unset USER_PASSWD_CONFIRM
 
+# ---------------------------------------------------------------------------
+# Confirm disk wipe
+# ---------------------------------------------------------------------------
+echo
+echo "!! This will WIPE the disk defined in hosts/$HOSTNAME/disko.nix !!"
+grep -m1 '^[[:space:]]*device =' hosts/$HOSTNAME/disko.nix
+echo
+read -rp "Type 'yes' to continue: " CONFIRM
+[[ "$CONFIRM" == "yes" ]] || { echo "Aborted."; exit 1; }
 
 # ---------------------------------------------------------------------------
 # Partition + format + mount via disko
