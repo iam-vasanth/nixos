@@ -12,6 +12,7 @@
       max-cache-ttl 7200
       pinentry-program ${pkgs.pinentry-gtk2}/bin/pinentry-gtk-2
     '';
+    type = "copy";
     permissions = "600";
   };
 

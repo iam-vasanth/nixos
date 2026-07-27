@@ -19,7 +19,9 @@
     ./programs/noctalia.nix
     ./programs/playerctld.nix
     ./programs/ssh.nix
+    ./programs/starship.nix
     ./programs/udiskie.nix
+    ./programs/zathura.nix
     # ./programs/spicetify.nix # Too broke for a premium
 
     # WM

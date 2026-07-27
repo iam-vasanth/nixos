@@ -13,6 +13,7 @@
         IdentityFile ~/.ssh/git_zoro
         AddKeysToAgent yes
     '';
+    type = "copy";
     permissions = "600";
   };
 }

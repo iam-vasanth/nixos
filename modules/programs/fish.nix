@@ -15,6 +15,7 @@
     interactiveShellInit = ''
       set fish_greeting
       nix-your-shell fish | source
+      starship init fish | source
     '';
 
     # Aliases
@@ -62,33 +63,10 @@
       myip = "curl ifconfig.me";
       sshk = "kitty +kitten ssh";
     };
-
-    plugins = [
-      {
-        # Fuzzy git interactive
-        name = "forgit";
-        src = pkgs.fishPlugins.forgit.src;
-      }
-      {
-        # fzf for history/files/git
-        name = "fzf-fish";
-        src = pkgs.fishPlugins.fzf-fish.src;
-      }
-      {
-        # Notifications for long commands
-        name = "done";
-        src = pkgs.fishPlugins.done.src;
-      }
-      {
-        # Auto-close brackets/quotes
-        name = "autopair";
-        src = pkgs.fishPlugins.autopair.src;
-      }
-      {
-        # Colorize command output
-        name = "grc";
-        src = pkgs.fishPlugins.grc.src;
-      }
-    ];
   };
+  ###########################################################################
+  # Set fish as the user's login shell
+  ###########################################################################
+
+  # users.users.${user}.shell = pkgs.fish;
 }

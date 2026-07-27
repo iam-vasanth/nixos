@@ -61,8 +61,11 @@
     ###########################################################################
 
     # Fish dependencies
-    pkgs.fzf
-    pkgs.grc
+    pkgs.fishPlugins.forgit    # Fuzzy git interactive
+    pkgs.fishPlugins.fzf-fish  # fzf for history/files/git
+    pkgs.fishPlugins.done      # Notifications for long commands
+    pkgs.fishPlugins.autopair  # Auto-close brackets/quotes
+    pkgs.fishPlugins.grc       # Colorize command output
     pkgs.nix-your-shell
 
 
