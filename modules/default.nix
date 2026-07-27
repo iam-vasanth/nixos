@@ -23,6 +23,7 @@
     ./programs/starship.nix
     ./programs/udiskie.nix
     ./programs/zathura.nix
+    ./programs/zed.nix
     # ./programs/spicetify.nix # Too broke for a premium
 
     # WM
