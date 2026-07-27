@@ -2,6 +2,7 @@
 
 {
   imports = [
+    #./mango-desktop-patch.nix
   ];
   options.wm.mango.enable = lib.mkOption {
     type = lib.types.bool;
@@ -11,28 +12,39 @@
 
   config = lib.mkIf config.wm.mango.enable {
 
-    # hjf = {
-    #   ".config/niri/config.kdl".source = paths.dots + /niri/config.kdl;
-    #   ".config/noctalia/config.toml".source = paths.dots + /noctalia/niri/main-config.toml;
-    # };
+    hjf = {
+      # ".config/mango/config.conf".source = paths.dots + /mango/config.conf;
+      # ".config/noctalia/config.toml".source = paths.dots + /noctalia/niri/main-config.toml;
+    };
 
     programs.mango = {
       enable = true;
       addLoginEntry = true;
     };
-
-    # xdg.portal = {
-    #   config.niri = {
-    #     default = lib.mkForce [ "kde" ];
-    #     "org.freedesktop.impl.portal.FileChooser" = [ "gnome" ];
-    #     "org.freedesktop.portal.ScreenCast" = "wlr";
-    #     "org.freedesktop.impl.portal.ScreenCast" = "wlr";
-    #     "org.freedesktop.impl.portal.Screenshot" = "kde";
-    #   };
-    # };
-
     environment.systemPackages = [
       pkgs.xwayland-satellite
     ];
+
+    # xdg.portal = {
+    #   enable = true;
+    #   wlr.enable = true;
+    #   extraPortals = [
+    #     pkgs.kdePackages.xdg-desktop-portal-kde
+    #     pkgs.xdg-desktop-portal-wlr
+    #   ];
+    #   config.mango = {
+    #     default = lib.mkForce [ "kde" ];
+    #     "org.freedesktop.impl.portal.ScreenCast" = "wlr";
+    #     "org.freedesktop.impl.portal.Screenshot" = "wlr";
+    #   };
+    # };
+
+    # systemd.user.targets.mango-session = {
+    #   name = "Mango system session";
+    #   description = "mango compositor session";
+    #   bindsTo = [ "graphical-session.target" ];
+    #   wants = [ "graphical-session-pre.target" ];
+    #   after = [ "graphical-session-pre.target" ];
+    # };
   };
 }

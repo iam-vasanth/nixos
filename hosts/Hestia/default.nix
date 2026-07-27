@@ -2,7 +2,6 @@
 {
 
   imports = [
-    /etc/nixos/hardware-configuration.nix
     ./vm-guest.nix
   ];
   wm.niri.enable = true;

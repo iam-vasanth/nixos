@@ -28,6 +28,7 @@
 
     # WM
     ./wm/common.nix
+    ./wm/mango/mango.nix # MangoWM has some issues with nix side as of right now.
     ./wm/niri/niri.nix
   ];
 }

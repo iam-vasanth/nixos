@@ -15,7 +15,7 @@
         enable = true;
         systemd = {
           enable = true;
-          target = "graphical-session.target";
+          # target = "graphical-session.target";
         };
       };
       files = {
@@ -45,11 +45,11 @@
     #   enable = true;
     #   settings = {
     #     initial_session = {
-    #       command = "niri-session";
+    #       command = "mango";
     #       user = user;
     #     };
     #     default_session = {
-    #       command = "${pkgs.tuigreet}/bin/tuigreet --cmd niri-session";
+    #       command = "${pkgs.tuigreet}/bin/tuigreet --cmd mango";
     #       user = "greeter";
     #     };
     #   };

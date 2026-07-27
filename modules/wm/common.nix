@@ -45,14 +45,19 @@ in
           ];
         };
 
-        portal = {
-          enable = true;
-          extraPortals = [
-            pkgs.xdg-desktop-portal-gtk
-            pkgs.xdg-desktop-portal-gnome
-            pkgs.xdg-desktop-portal-termfilechooser
-          ];
-        };
+        # portal = {
+        #   enable = true;
+        #   configPackages = [
+        #     pkgs.kdePackages.xdg-desktop-portal-kde
+        #   ];
+        #   extraPortals = [
+        #     pkgs.kdePackages.xdg-desktop-portal-kde
+        #     pkgs.xdg-desktop-portal-gnome
+        #     pkgs.xdg-desktop-portal-wlr
+        #     pkgs.xdg-desktop-portal-gtk
+        #     pkgs.xdg-desktop-portal-termfilechooser
+        #   ];
+        # };
       };
     };
   }

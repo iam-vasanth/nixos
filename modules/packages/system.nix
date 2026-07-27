@@ -36,6 +36,9 @@
     pkgs.mpv
     pkgs.android-tools
     pkgs.obsidian
+    pkgs.grim
+    pkgs.fuzzel
+    pkgs.wlr-randr
 
     ###########################################################################
     # Themes and Fonts

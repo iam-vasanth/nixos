@@ -22,16 +22,6 @@
       package = unstable.niri;
     };
 
-    # xdg.portal = {
-    #   config.niri = {
-    #     default = lib.mkForce [ "kde" ];
-    #     "org.freedesktop.impl.portal.FileChooser" = [ "gnome" ];
-    #     "org.freedesktop.portal.ScreenCast" = "wlr";
-    #     "org.freedesktop.impl.portal.ScreenCast" = "wlr";
-    #     "org.freedesktop.impl.portal.Screenshot" = "kde";
-    #   };
-    # };
-
     environment.systemPackages = [
       pkgs.xwayland-satellite
     ];

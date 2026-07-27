@@ -52,22 +52,17 @@ cd "$WORKDIR"
 # Pick host
 # ---------------------------------------------------------------------------
 echo "Select host to install:"
-select HOSTNAME in "Ares" "Athena" "Hestia"; do
+select HOSTNAME in "Ares" "Hestia"; do
   [[ -n "${HOSTNAME:-}" ]] && break
 done
 
-case "$HOSTNAME" in
-  Ares|Athena) HOSTDIR="thinkpad-x1" ;;
-  Hestia)      HOSTDIR="vm" ;;
-  *) echo "Unknown host"; exit 1 ;;
-esac
 
 # ---------------------------------------------------------------------------
 # Confirm disk wipe
 # ---------------------------------------------------------------------------
 echo
-echo "!! This will WIPE the disk defined in hosts/$HOSTDIR/disko.nix !!"
-grep -m1 '^[[:space:]]*device =' hosts/$HOSTDIR/disko.nix
+echo "!! This will WIPE the disk defined in hosts/$HOSTNAME/disko.nix !!"
+grep -m1 '^[[:space:]]*device =' hosts/$HOSTNAME/disko.nix
 echo
 read -rp "Type 'yes' to continue: " CONFIRM
 [[ "$CONFIRM" == "yes" ]] || { echo "Aborted."; exit 1; }
@@ -79,35 +74,50 @@ read -rp "Type 'yes' to continue: " CONFIRM
 
 echo
 echo "Root account:"
-select ROOT_CHOICE in "Lock root (recommended — use sudo via 'zoro')" "Also set a root password"; do
-  [[ -n "${ROOT_CHOICE:-}" ]] && break
+select ROOT_CHOICE in \
+    "Lock root (recommended — use sudo via 'zoro')" \
+    "Also set a root password"; do
+    [[ -n "${ROOT_CHOICE:-}" ]] && break
 done
 
 ROOT_PASSWD=""
+
 if [[ "$ROOT_CHOICE" == "Also set a root password" ]]; then
-  while true; do
-    read -rsp "New password for root: " ROOT_PASSWD; echo
-    read -rsp "Confirm root password: " ROOT_PASSWD_CONFIRM; echo
-    [[ "$ROOT_PASSWD" == "$ROOT_PASSWD_CONFIRM" && -n "$ROOT_PASSWD" ]] && break
-    echo "Passwords didn't match (or were empty) — try again."
-  done
-  unset ROOT_PASSWD_CONFIRM
+    while true; do
+        read -rsp "New password for root: " ROOT_PASSWD; echo
+        read -rsp "Confirm root password: " ROOT_PASSWD_CONFIRM; echo
+
+        [[ "$ROOT_PASSWD" == "$ROOT_PASSWD_CONFIRM" && -n "$ROOT_PASSWD" ]] && break
+        echo "Passwords didn't match (or were empty) — try again."
+    done
+    unset ROOT_PASSWD_CONFIRM
 fi
+
+echo
+
+while true; do
+    read -rsp "Password for zoro: " USER_PASSWD; echo
+    read -rsp "Confirm zoro password: " USER_PASSWD_CONFIRM; echo
+
+    [[ "$USER_PASSWD" == "$USER_PASSWD_CONFIRM" && -n "$USER_PASSWD" ]] && break
+    echo "Passwords didn't match (or were empty) — try again."
+done
+unset USER_PASSWD_CONFIRM
 
 
 # ---------------------------------------------------------------------------
 # Partition + format + mount via disko
 # ---------------------------------------------------------------------------
-nix --extra-experimental-features "nix-command flakes" run \
+nix --extra-experimental-features "nix-command flakes pipe-operators" run \
   "github:nix-community/disko/${DISKO_REV}" -- \
-  --mode disko "hosts/$HOSTDIR/disko.nix"
+  --mode disko "hosts/$HOSTNAME/disko.nix"
 
 # ---------------------------------------------------------------------------
 # Generate hardware-configuration.nix (disko already handled filesystems)
 # ---------------------------------------------------------------------------
 nixos-generate-config --no-filesystems --root /mnt
-cp /mnt/etc/nixos/hardware-configuration.nix "hosts/$HOSTDIR/hardware-configuration.nix"
-echo "Wrote hosts/$HOSTDIR/hardware-configuration.nix"
+cp /mnt/etc/nixos/hardware-configuration.nix "hosts/$HOSTNAME/hardware-configuration.nix"
+echo "Wrote hosts/$HOSTNAME/hardware-configuration.nix"
 
 # ---------------------------------------------------------------------------
 # Copy the flake onto the target and install
@@ -119,16 +129,17 @@ cp -r "$WORKDIR"/. /mnt/etc/nixos/
 nixos-install --flake "/mnt/etc/nixos#$HOSTNAME" --no-root-passwd
 
 # ---------------------------------------------------------------------------
-# Set user password inside the new system
+# Set passwords inside the new system
 # ---------------------------------------------------------------------------
 echo
-printf '%s:%s\n' "zoro" "$PASSWORD" | nixos-enter --root /mnt -c "chpasswd"
-unset PASSWORD
+
+printf '%s:%s\n' "zoro" "$USER_PASSWD" | nixos-enter --root /mnt -c "chpasswd"
+unset USER_PASSWD
 
 if [[ -n "$ROOT_PASSWD" ]]; then
-  printf '%s:%s\n' "root" "$ROOT_PASSWD" | nixos-enter --root /mnt -c "chpasswd"
+    printf '%s:%s\n' "root" "$ROOT_PASSWD" | nixos-enter --root /mnt -c "chpasswd"
+    unset ROOT_PASSWD
 fi
-unset ROOT_PASSWD
 
 echo
 echo "== Install complete =="
