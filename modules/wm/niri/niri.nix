@@ -1,6 +1,7 @@
 {
-  lib,
   config,
+  lib,
+  inputs,
   pkgs,
   unstable,
   paths,
@@ -11,7 +12,7 @@
   ###########################################################################
 
   imports = [
-    ./niri-session-patch.nix
+    # ./niri-session-patch.nix
   ];
   options.wm.niri.enable = lib.mkOption {
     type = lib.types.bool;

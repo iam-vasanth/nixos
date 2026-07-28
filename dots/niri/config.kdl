@@ -236,6 +236,14 @@ binds {
   Mod+Shift+1 { move-column-to-workspace 1; }
   Mod+Shift+2 { move-column-to-workspace 2; }
 
+  // Floating
+  Mod+P { toggle-window-floating; }
+  Mod+Shift+V { switch-focus-between-floating-and-tiling; }
+  // Mod+Minus  { set-column-width "-10%"; }
+  // Mod+Equal  { set-column-width "+10%"; }
+  // Mod+Shift+Minus { set-window-height "-10%"; }
+  // Mod+Shift+Equal { set-window-height "+10%"; }
+
   // Sizing
   Mod+R { switch-preset-column-width; }
   Mod+F { maximize-column; }

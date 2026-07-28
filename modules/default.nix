@@ -27,7 +27,7 @@
 
     # WM
     ./wm/common.nix
-    ./wm/mango/mango.nix # MangoWM has some issues on dependency upstream side as of right now.
+    # ./wm/mango/mango.nix -  MangoWM has some dependency issues on upstream side as of right now.
     ./wm/niri/niri.nix
   ];
 }

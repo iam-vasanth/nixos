@@ -12,7 +12,22 @@
     # Create Projects directory
     #########################################################################
 
+    "Downloads/.keep".text = "";
     "Projects/.keep".text = "";
+    "Documents/.keep".text = "";
+    "Music/.keep".text = "";
+    "Pictures/.keep".text = "";
+    "Videos/.keep".text = "";
+
+    ".config/user-dirs.dirs".text = ''
+      XDG_DOWNLOAD_DIR="${config.users.users.${user}.home}/Downloads"
+      XDG_DOCUMENTS_DIR="${config.users.users.${user}.home}/Documents"
+      XDG_MUSIC_DIR="${config.users.users.${user}.home}/Music"
+      XDG_PICTURES_DIR="${config.users.users.${user}.home}/Pictures"
+      XDG_VIDEOS_DIR="${config.users.users.${user}.home}/Videos"
+    '';
+
+    ".config/user-dirs.locale".text = "en_US";
 
     #########################################################################
     # GTK bookmarks

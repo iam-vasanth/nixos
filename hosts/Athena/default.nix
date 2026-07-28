@@ -18,4 +18,6 @@
   program.starship.enable = true;
   program.zathura.enable = true;
   program.zed.enable = true;
+
+  programs.dconf.enable = true;
 }

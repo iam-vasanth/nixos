@@ -42,6 +42,10 @@
 
     # Themes
     pkgs.bibata-cursors
+    pkgs.papirus-icon-theme
+    pkgs.adwaita-icon-theme
+    pkgs.hicolor-icon-theme
+    pkgs.shared-mime-info
     pkgs.kdePackages.breeze
     pkgs.kdePackages.breeze.qt5
     pkgs.kdePackages.breeze-icons
