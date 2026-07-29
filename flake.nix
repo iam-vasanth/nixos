@@ -16,8 +16,6 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
-    niri.url = "github:sodiboo/niri-flake";
-
     mangowm = {
       url = "github:mangowm/mango";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -40,6 +38,7 @@
     self,
     nixpkgs,
     nixpkgs-unstable,
+    hjem,
     mangowm,
     nixos-hardware,
     sops-nix,
@@ -79,7 +78,7 @@
             disko.nixosModules.disko
             sops-nix.nixosModules.sops
             mangowm.nixosModules.mango
-            inputs.hjem.nixosModules.default
+            hjem.nixosModules.default
             nix-flatpak.nixosModules.nix-flatpak
           ]
           ++ hardwareModules;

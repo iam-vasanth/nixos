@@ -6,6 +6,10 @@
   services.flatpak = {
     enable = true;
 
+    overrides.settings = {
+      "app.zen_browser.zen".Context = ["filesystems=xdg-download;"];
+    };
+
     packages = [
       {
         appId = "app.zen_browser.zen";

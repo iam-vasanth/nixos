@@ -11,6 +11,23 @@
   ###########################################################################
 
   config = lib.mkIf config.wm.niri.enable {
+    modifications = final: prev: {
+      # FIXME Temporary until nixos-unstable includes nixpkgs c088236, which pins Niri
+      # to the newest libdisplay-info version supported by libdisplay-info-rs.
+      niri = prev.niri.override {
+        libdisplay-info = prev.libdisplay-info.overrideAttrs (_oldAttrs: rec {
+          version = "0.3.0";
+          src = final.fetchFromGitLab {
+            domain = "gitlab.freedesktop.org";
+            owner = "emersion";
+            repo = "libdisplay-info";
+            rev = version;
+            hash = "sha256-nXf2KGovNKvcchlHlzKBkAOeySMJXgxMpbi5z9gLrdc=";
+          };
+        });
+      };
+    };
+
     programs.niri.package = lib.mkForce (
       (pkgs.symlinkJoin {
         name = "niri-quiet-session";
