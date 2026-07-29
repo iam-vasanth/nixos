@@ -49,6 +49,8 @@
     system = "x86_64-linux";
     user = "zoro";
 
+    overlays = import ./overlays {inherit inputs;};
+
     paths = {
       dots = ./dots;
       devsh = ./devshells;
@@ -58,6 +60,7 @@
     unstable = import nixpkgs-unstable {
       inherit system;
       config.allowUnfree = true;
+      overlays = overlays;
     };
     mkHost = {
       hostname,
@@ -65,7 +68,7 @@
     }:
       nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = {inherit inputs hostname user unstable paths;};
+        specialArgs = {inherit inputs hostname user unstable overlays paths;};
 
         modules =
           [

@@ -1,0 +1,3 @@
+{...}: [
+  (import ./niri-libdisplay.nix)
+]

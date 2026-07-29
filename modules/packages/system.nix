@@ -12,14 +12,11 @@
     pkgs.wlr-randr
     pkgs.ffmpeg
     pkgs.nautilus
-    pkgs.foot
 
     ###########################################################################
     # Normal
     ###########################################################################
 
-    unstable.spotatui
-    unstable.spotube
     pkgs.yt-dlp
     pkgs.loupe
     pkgs.neovim
@@ -33,8 +30,6 @@
     pkgs.mpv
     pkgs.android-tools
     pkgs.obsidian
-    pkgs.grim
-    pkgs.fuzzel
 
     ###########################################################################
     # Themes and Fonts
