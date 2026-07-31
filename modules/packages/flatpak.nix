@@ -71,10 +71,10 @@
         appId = "dev.vencord.Vesktop";
         origin = "flathub";
       }
-      # {
-      #   appId = "com.github.KRTirtho.Spotube";
-      #   origin = "flathub";
-      # }
+      {
+        appId = "org.pvermeer.WebAppHub";
+        origin = "flathub";
+      }
     ];
 
     update.auto = {

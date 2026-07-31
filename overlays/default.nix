@@ -1,3 +1,3 @@
 {...}: [
-  (import ./niri-libdisplay.nix)
+  # (import ./niri-libdisplay.nix)
 ]

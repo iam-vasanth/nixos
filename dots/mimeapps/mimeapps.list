@@ -1,3 +1,4 @@
+[Default Applications]
 image/jpeg=org.gnome.Loupe.desktop
 image/png=org.gnome.Loupe.desktop
 image/gif=org.gnome.Loupe.desktop
@@ -26,11 +27,23 @@ audio/wav=mpv.desktop
 audio/x-wav=mpv.desktop
 audio/aac=mpv.desktop
 
+application/pdf=org.pwmt.zathura-pdf-mupdf.desktop
+
 application/json=dev.zed.Zed.desktop
 text/plain=dev.zed.Zed.desktop
 text/markdown=dev.zed.Zed.desktop
+text/x-shellscript=dev.zed.Zed.desktop
+application/x-yaml=dev.zed.Zed.desktop
+text/x-yaml=dev.zed.Zed.desktop
+application/toml=dev.zed.Zed.desktop
+text/x-nix=dev.zed.Zed.desktop
+text/csv=dev.zed.Zed.desktop
+
+inode/directory=org.gnome.Nautilus.desktop
 
 x-scheme-handler/msteams=teams-for-linux.desktop
+x-scheme-handler/tg=org.telegram.desktop.desktop
+x-scheme-handler/discord=dev.vencord.Vesktop.desktop
 
 text/html=app.zen_browser.zen.desktop
 x-scheme-handler/http=app.zen_browser.zen.desktop

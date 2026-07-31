@@ -1,9 +1,11 @@
-    set font "JetBrainsMono Nerd Font 11"
-    set recolor-lightcolor "#1e1e2e"
-    set recolor-darkcolor "#cdd6f4"
-    set default-bg "#1e1e2e"
-    set scroll-step 50
-    set selection-clipboard clipboard
-    set window-title-basename true
+set font "JetBrainsMono Nerd Font 11"
+set recolor-lightcolor "#1e1e2e"
+set recolor-darkcolor "#cdd6f4"
+set default-bg "#1e1e2e"
+set scroll-step 50
+set selection-clipboard clipboard
+set window-title-basename true
 
-    map <C-i> recolor
+map <C-i> recolor
+
+source noctaliarc

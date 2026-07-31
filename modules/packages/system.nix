@@ -30,12 +30,12 @@
     pkgs.mpv
     pkgs.android-tools
     pkgs.obsidian
+    pkgs.firefox
 
     ###########################################################################
-    # Themes and Fonts
-    ###########################################################################
-
     # Themes
+    ###########################################################################
+
     pkgs.bibata-cursors
     pkgs.papirus-icon-theme
     pkgs.adwaita-icon-theme
@@ -45,7 +45,19 @@
     pkgs.kdePackages.breeze.qt5
     pkgs.kdePackages.breeze-icons
 
-    # Fonts
+    ###########################################################################
+    # Others
+    ###########################################################################
+
+    # Zed-Editor : nix language server
+    pkgs.nixd
+  ];
+
+  ###########################################################################
+  # Fonts
+  ###########################################################################
+
+  fonts.packages = [
     pkgs.nerd-fonts.jetbrains-mono
     pkgs.nerd-fonts.fira-code
     pkgs.fira-code-symbols
@@ -53,12 +65,6 @@
     pkgs.nerd-fonts.hack
     pkgs.inter-nerdfont
     pkgs.atkinson-hyperlegible-next
-
-    ###########################################################################
-    # Others
-    ###########################################################################
-
-    # Zed-Editor : nix language server
-    pkgs.nixd
+    pkgs.maple-mono.Normal-NF
   ];
 }
