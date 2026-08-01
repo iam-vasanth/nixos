@@ -162,6 +162,10 @@ wallpaper_scheme = "m3-monochrome"
     builtin_ids = [ "btop", "gtk3", "gtk4", "kcolorscheme", "kitty", "mango", "niri", "qt", "starship" ]
     community_ids = [ "spicetify", "obsidian", "zed", "lazygit", "papirus-icons", "telegram", "zathura" ]
 
+[theme.templates.user.lazyvim]
+input_path = "~/.config/noctalia/templates/lazyvim.lua"
+output_path = "~/.config/nvim/lua/matugen.lua"
+
 [wallpaper]
 directory = "/home/zoro/Pictures/Wallpapers"
 fill_mode = "stretch"

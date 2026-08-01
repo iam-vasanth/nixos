@@ -25,23 +25,16 @@
   config = lib.mkIf config.program.noctalia.enable {
     hjem.extraModules = [inputs.noctalia.hjemModules.default];
     hjf = {
-      ".config/noctalia/lazyvim-matugen.lua" = {
-        source = paths.dots + "/noctalia/lazyvim-matugen.lua";
+      ".config/noctalia/templates/lazyvim.lua" = {
+        source = paths.dots + "/noctalia/templates/lazyvim.lua";
         type = "copy";
+        permissions = "777";
       };
       "Pictures/.nix.png".source = paths.dots + /nix.png;
     };
     hj = {
       programs.noctalia = {
         enable = true;
-        settings = {
-          themes.templates = {
-            lazyvim = {
-              input_path = "~/.config/noctalia/lazyvim-matugen.lua";
-              output_path = "~/.config/nvim/lua/matugen.lua";
-            };
-          };
-        };
         systemd = {
           enable = true;
           target = "graphical-session.target";
