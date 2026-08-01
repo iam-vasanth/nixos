@@ -1,0 +1,112 @@
+gui:
+  nerdFontsVersion: "3"
+  showBottomLine: true
+  showCommandLog: false
+  showRandomTip: false
+  showIcons: true
+  showFileTree: true
+  showListFooter: true
+  showNumstatInFilesView: true
+  showDivergenceFromBaseBranch: "arrowAndNumber"
+  splitDiff: "auto"
+  skipDiscardChangeWarning: false
+  skipStashWarning: false
+  border: "rounded"
+  animateExplosion: true
+  mouseEvents: true
+  scrollHeight: 2
+  timeFormat: "02 Jan 06 15:04"
+  shortTimeFormat: "15:04"
+
+git:
+  pagers:
+    - pager: delta --dark --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
+      colorArg: always
+  commit:
+    signOff: false
+    autoWrapCommitMessage: true
+  log:
+    order: "topo-order"
+    showGraph: "when-maximised"
+    showWholeGraph: false
+  autoFetch: true
+  autoRefresh: true
+  fetchAll: true
+  overrideGpg: false
+  disableForcePushing: false
+  parseEmoji: true
+  branchLogCmd: "git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium {{branchName}} --"
+  allBranchesLogCmds:
+    - "git log --graph --all --color=always --abbrev-commit --decorate --date=relative --pretty=medium"
+
+os:
+  # Matches core.editor in dots/git/config
+  editPreset: "zed"
+
+update:
+  method: "never"
+
+confirmOnQuit: false
+disableStartupPopups: true
+
+notARepository: "skip"
+
+keybinding:
+  universal:
+    quit: "q"
+    quit-alt1: "<c-c>"
+    return: "<esc>"
+    togglePanel: "<tab>"
+    prevItem-alt: "k"
+    nextItem-alt: "j"
+    prevBlock-alt: "h"
+    nextBlock-alt: "l"
+    nextTab: "]"
+    prevTab: "["
+    undo: "z"
+    redo: "<c-z>"
+    filteringMenu: "<c-s>"
+    diffingMenu: "W"
+    copyToClipboard: "<c-o>"
+    extrasMenu: "@"
+    openDiffTool: "<c-t>"
+    toggleWhitespaceInDiffView: "<c-w>"
+  files:
+    commitChanges: "c"
+    commitChangesWithEditor: "<c-o>"
+    amendLastCommit: "A"
+    confirmDiscard: "x"
+    ignoreFile: "i"
+    refreshFiles: "r"
+    stashAllChanges: "s"
+    toggleStagedAll: "a"
+    fetch: "f"
+    toggleTreeView: "`"
+    openMergeOptions: "M"
+  branches:
+    createPullRequest: "o"
+    checkoutBranchByName: "c"
+    forceCheckoutBranch: "F"
+    rebaseBranch: "r"
+    renameBranch: "R"
+    mergeIntoCurrentBranch: "M"
+    fastForward: "f"
+    createTag: "T"
+    setUpstream: "u"
+  commits:
+    squashDown: "s"
+    renameCommit: "r"
+    renameCommitWithEditor: "R"
+    moveDownCommit: "<c-j>"
+    moveUpCommit: "<c-k>"
+    amendToCommit: "A"
+    pickCommit: "p"
+    revertCommit: "t"
+    cherryPickCopy: "C"
+    pasteCommits: "V"
+    checkoutCommit: "<space>"
+    copyCommitAttributeToClipboard: "y"
+    startInteractiveRebase: "i"
+  stash:
+    popStash: "g"
+    renameStash: "r"

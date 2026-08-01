@@ -68,10 +68,6 @@
         origin = "flathub";
       }
       {
-        appId = "dev.vencord.Vesktop";
-        origin = "flathub";
-      }
-      {
         appId = "org.pvermeer.WebAppHub";
         origin = "flathub";
       }

@@ -17,6 +17,7 @@
     # Normal
     ###########################################################################
 
+    pkgs.vesktop
     pkgs.alacritty
     pkgs.yt-dlp
     pkgs.loupe
@@ -24,7 +25,6 @@
     pkgs.lazygit
     pkgs.lazydocker
     pkgs.distrobox
-    pkgs.rstudio
     pkgs.localsend
     pkgs._7zz-rar
     pkgs.btop

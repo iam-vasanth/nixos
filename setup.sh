@@ -108,7 +108,7 @@ nix --extra-experimental-features "nix-command flakes pipe-operators" run \
   "github:nix-community/disko/${DISKO_REV}" -- \
   --mode disko "hosts/$HOSTNAME/disko.nix"
 
-# ---------------------------------------------------------------------------
+# ----------------------f-----------------------------------------------------
 # Copy the flake onto the target and install
 # ---------------------------------------------------------------------------
 mkdir -p /mnt/etc/nixos

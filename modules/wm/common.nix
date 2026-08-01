@@ -1,6 +1,8 @@
 {
   lib,
   config,
+  pkgs,
+  unstable,
   ...
 }:
 ###########################################################################
@@ -48,6 +50,22 @@ in {
         enable = true;
         settings.default = [
           "foot.desktop"
+        ];
+      };
+      portal = {
+        enable = true;
+        config = {
+          common = {
+            default = [
+              "gtk"
+              "gnome"
+            ];
+          };
+        };
+
+        extraPortals = with pkgs; [
+          xdg-desktop-portal-gtk
+          xdg-desktop-portal-gnome
         ];
       };
     };
