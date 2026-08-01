@@ -17,6 +17,7 @@
     # Normal
     ###########################################################################
 
+    pkgs.alacritty
     pkgs.yt-dlp
     pkgs.loupe
     pkgs.neovim

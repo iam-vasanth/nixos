@@ -32,6 +32,8 @@
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
 
     disko.url = "github:nix-community/disko";
+
+    impermanence.url = "github:nix-community/impermanence";
   };
 
   outputs = {
@@ -44,6 +46,7 @@
     sops-nix,
     nix-flatpak,
     disko,
+    impermanence,
     ...
   } @ inputs: let
     system = "x86_64-linux";
@@ -79,6 +82,7 @@
             ./modules/default.nix
 
             disko.nixosModules.disko
+            impermanence.nixosModules.impermanence
             sops-nix.nixosModules.sops
             mangowm.nixosModules.mango
             hjem.nixosModules.default

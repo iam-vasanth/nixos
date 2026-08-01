@@ -109,13 +109,6 @@ nix --extra-experimental-features "nix-command flakes pipe-operators" run \
   --mode disko "hosts/$HOSTNAME/disko.nix"
 
 # ---------------------------------------------------------------------------
-# Generate hardware-configuration.nix (disko already handled filesystems)
-# ---------------------------------------------------------------------------
-nixos-generate-config --no-filesystems --root /mnt
-cp /mnt/etc/nixos/hardware-configuration.nix "hosts/$HOSTNAME/hardware-configuration.nix"
-echo "Wrote hosts/$HOSTNAME/hardware-configuration.nix"
-
-# ---------------------------------------------------------------------------
 # Copy the flake onto the target and install
 # ---------------------------------------------------------------------------
 mkdir -p /mnt/etc/nixos

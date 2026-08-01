@@ -13,6 +13,7 @@
     ./program/fish.nix
     ./program/git.nix
     ./program/gpg-agent.nix
+    ./program/gtk.nix
     ./program/kitty.nix
     ./program/mimeapps.nix
     ./program/mpv.nix
