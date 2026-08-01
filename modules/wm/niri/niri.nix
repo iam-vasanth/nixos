@@ -3,7 +3,7 @@
   lib,
   pkgs,
   unstable,
-  paths,
+  impure,
   ...
 }: {
   ###########################################################################
@@ -21,8 +21,8 @@
 
   config = lib.mkIf config.wm.niri.enable {
     hjf = {
-      ".config/niri/config.kdl".source = paths.dots + /niri/config.kdl;
-      ".config/noctalia/config.toml".source = paths.dots + /noctalia/niri/main-config.toml;
+      ".config/niri/config.kdl".source = impure.dots + "/niri/config.kdl";
+      ".config/noctalia/config.toml".source = impure.dots + "/noctalia/niri/main-config.toml";
     };
 
     programs.niri = {

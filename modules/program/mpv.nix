@@ -1,7 +1,7 @@
-{paths, ...}: {
+{pkgs, impure, ...}: {
   hjf = {
-    ".config/mpv/shaders".source = paths.dots + /mpv/shaders;
-    ".config/mpv/mpv.conf".source = paths.dots + /mpv/mpv.conf;
-    ".config/mpv/input.conf".source = paths.dots + /mpv/input.conf;
+    ".config/mpv/shaders".source = "${pkgs.mpv-shim-default-shaders}/share/mpv-shim-default-shaders/shaders";
+    ".config/mpv/mpv.conf".source = impure.dots + "/mpv/mpv.conf";
+    ".config/mpv/input.conf".source = impure.dots + "/mpv/input.conf";
   };
 }

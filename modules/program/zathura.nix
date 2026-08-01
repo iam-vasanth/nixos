@@ -3,7 +3,7 @@
   lib,
   pkgs,
   unstable,
-  paths,
+  impure,
   ...
 }: {
   ###########################################################################
@@ -19,7 +19,7 @@
     environment.systemPackages = [pkgs.zathura];
 
     hjf = {
-      ".config/zathura/zathurarc".source = paths.dots + /zathura/zathurarc;
+      ".config/zathura/zathurarc".source = impure.dots + "/zathura/zathurarc";
     };
   };
 }

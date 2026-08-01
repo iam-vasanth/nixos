@@ -3,7 +3,7 @@
   lib,
   pkgs,
   unstable,
-  paths,
+  impure,
   ...
 }: {
   ###########################################################################
@@ -19,9 +19,9 @@
     environment.systemPackages = [pkgs.gitFull pkgs.lazygit];
 
     hjf = {
-      ".gitconfig".source = paths.dots + /git/config;
-      ".gitignore".source = paths.dots + /git/ignore;
-      ".config/lazygit/config.yml".source = paths.dots + /lazygit/config.yml;
+      ".gitconfig".source = impure.dots + "/git/config";
+      ".gitignore".source = impure.dots + "/git/ignore";
+      ".config/lazygit/config.yml".source = impure.dots + "/lazygit/config.yml";
     };
   };
 }

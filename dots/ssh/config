@@ -1,0 +1,7 @@
+Host github.com
+  IdentityFile ~/.ssh/git_zoro
+  AddKeysToAgent yes
+
+Host gitlab.com
+  IdentityFile ~/.ssh/git_zoro
+  AddKeysToAgent yes

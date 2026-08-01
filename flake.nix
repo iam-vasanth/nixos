@@ -15,6 +15,11 @@
       url = "github:feel-co/hjem";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+    hjem-impure = {
+      url = "github:Rexcrazy804/hjem-impure";
+      inputs.nixpkgs.follows = "";
+      inputs.hjem.follows = "";
+    };
 
     mangowm = {
       url = "github:mangowm/mango";
@@ -29,11 +34,13 @@
 
     sops-nix.url = "github:mic92/sops-nix";
 
-    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
-
     disko.url = "github:nix-community/disko";
 
     impermanence.url = "github:nix-community/impermanence";
+
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
+
+    lazyvim.url = "github:pfassina/lazyvim-nix";
   };
 
   outputs = {
@@ -44,9 +51,10 @@
     mangowm,
     nixos-hardware,
     sops-nix,
-    nix-flatpak,
     disko,
     impermanence,
+    nix-flatpak,
+    lazyvim,
     ...
   } @ inputs: let
     system = "x86_64-linux";
@@ -57,6 +65,11 @@
     paths = {
       dots = ./dots;
       devsh = ./devshells;
+    };
+
+    impure = {
+      dots = toString paths.dots;
+      dotsImpure = "/home/${user}/nixos/dots";
     };
 
     pkgs = nixpkgs.legacyPackages.${system};
@@ -71,7 +84,7 @@
     }:
       nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = {inherit inputs hostname user unstable overlays paths;};
+        specialArgs = {inherit inputs hostname user unstable overlays paths impure;};
 
         modules =
           [

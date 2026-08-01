@@ -3,7 +3,7 @@
   lib,
   pkgs,
   unstable,
-  paths,
+  impure,
   ...
 }: {
   ###########################################################################
@@ -19,7 +19,7 @@
     environment.systemPackages = [pkgs.kitty];
 
     hjf = {
-      ".config/kitty/kitty.conf".source = paths.dots + /kitty/kitty.conf;
+      ".config/kitty/kitty.conf".source = impure.dots + "/kitty/kitty.conf";
     };
   };
 }

@@ -15,6 +15,7 @@
     ./program/gpg-agent.nix
     ./program/gtk.nix
     ./program/kitty.nix
+    ./program/lazyvim.nix
     ./program/mimeapps.nix
     ./program/mpv.nix
     ./program/noctalia.nix

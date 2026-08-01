@@ -3,7 +3,7 @@
   lib,
   pkgs,
   unstable,
-  paths,
+  impure,
   ...
 }: {
   ###########################################################################
@@ -19,8 +19,8 @@
     environment.systemPackages = [pkgs.fastfetch];
 
     hjf = {
-      ".config/fastfetch/config.jsonc".source = paths.dots + /fastfetch/config.jsonc;
-      ".config/fastfetch/ascii.txt".source = paths.dots + /fastfetch/ascii.txt;
+      ".config/fastfetch/config.jsonc".source = impure.dots + "/fastfetch/config.jsonc";
+      ".config/fastfetch/ascii.txt".source = impure.dots + "/fastfetch/ascii.txt";
     };
   };
 }

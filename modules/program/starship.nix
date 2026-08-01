@@ -3,7 +3,7 @@
   lib,
   pkgs,
   unstable,
-  paths,
+  impure,
   ...
 }: {
   ###########################################################################
@@ -19,7 +19,7 @@
     environment.systemPackages = [pkgs.starship];
 
     hjf = {
-      ".config/starship.toml".source = paths.dots + /starship/starship.toml;
+      ".config/starship.toml".source = impure.dots + "/starship/starship.toml";
     };
   };
 }

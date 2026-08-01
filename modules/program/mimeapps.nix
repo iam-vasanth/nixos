@@ -1,5 +1,5 @@
-{paths, ...}: {
+{impure, ...}: {
   hjf = {
-    ".config/mimeapps.list".source = paths.dots + /mimeapps/mimeapps.list;
+    ".config/mimeapps.list".source = impure.dots + "/mimeapps/mimeapps.list";
   };
 }

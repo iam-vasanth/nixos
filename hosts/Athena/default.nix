@@ -15,6 +15,7 @@
   program.fish.enable = true;
   program.git.enable = true;
   program.kitty.enable = true;
+  program.lazyvim.enable = true;
   program.starship.enable = true;
   program.zathura.enable = true;
   program.zed.enable = true;
