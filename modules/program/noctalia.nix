@@ -26,45 +26,44 @@
     hjem.extraModules = [inputs.noctalia.hjemModules.default];
     hjf = {
       ".config/nvim/lua/matugen.lua".source = impure.dots + "/noctalia/lazyvim-matugen.lua";
-    };
-    programs.noctalia = {
-      enable = true;
-      settings = {
-        themes.templates = {
-          lazyvim = {
-            input_path = "~/.config/noctalia/lazyvim-matugen.lua";
-            output_path = "~/.config/nvim/lua/matugen.lua";
-          };
-        };
-      };
-      systemd = {
-        enable = true;
-        target = "graphical-session.target";
-      };
-    };
-    files = {
       "Pictures/.nix.png".source = paths.dots + /nix.png;
     };
-  };
-
-  ###########################################################################
-  # Noctalia greeter and fallback options
-  ###########################################################################
-
-  programs.noctalia-greeter = {
-    enable = true;
-    greeter-args = "";
-    settings = {
-      cursor = {
-        theme = "Bibata-Modern-Classic";
-        size = 24;
-        path = "${pkgs.bibata-cursors}/share/icons";
-      };
-      keyboard = {
-        layout = "us";
+    hj = {
+      programs.noctalia = {
+        enable = true;
+        settings = {
+          themes.templates = {
+            lazyvim = {
+              input_path = "~/.config/noctalia/lazyvim-matugen.lua";
+              output_path = "~/.config/nvim/lua/matugen.lua";
+            };
+          };
+        };
+        systemd = {
+          enable = true;
+          target = "graphical-session.target";
+        };
       };
     };
-  };
+
+    ###########################################################################
+    # Noctalia greeter and fallback options
+    ###########################################################################
+
+    programs.noctalia-greeter = {
+      enable = true;
+      greeter-args = "";
+      settings = {
+        cursor = {
+          theme = "Bibata-Modern-Classic";
+          size = 24;
+          path = "${pkgs.bibata-cursors}/share/icons";
+        };
+        keyboard = {
+          layout = "us";
+        };
+      };
+    };
 
   # services.greetd = {
   #   enable = true;
@@ -90,4 +89,5 @@
   #     autoSuspend = false;
   #   };
   # };
+  };
 }
