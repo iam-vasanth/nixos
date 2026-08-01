@@ -25,7 +25,10 @@
   config = lib.mkIf config.program.noctalia.enable {
     hjem.extraModules = [inputs.noctalia.hjemModules.default];
     hjf = {
-      ".config/nvim/lua/matugen.lua".source = impure.dots + "/noctalia/lazyvim-matugen.lua";
+      ".config/noctalia/lazyvim-matugen.lua" = {
+        source = paths.dots + "/noctalia/lazyvim-matugen.lua";
+        type = "copy";
+      };
       "Pictures/.nix.png".source = paths.dots + /nix.png;
     };
     hj = {
