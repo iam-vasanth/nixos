@@ -69,7 +69,7 @@
 
     impure = {
       dots = toString paths.dots;
-      dotsImpure = "/home/${user}/nixos/dots";
+      dotsImpure = "/home/${user}/Projects/nixos/dots";
     };
 
     pkgs = nixpkgs.legacyPackages.${system};

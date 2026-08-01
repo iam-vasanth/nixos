@@ -13,6 +13,7 @@
   config = lib.mkIf config.program.lazyvim.enable {
     environment.systemPackages = [
       pkgs.git
+      pkgs.fortune
       pkgs.ripgrep
       pkgs.fd
       pkgs.gcc
@@ -24,6 +25,6 @@
 
     programs.neovim.enable = true;
 
-    hjf.".config/nvim".source = impure.dots + "/nvim";
+    # hjf.".config/nvim".source = impure.dots + "/nvim";
   };
 }

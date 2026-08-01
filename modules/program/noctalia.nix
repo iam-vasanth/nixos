@@ -5,6 +5,7 @@
   user,
   pkgs,
   paths,
+  impure,
   ...
 }: {
   imports = [
@@ -23,61 +24,70 @@
 
   config = lib.mkIf config.program.noctalia.enable {
     hjem.extraModules = [inputs.noctalia.hjemModules.default];
-    hj = {
-      programs.noctalia = {
-        enable = true;
-        systemd = {
-          enable = true;
-          target = "graphical-session.target";
-        };
-      };
-      files = {
-        "Pictures/.nix.png".source = paths.dots + /nix.png;
-      };
+    hjf = {
+      ".config/nvim/lua/matugen.lua".source = impure.dots + "/noctalia/lazyvim-matugen.lua";
     };
-
-    ###########################################################################
-    # Noctalia greeter and fallback options
-    ###########################################################################
-
-    programs.noctalia-greeter = {
+    programs.noctalia = {
       enable = true;
-      greeter-args = "";
       settings = {
-        cursor = {
-          theme = "Bibata-Modern-Classic";
-          size = 24;
-          path = "${pkgs.bibata-cursors}/share/icons";
-        };
-        keyboard = {
-          layout = "us";
+        themes.templates = {
+          lazyvim = {
+            input_path = "~/.config/noctalia/lazyvim-matugen.lua";
+            output_path = "~/.config/nvim/lua/matugen.lua";
+          };
         };
       };
+      systemd = {
+        enable = true;
+        target = "graphical-session.target";
+      };
     };
-
-    # services.greetd = {
-    #   enable = true;
-    #   settings = {
-    #     initial_session = {
-    #       command = "mango";
-    #       user = user;
-    #     };
-    #     default_session = {
-    #       command = "${pkgs.tuigreet}/bin/tuigreet --cmd mango";
-    #       user = "greeter";
-    #     };
-    #   };
-    # };
-
-    # services.displayManager = {
-    #   autoLogin = {
-    #     enable = true;
-    #     user = "${user}";
-    #   };
-    #   gdm = {
-    #     enable = true;
-    #     autoSuspend = false;
-    #   };
-    # };
+    files = {
+      "Pictures/.nix.png".source = paths.dots + /nix.png;
+    };
   };
+
+  ###########################################################################
+  # Noctalia greeter and fallback options
+  ###########################################################################
+
+  programs.noctalia-greeter = {
+    enable = true;
+    greeter-args = "";
+    settings = {
+      cursor = {
+        theme = "Bibata-Modern-Classic";
+        size = 24;
+        path = "${pkgs.bibata-cursors}/share/icons";
+      };
+      keyboard = {
+        layout = "us";
+      };
+    };
+  };
+
+  # services.greetd = {
+  #   enable = true;
+  #   settings = {
+  #     initial_session = {
+  #       command = "mango";
+  #       user = user;
+  #     };
+  #     default_session = {
+  #       command = "${pkgs.tuigreet}/bin/tuigreet --cmd mango";
+  #       user = "greeter";
+  #     };
+  #   };
+  # };
+
+  # services.displayManager = {
+  #   autoLogin = {
+  #     enable = true;
+  #     user = "${user}";
+  #   };
+  #   gdm = {
+  #     enable = true;
+  #     autoSuspend = false;
+  #   };
+  # };
 }
