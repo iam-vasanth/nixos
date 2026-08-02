@@ -68,7 +68,7 @@
     };
 
     impure = {
-      dots = toString paths.dots;
+      dots = "${paths.dots}";
       dotsImpure = "/home/${user}/Projects/nixos/dots";
     };
 
