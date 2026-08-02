@@ -92,6 +92,7 @@ result-*
 .direnv/
 .devenv/
 .devenv.flake.nix
+.nix-cache/
 
 ###########################################################################
 # Docker
