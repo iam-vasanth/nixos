@@ -24,6 +24,32 @@ function M.setup()
     vim.api.nvim_set_hl(0, group, opts)
   end
 
+  local colors = {
+    bg = '{{colors.surface.default.hex}}',
+    fg = '{{colors.on_surface.default.hex}}',
+    primary = '{{colors.primary.default.hex}}',
+    surface1 = '{{colors.surface_container.default.hex}}',
+  }
+  local lualine_ok, lualine = pcall(require, 'lualine')
+  if lualine_ok then
+    lualine.setup({
+      options = {
+        theme = {
+          normal = {
+            a = { bg = colors.primary, fg = colors.bg, gui = 'bold' },
+            b = { bg = colors.surface1, fg = colors.fg },
+            c = { bg = colors.bg, fg = colors.fg },
+          },
+          inactive = {
+            a = { bg = colors.surface1, fg = colors.fg },
+            b = { bg = colors.surface1, fg = colors.fg },
+            c = { bg = colors.bg, fg = colors.fg },
+          },
+        },
+      },
+    })
+  end
+
   -- Telescope
   hi('TelescopeNormal',         { fg = '{{colors.on_surface.default.hex}}',          bg = '{{colors.surface.default.hex}}' })
   hi('TelescopeBorder',         { fg = '{{colors.outline.default.hex}}',             bg = '{{colors.surface.default.hex}}' })
@@ -49,6 +75,21 @@ function M.setup()
   hi('SnacksDashboardDir',     { fg = '{{colors.outline_variant.default.hex}}', bg = '{{colors.background.default.hex}}' })
   hi('SnacksDashboardFile',    { fg = '{{colors.on_surface.default.hex}}',      bg = '{{colors.background.default.hex}}' })
   hi('SnacksDashboardSpecial', { fg = '{{colors.on_primary.default.hex}}',      bg = '{{colors.background.default.hex}}' })
+
+-- Neo-tree
+  hi('NeoTreeNormal',       { fg = '{{colors.on_surface.default.hex}}', bg = '{{colors.surface.default.hex}}' })
+  hi('NeoTreeNormalNC',     { fg = '{{colors.on_surface.default.hex}}', bg = '{{colors.surface.default.hex}}' })
+  hi('NeoTreeWinSeparator', { fg = '{{colors.outline.default.hex}}', bg = '{{colors.surface.default.hex}}' })
+
+  -- Snacks explorer
+  hi('SnacksNormal',       { fg = '{{colors.on_surface.default.hex}}', bg = '{{colors.surface.default.hex}}' })
+  hi('SnacksNormalNC',     { fg = '{{colors.on_surface.default.hex}}', bg = '{{colors.surface.default.hex}}' })
+  hi('SnacksWinBar',       { fg = '{{colors.on_surface.default.hex}}', bg = '{{colors.surface.default.hex}}' })
+
+  -- Generic window separators / statusline fallback
+  hi('WinSeparator', { fg = '{{colors.outline.default.hex}}' })
+  hi('StatusLine',   { fg = '{{colors.on_surface.default.hex}}', bg = '{{colors.surface.default.hex}}' })
+  hi('StatusLineNC', { fg = '{{colors.outline.default.hex}}',    bg = '{{colors.surface.default.hex}}' })
 end
 
  -- Register a signal handler for SIGUSR1 (matugen updates)

@@ -5,7 +5,6 @@
   user,
   pkgs,
   paths,
-  impure,
   ...
 }: {
   imports = [
