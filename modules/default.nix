@@ -11,7 +11,7 @@
     # Programs
     ./program/fastfetch.nix
     ./program/fish.nix
-    ./programs/gaming.nix
+    ./program/gaming.nix
     ./program/git.nix
     ./program/gpg-agent.nix
     ./program/gtk.nix
