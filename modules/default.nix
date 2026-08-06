@@ -18,11 +18,12 @@
     ./program/kitty.nix
     ./program/lazyvim.nix
     ./program/mimeapps.nix
-    ./program/mpv.nix
+    # ./program/mpv.nix
     ./program/noctalia.nix
     ./program/playerctld.nix
     ./program/ssh.nix
     ./program/starship.nix
+    # ./program/tmux.nix
     ./program/udiskie.nix
     ./program/zathura.nix
     ./program/zed.nix

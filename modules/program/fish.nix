@@ -71,6 +71,10 @@
         diff = "diff --color=auto";
         ip = "ip --color=auto";
 
+        # Tmux
+        tm = "tmux attach -t main || tmux new -s main";
+        tls = "tmux ls";
+
         # Containers
         d = "docker";
         dc = "docker compose";
@@ -80,7 +84,8 @@
         # Virt-manager
         vmlist = "virsh -c qemu:///system list --all";
         vmip = "virsh -c qemu:///system domifaddr";
-
+        
+        # Others
         ports = "ss -tuln";
         myip = "curl ifconfig.me";
         sshk = "kitty +kitten ssh";

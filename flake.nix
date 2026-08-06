@@ -106,15 +106,14 @@
   in {
     formatter.${system} = pkgs.alejandra;
 
-    # # Dev shells
-    # devShells.${system} = {
-    #   default  = import ./devshells/default.nix  { inherit pkgs unstable; };
-    #   backend  = import ./devshells/backend.nix  { inherit pkgs unstable; };
-    #   frontend = import ./devshells/frontend.nix { inherit pkgs unstable; };
-    #   ci       = import ./devshells/ci.nix       { inherit pkgs unstable; };
-    #   Have to write Kubernetes and docker, AWS, Rust, Python, SOPS... dev shells
-    # };
-    #
+    devShells.${system} = {
+      devops = import (paths.devsh + /devops.nix) {inherit pkgs unstable;};
+      rust = import (paths.devsh + /rust.nix) {inherit pkgs unstable;};
+      java = import (paths.devsh + /java.nix) {inherit pkgs unstable;};
+      python = import (paths.devsh + /python.nix) {inherit pkgs unstable;};
+      go = import (paths.devsh + /go.nix) {inherit pkgs unstable;};
+    };
+
     nixosConfigurations = {
       Athena = mkHost {
         hostname = "Athena";
