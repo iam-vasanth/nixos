@@ -71,6 +71,10 @@
         appId = "org.pvermeer.WebAppHub";
         origin = "flathub";
       }
+      {
+        appId = "com.spotify.Client";
+        origin = "flathub";
+      }
     ];
 
     update.auto = {

@@ -272,7 +272,7 @@ binds {
   // Mod+Grave { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "emoji"; }
   Mod+W { spawn "noctalia" "msg" "panel-toggle" "wallpaper"; }
   Mod+Escape { spawn "noctalia" "msg" "panel-toggle" "session"; }
-  Mod+L { spawn "noctalia" "msg" "session" "logout"; }
+  Mod+L { spawn "noctalia" "msg" "session" "lock"; }
 
   // Noctalia - Screenshot
   Print { spawn "noctalia" "msg" "screenshot-region"; }
@@ -295,3 +295,4 @@ binds {
 }
 
 include optional=true "./noctalia.kdl"
+include optional=true "./animation.kdl"

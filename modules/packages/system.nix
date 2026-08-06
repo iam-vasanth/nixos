@@ -33,6 +33,9 @@
     pkgs.android-tools
     pkgs.obsidian
     pkgs.firefox
+    pkgs.kdePackages.kdeconnect-kde
+    pkgs.glib
+    pkgs.sshfs
 
     ###########################################################################
     # Themes

@@ -196,3 +196,4 @@ custom_image_colorize = true
 
 [widget.spacer_2]
 type = "spacer"
+
