@@ -52,7 +52,7 @@ cd "$WORKDIR"
 # Pick host
 # ---------------------------------------------------------------------------
 echo "Select host to install:"
-select HOSTNAME in "Athena" "Hestia"; do
+select HOSTNAME in "Athena" "Ares" "Hestia"; do
   [[ -n "${HOSTNAME:-}" ]] && break
 done
 
