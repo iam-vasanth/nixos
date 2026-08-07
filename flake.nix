@@ -118,6 +118,14 @@
       Athena = mkHost {
         hostname = "Ares";
         hardwareModules = [
+          nixos-hardware.nixosModules<model-here>
+          nixos-hardware.nixosModules.common-pc-laptop-ssd
+        ];
+      };
+
+      Ares = mkHost {
+        hostname = "Ares";
+        hardwareModules = [
           nixos-hardware.nixosModules.lenovo-thinkpad-x1-10th-gen
           nixos-hardware.nixosModules.common-cpu-intel
         ];

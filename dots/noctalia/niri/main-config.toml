@@ -1,4 +1,4 @@
-config_version = 2
+config_version = 12
 
 [audio]
 enable_overdrive = true
@@ -10,7 +10,7 @@ enabled = true
 [bar.default]
 background_opacity = 0.59999998658895493
 center = [ "date", "spacer_2", "clock" ]
-end = [ "media", "tray", "notifications", "battery", "control-center" ]
+end = [ "media", "tray", "battery", "control-center" ]
 margin_ends = 0
 position = "left"
 radius = 0
@@ -26,8 +26,51 @@ width = 600
     [control_center.calendar]
     show_events_card = false
 
+    [[control_center.shortcuts]]
+    type = "wifi"
+
+    [[control_center.shortcuts]]
+    type = "bluetooth"
+
+    [[control_center.shortcuts]]
+    type = "caffeine"
+
+    [[control_center.shortcuts]]
+    type = "icefish/phone-connect:tile"
+
+    [[control_center.shortcuts]]
+    type = "notification"
+
+    [[control_center.shortcuts]]
+    type = "power_profile"
+
+[desktop_widgets]
+schema_version = 2
+widget_order = [ "desktop-widget-0000000000000001" ]
+
+    [desktop_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [desktop_widgets.widget.desktop-widget-0000000000000001]
+    box_height = 192.0
+    box_width = 368.0
+    cx = 976.0
+    cy = 156.0
+    output = "eDP-1"
+    rotation = 0.0
+    type = "clock"
+
+        [desktop_widgets.widget.desktop-widget-0000000000000001.settings]
+        background = false
+        center_text = true
+        clock_style = "digital"
+        color = "secondary"
+        shadow = true
+
 [dock]
-auto_hide = true
+auto_hide = false
 background_opacity = 0.59999998658895493
 cross_axis_padding = 5
 enabled = true
@@ -38,6 +81,7 @@ position = "right"
 radius = 10
 reserve_space = false
 show_dots = true
+smart_auto_hide = true
 
 [idle]
 behavior_order = [ "lock", "screen-off", "lock-and-suspend" ]
@@ -59,8 +103,104 @@ pre_action_fade_seconds = 20
     timeout = 1000.0
 
 [lockscreen_widgets]
-enabled = false
+enabled = true
 schema_version = 2
+widget_order = [
+    "lockscreen-login-box@eDP-1",
+    "lockscreen-login-box@Virtual-1",
+    "lockscreen-widget-0000000000000001",
+    "lockscreen-widget-0000000000000002"
+]
+
+  [lockscreen_widgets.grid]
+  cell_size = 16
+  major_interval = 4
+  visible = true
+
+  [lockscreen_widgets.widget."lockscreen-login-box@Virtual-1"]
+  box_height = 196.0
+  box_width = 720.0
+  cx = 640.0
+  cy = 681.0
+  output = "Virtual-1"
+  rotation = 0.0
+  type = "login_box"
+
+      [lockscreen_widgets.widget."lockscreen-login-box@Virtual-1".settings]
+      background_color = "surface_variant"
+      background_opacity = 0.88
+      background_radius = 12.0
+      center_password_text = false
+      input_opacity = 1.0
+      input_radius = 6.0
+      layout = "regular"
+      show_caps_lock = true
+      show_keyboard_layout = true
+      show_login_button = true
+      show_media = true
+      show_session_buttons = true
+      show_unlock_hint = true
+      show_weather = true
+
+  [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
+  box_height = 70.0
+  box_width = 400.0
+  cx = 960.0
+  cy = 961.0
+  output = "eDP-1"
+  rotation = 0.0
+  type = "login_box"
+
+      [lockscreen_widgets.widget."lockscreen-login-box@eDP-1".settings]
+      background_color = "surface_variant"
+      background_opacity = 0.80000000000000004
+      background_radius = 10.0
+      center_password_text = true
+      input_opacity = 1.0
+      input_radius = 10.0
+      layout = "compact"
+      show_caps_lock = true
+      show_keyboard_layout = true
+      show_login_button = true
+      show_media = true
+      show_session_buttons = false
+      show_unlock_hint = false
+      show_weather = false
+
+  [lockscreen_widgets.widget.lockscreen-widget-0000000000000001]
+  box_height = 224.0
+  box_width = 384.0
+  cx = 960.0
+  cy = 220.0
+  output = "eDP-1"
+  rotation = 0.0
+  type = "clock"
+
+      [lockscreen_widgets.widget.lockscreen-widget-0000000000000001.settings]
+      background = false
+      background_opacity = 0.80000000000000004
+      background_padding = 12
+      background_radius = 10
+      center_text = true
+      clock_style = "digital"
+      shadow = true
+      timezone = "Asia/Kolkata"
+
+  [lockscreen_widgets.widget.lockscreen-widget-0000000000000002]
+  box_height = 122.4375
+  box_width = 434.5
+  cx = 960.0
+  cy = 864.78125
+  output = "eDP-1"
+  rotation = 0.0
+  type = "audio_visualizer"
+
+      [lockscreen_widgets.widget.lockscreen-widget-0000000000000002.settings]
+      background = false
+      bands = 128
+      centered = false
+      mirrored = false
+      show_when_idle = false
 
 [notification]
 background_opacity = 0.79999998211860657
@@ -78,10 +218,11 @@ app_icon_color = "on_surface_variant"
 app_icon_colorize = true
 avatar_path = "/home/zoro/Pictures/.face.png"
 corner_radius_scale = 0.40000000596046448
-font_family = "Atkinson Hyperlegible Next Medium"
+font_family = "Atkinson Hyperlegible Next"
 lang = "en"
 password_style = "random"
 polkit_agent = true
+telemetry_enabled = true
 
     [shell.animation]
     speed = 1.5000000223517418
@@ -95,6 +236,8 @@ polkit_agent = true
     show_icons = false
 
     [shell.panel]
+    clipboard_placement = "attached"
+    launcher_placement = "attached"
     open_near_click_control_center = true
     transparency_mode = "glass"
 
@@ -160,24 +303,30 @@ wallpaper_scheme = "m3-monochrome"
 
     [theme.templates]
     builtin_ids = [ "btop", "gtk3", "gtk4", "kcolorscheme", "kitty", "mango", "niri", "qt", "starship" ]
-    community_ids = [ "spicetify", "obsidian", "zed", "lazygit", "papirus-icons", "telegram", "zathura" ]
+    community_ids = [ "spicetify", "discord", "telegram", "obsidian", "zed", "zathura", "papirus-icons", "lazygit" ]
 
-[theme.templates.user.lazyvim]
-input_path = "~/.config/noctalia/templates/lazyvim.lua"
-output_path = "~/.config/nvim/lua/matugen.lua"
+        [theme.templates.user.lazyvim]
+        input_path = "~/.config/noctalia/templates/lazyvim.lua"
+        output_path = "~/.config/nvim/lua/matugen.lua"
 
 [wallpaper]
 directory = "/home/zoro/Pictures/Wallpapers"
-fill_mode = "stretch"
+edge_smoothness = 0.29999999329447746
+fill_mode = "fit"
+transition = [ "disc" ]
+transition_on_startup = true
 
     [wallpaper.default]
-    path = "/home/zoro/Pictures/Wallpapers/wall-16.png"
+    path = "/home/zoro/Pictures/Wallpapers/wall-22.png"
 
     [wallpaper.last]
-    path = "/home/zoro/Pictures/Wallpapers/wall-16.png"
+    path = "/home/zoro/Pictures/Wallpapers/wall-22.png"
 
     [wallpaper.monitors.Virtual-1]
-    path = "/home/zoro/Pictures/Wallpapers/wall-16.png"
+    path = "/home/zoro/Pictures/Wallpapers/wall-22.png"
+
+    [wallpaper.monitors.eDP-1]
+    path = "/home/zoro/Pictures/Wallpapers/wall-22.png"
 
 [weather]
 enabled = false
@@ -197,3 +346,5 @@ custom_image_colorize = true
 [widget.spacer_2]
 type = "spacer"
 
+[widget.workspaces]
+show_labels = false
