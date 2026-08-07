@@ -36,6 +36,7 @@
     pkgs.kdePackages.kdeconnect-kde
     pkgs.glib
     pkgs.sshfs
+    pkgs.gnome-disk-utility
 
     ###########################################################################
     # Themes

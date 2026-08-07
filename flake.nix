@@ -116,7 +116,7 @@
 
     nixosConfigurations = {
       Athena = mkHost {
-        hostname = "Athena";
+        hostname = "Ares";
         hardwareModules = [
           nixos-hardware.nixosModules.lenovo-thinkpad-x1-10th-gen
           nixos-hardware.nixosModules.common-cpu-intel
