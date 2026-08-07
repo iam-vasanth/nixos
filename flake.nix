@@ -118,8 +118,7 @@
       Athena = mkHost {
         hostname = "Ares";
         hardwareModules = [
-          nixos-hardware.nixosModules<model-here>
-          nixos-hardware.nixosModules.common-pc-laptop-ssd
+          nixos-hardware.nixosModules.asus-fa506ic
         ];
       };
 
