@@ -116,7 +116,7 @@
 
     nixosConfigurations = {
       Athena = mkHost {
-        hostname = "Ares";
+        hostname = "Athena";
         hardwareModules = [
           nixos-hardware.nixosModules.asus-fa506ic
         ];
