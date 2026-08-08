@@ -27,11 +27,11 @@
       amdgpuBusId = "PCI:6:0:0";
       nvidiaBusId = "PCI:1:0:0";
     };
-    services = {
-      asusd = {
-        enable = true;
-      };
-      supergfxd.enable = true;
+  };
+  services = {
+    asusd = {
+      enable = true;
     };
+    supergfxd.enable = true;
   };
 }
