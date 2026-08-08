@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  hostname,
   pkgs,
   unstable,
   impure,
@@ -21,8 +22,8 @@
 
   config = lib.mkIf config.wm.niri.enable {
     hjf = {
-      ".config/niri/config.kdl".source = impure.dots + "/niri/config.kdl";
-      ".config/noctalia/config.toml".source = impure.dots + "/noctalia/niri/main-config.toml";
+      ".config/niri/config.kdl".source = impure.dots + "/niri/${hostname}/config.kdl";
+      ".config/noctalia/config.toml".source = impure.dots + "/noctalia/niri/${hostname}/main-config.toml";
     };
 
     programs.niri = {
