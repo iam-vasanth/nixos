@@ -14,9 +14,9 @@
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = true;
-    powerManagement.finegrained = true; # laptop hybrid graphics
-    open = true; # RTX 3050 (Ampere) supports the open kernel module
-    nvidiaSettings = true;
+    powerManagement.finegrained = true;
+    open = true;
+    nvidiasettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
 
     prime = {
@@ -26,6 +26,12 @@
       };
       amdgpuBusId = "PCI:6:0:0";
       nvidiaBusId = "PCI:1:0:0";
+    };
+    services = {
+      asusd = {
+        enable = true;
+      };
+      supergfxd.enable = true;
     };
   };
 }
