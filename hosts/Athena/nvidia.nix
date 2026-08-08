@@ -16,7 +16,7 @@
     powerManagement.enable = true;
     powerManagement.finegrained = true;
     open = true;
-    nvidiasettings = true;
+    nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
 
     prime = {
