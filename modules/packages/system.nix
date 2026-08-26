@@ -37,6 +37,8 @@
     pkgs.glib
     pkgs.sshfs
     pkgs.gnome-disk-utility
+    pkgs.kind
+    pkgs.kubectl
 
     ###########################################################################
     # Themes

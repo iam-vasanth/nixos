@@ -184,9 +184,8 @@ debug {
 // Startup Programs
 // ---------------------------------------------------------------------------
 
-// Any startup commands will go here - none for now.
-// spawn-at-startup "polkit-kde-authentication-agent-1"
-
+// Any startup commands will go here.
+spawn-at-startup "steam" "-nochatui" "-nofriendsui" "-silent" "%U"
 
 // ---------------------------------------------------------------------------
 // Keybindings

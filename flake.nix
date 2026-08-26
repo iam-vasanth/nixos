@@ -40,7 +40,6 @@
 
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
 
-    lazyvim.url = "github:pfassina/lazyvim-nix";
   };
 
   outputs = {
@@ -54,7 +53,6 @@
     disko,
     impermanence,
     nix-flatpak,
-    lazyvim,
     ...
   } @ inputs: let
     system = "x86_64-linux";

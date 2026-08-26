@@ -1,6 +1,10 @@
-{ pkgs, unstable, ... }:
+{ config, pkgs, unstable, ... }:
 
 {
+
+  programs.steam.enable = true;
+  hardware.steam-hardware.enable = true;
+
   environment.systemPackages = [
     (pkgs.heroic.override {
       extraPkgs = pkgs': with pkgs'; [

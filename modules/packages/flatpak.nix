@@ -8,6 +8,7 @@
 
     overrides.settings = {
       "app.zen_browser.zen".Context = ["filesystems=xdg-download;"];
+      "moe.launcher.an-anime-game-launcher".Context = ["filesystem=xdg-run/discord-ipc-0;"];
     };
 
     packages = [
@@ -73,6 +74,18 @@
       }
       {
         appId = "com.spotify.Client";
+        origin = "flathub";
+      }
+      {
+        appId = "moe.launcher.an-anime-game-launcher";
+        origin = "flathub";
+      }
+      {
+        appId = "org.freedesktop.Platform.VulkanLayer.gamescope//25.08";
+        origin = "flathub";
+      }
+      {
+        appId = "io.github.giantpinkrobots.varia";
         origin = "flathub";
       }
     ];
