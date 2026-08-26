@@ -144,9 +144,15 @@
 
   networking = {
     networkmanager.enable = true;
-    firewall.enable = false;
+    firewall = {
+      enable = true;
+      allowPing = true;
+      allowedTCPPorts = [22];
+      trustedInterfaces = ["tailscale0" "virbr0"];
+      allowedUDPPorts = [41641]; # tailscale
+      logRefusedConnections = false;
+    };
   };
-
   hardware.bluetooth.enable = true;
 
   ###########################################################################
@@ -198,8 +204,6 @@
 
   services.fwupd.enable = true;
 
-  services.gnome.gcr-ssh-agent.enable = false;
-
   ###########################################################################
   # Fprintd
   ###########################################################################
@@ -229,6 +233,9 @@
   ###########################################################################
 
   programs.ssh.startAgent = true;
+  
+  # To disable gnome ssh agent  
+  services.gnome.gcr-ssh-agent.enable = false;
 
   ###########################################################################
   # Localsend
