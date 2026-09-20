@@ -62,32 +62,36 @@ done
 echo
 echo "Root account:"
 select ROOT_CHOICE in \
-    "Lock root (recommended — use sudo via 'zoro')" \
-    "Also set a root password"; do
-    [[ -n "${ROOT_CHOICE:-}" ]] && break
+  "Lock root (recommended — use sudo via 'zoro')" \
+  "Also set a root password"; do
+  [[ -n "${ROOT_CHOICE:-}" ]] && break
 done
 
 ROOT_PASSWD=""
 
 if [[ "$ROOT_CHOICE" == "Also set a root password" ]]; then
-    while true; do
-        read -rsp "New password for root: " ROOT_PASSWD; echo
-        read -rsp "Confirm root password: " ROOT_PASSWD_CONFIRM; echo
+  while true; do
+    read -rsp "New password for root: " ROOT_PASSWD
+    echo
+    read -rsp "Confirm root password: " ROOT_PASSWD_CONFIRM
+    echo
 
-        [[ "$ROOT_PASSWD" == "$ROOT_PASSWD_CONFIRM" && -n "$ROOT_PASSWD" ]] && break
-        echo "Passwords didn't match (or were empty) — try again."
-    done
-    unset ROOT_PASSWD_CONFIRM
+    [[ "$ROOT_PASSWD" == "$ROOT_PASSWD_CONFIRM" && -n "$ROOT_PASSWD" ]] && break
+    echo "Passwords didn't match (or were empty) — try again."
+  done
+  unset ROOT_PASSWD_CONFIRM
 fi
 
 echo
 
 while true; do
-    read -rsp "Password for zoro: " USER_PASSWD; echo
-    read -rsp "Confirm zoro password: " USER_PASSWD_CONFIRM; echo
+  read -rsp "Password for zoro: " USER_PASSWD
+  echo
+  read -rsp "Confirm zoro password: " USER_PASSWD_CONFIRM
+  echo
 
-    [[ "$USER_PASSWD" == "$USER_PASSWD_CONFIRM" && -n "$USER_PASSWD" ]] && break
-    echo "Passwords didn't match (or were empty) — try again."
+  [[ "$USER_PASSWD" == "$USER_PASSWD_CONFIRM" && -n "$USER_PASSWD" ]] && break
+  echo "Passwords didn't match (or were empty) — try again."
 done
 unset USER_PASSWD_CONFIRM
 
@@ -99,7 +103,10 @@ echo "!! This will WIPE the disk defined in hosts/$HOSTNAME/disko.nix !!"
 grep -m1 '^[[:space:]]*device =' hosts/$HOSTNAME/disko.nix
 echo
 read -rp "Type 'yes' to continue: " CONFIRM
-[[ "$CONFIRM" == "yes" ]] || { echo "Aborted."; exit 1; }
+[[ "$CONFIRM" == "yes" ]] || {
+  echo "Aborted."
+  exit 1
+}
 
 # ---------------------------------------------------------------------------
 # Partition + format + mount via disko
@@ -126,8 +133,8 @@ printf '%s:%s\n' "zoro" "$USER_PASSWD" | nixos-enter --root /mnt -c "chpasswd"
 unset USER_PASSWD
 
 if [[ -n "$ROOT_PASSWD" ]]; then
-    printf '%s:%s\n' "root" "$ROOT_PASSWD" | nixos-enter --root /mnt -c "chpasswd"
-    unset ROOT_PASSWD
+  printf '%s:%s\n' "root" "$ROOT_PASSWD" | nixos-enter --root /mnt -c "chpasswd"
+  unset ROOT_PASSWD
 fi
 
 echo

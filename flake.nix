@@ -110,6 +110,7 @@
       java = import (paths.devsh + /java.nix) {inherit pkgs unstable;};
       python = import (paths.devsh + /python.nix) {inherit pkgs unstable;};
       go = import (paths.devsh + /go.nix) {inherit pkgs unstable;};
+      qs = import (paths.devsh + /qs.nix) {inherit pkgs unstable;};
     };
 
     nixosConfigurations = {
